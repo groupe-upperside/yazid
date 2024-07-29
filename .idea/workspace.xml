@@ -4,7 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="241e2ab2-b6ba-4817-b28e-a758f8fa4295" name="Changes" comment="" />
+    <list default="true" id="241e2ab2-b6ba-4817-b28e-a758f8fa4295" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/[uid]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/[uid]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/at-home/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/at-home/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/chef/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/chef/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/click-and-collect/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/click-and-collect/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/contact/[uid]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/contact/[uid]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/creations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/creations/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/reservations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/reservations/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[lang]/slice-simulator/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[lang]/slice-simulator/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/preview/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/preview/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/revalidate/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/revalidate/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/loading.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/loading.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ContactFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Divider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Divider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Drawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Drawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LanguageSwitcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LanguageSwitcher.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/prismicio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/prismicio.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/Banner/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/Banner/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/BannerWithText/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/BannerWithText/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/CustomerLogos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/CustomerLogos/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/Divider/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/Divider/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/Form/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/Form/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/ImageAndTextGrid/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/ImageAndTextGrid/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/ImageCardWithCta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/ImageCardWithCta/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/ImageGrid/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/ImageGrid/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/ImageSlider/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/ImageSlider/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/ImageTextAndCtaGridLeft/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/ImageTextAndCtaGridLeft/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/PageTitleUnderlined/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/PageTitleUnderlined/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/TextAndStepper/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/TextAndStepper/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/Timeline/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/Timeline/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/slices/VideoAndTextGrid/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/slices/VideoAndTextGrid/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/getGridColsClass.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getGridColsClass.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +56,9 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -26,7 +73,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "js.linters.configure.manually.selectedeslint": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu-20.04/home/aurore/dev/yazid/src/app/[lang]/contact",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu-20.04/home/aurore/dev/yazid",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -35,8 +82,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "wsl://Ubuntu-20.04@/home/aurore/.nvm/versions/node/v19.4.0/bin/node",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2024.1.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "\\\\wsl.localhost\\Ubuntu-20.04\\home\\aurore\\dev\\yazid\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -92,7 +142,9 @@
       <workItem from="1721631748553" duration="5569000" />
       <workItem from="1721641103545" duration="61747000" />
       <workItem from="1721896471536" duration="35499000" />
-      <workItem from="1722241000855" duration="24694000" />
+      <workItem from="1722241000855" duration="24842000" />
+      <workItem from="1722268352967" duration="158000" />
+      <workItem from="1722268545697" duration="173000" />
     </task>
     <servers />
   </component>

@@ -1,9 +1,11 @@
+import type { Content } from '@prismicio/client';
+import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
+
 import { createClient } from '@/prismicio';
 import { getLocales } from '@/utils/getLocales';
-import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
-import { LanguageSwitcher } from './LanguageSwitcher';
-import type { Content } from '@prismicio/client';
+
 import Drawer from './Drawer';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 type HeaderProps = {
   doc: Content.AllDocumentTypes;
@@ -17,18 +19,18 @@ export default async function Header({ doc }: HeaderProps) {
 
   return (
     <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-4 mb-6 2xl:mb-14">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-2xl">
+      <nav className="mb-6 border-gray-200 bg-white p-4 lg:px-6 2xl:mb-14">
+        <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between">
           <Drawer meta={meta} />
           <PrismicNextLink field={meta.data.home_link}>
-            <PrismicNextImage className="h-16 xl:h-18 2xl:h-20 w-auto" field={meta.data.og_image} />
+            <PrismicNextImage className="xl:h-18 h-16 w-auto 2xl:h-20" field={meta.data.og_image} />
           </PrismicNextLink>
-          <div className="justify-between items-center lg:flex lg:w-auto gap-x-4" id="mobile-menu-2">
-            <ul className="hidden mt-4 xl:flex xl:flex-row xl:space-x-6 2xl:space-x-8 xl:mt-0 font-medium uppercase tracking-widest">
+          <div className="items-center justify-between gap-x-4 lg:flex lg:w-auto" id="mobile-menu-2">
+            <ul className="mt-4 hidden font-medium uppercase tracking-widest xl:mt-0 xl:flex xl:flex-row xl:space-x-6 2xl:space-x-8">
               {meta.data.navigation_right.map(({ link, label }) => (
                 <li key={label}>
                   <PrismicNextLink
-                    className="block py-2 pr-4 pl-3 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0"
+                    className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent"
                     field={link}
                   >
                     {label}
@@ -36,8 +38,8 @@ export default async function Header({ doc }: HeaderProps) {
                 </li>
               ))}
             </ul>
-            <ul className="mt-4 flex flex-row gap-x-4 lg:mt-0 font-semibold uppercase">
-              <li className="xl:block hidden border-x-2 px-2 border-gray-900">
+            <ul className="mt-4 flex flex-row gap-x-4 font-semibold uppercase lg:mt-0">
+              <li className="hidden border-x-2 border-gray-900 px-2 xl:block">
                 <LanguageSwitcher locales={locales} />
               </li>
               {meta.data.icons.map(({ link, icon }) => (

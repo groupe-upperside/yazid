@@ -1,6 +1,7 @@
 import { type Content, isFilled } from '@prismicio/client';
-import { SliceComponentProps, PrismicRichText } from '@prismicio/react';
-import { PrismicNextLink, PrismicNextImage } from '@prismicio/next';
+import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
+import type { SliceComponentProps } from '@prismicio/react';
+
 import Divider from '@/components/Divider';
 
 export type CustomerLogosProps = SliceComponentProps<Content.CustomerLogosSlice>;
@@ -10,22 +11,22 @@ const CustomerLogos = ({ slice }: CustomerLogosProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-20 xl:p-32 font-avenir tracking-widest bg-[#F7F4EF]"
+      className="bg-[#F7F4EF] p-20 font-avenir tracking-widest xl:p-32"
     >
       <div className="w-full">
-        <div className="flex justify-center items-center flex-col w-full">
+        <div className="flex w-full flex-col items-center justify-center">
           {slice.primary.title_light ? (
-            <h2 className="mb-3 text-2xl font-medium tracking-widest uppercase xl:text-start text-center text-gray-900 md:text-3xl">
+            <h2 className="mb-3 text-center text-2xl font-medium uppercase tracking-widest text-gray-900 md:text-3xl xl:text-start">
               {slice.primary.title_light}
             </h2>
           ) : null}
-          <h2 className="mb-3 text-2xl font-semibold uppercase tracking-widest xl:text-start text-center text-gray-900 md:text-3xl">
+          <h2 className="mb-3 text-center text-2xl font-semibold uppercase tracking-widest text-gray-900 md:text-3xl xl:text-start">
             {slice.primary.title_bold}
           </h2>
           <Divider />
         </div>
         {slice.primary.logos.length > 0 && (
-          <ul className="flex flex-row justify-between items-center w-full">
+          <ul className="flex w-full flex-row items-center justify-between">
             {slice.primary.logos.map(
               (logo) =>
                 isFilled.image(logo.image) && (

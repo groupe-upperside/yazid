@@ -1,5 +1,5 @@
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+import type { Content } from '@prismicio/client';
+import type { SliceComponentProps } from '@prismicio/react';
 
 /**
  * Props for `Divider`.
@@ -12,7 +12,7 @@ export type DividerProps = SliceComponentProps<Content.DividerSlice>;
 const Divider = ({ slice }: DividerProps): JSX.Element => {
   return (
     <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <hr className="border-black h-0.5 border-0.5" />
+      <hr className="border-0.5 h-0.5 border-black" />
     </section>
   );
 };

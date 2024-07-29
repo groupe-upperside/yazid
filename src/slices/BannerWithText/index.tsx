@@ -1,6 +1,6 @@
-import { Content } from '@prismicio/client';
+import type { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import { SliceComponentProps } from '@prismicio/react';
+import type { SliceComponentProps } from '@prismicio/react';
 
 /**
  * Props for `BannerWithText`.
@@ -21,14 +21,14 @@ const BannerWithText = ({ slice }: BannerWithTextProps): JSX.Element => {
     >
       {backgroundImageUrl && (
         <div className="absolute inset-0 z-0">
-          <PrismicNextImage field={slice.primary.image} className="xl:h-[45rem] h-[40rem] object-cover" />
+          <PrismicNextImage field={slice.primary.image} className="h-[40rem] object-cover xl:h-[45rem]" />
         </div>
       )}
-      <div className="relative z-10 p-20 xl:p-32 flex flex-col items-center justify-center h-full font-avenir tracking-widest bg-white bg-opacity-80">
-        <h1 className="mb-8 text-4xl font-semibold uppercase text-center text-gray-900 md:text-5xl">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center bg-white bg-opacity-80 p-20 font-avenir tracking-widest xl:p-32">
+        <h1 className="mb-8 text-center text-4xl font-semibold uppercase text-gray-900 md:text-5xl">
           {slice.primary.title_bold}
         </h1>
-        <p className="mb-3 text-3xl text-center text-[#707070] md:text-4xl first-letter:uppercase">
+        <p className="mb-3 text-center text-3xl text-[#707070] first-letter:uppercase md:text-4xl">
           {slice.primary.subtitle_light}
         </p>
       </div>

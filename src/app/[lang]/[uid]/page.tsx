@@ -1,12 +1,11 @@
-import { Metadata } from 'next';
+import * as prismic from '@prismicio/client';
+import { SliceZone } from '@prismicio/react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import { SliceZone } from '@prismicio/react';
-import * as prismic from '@prismicio/client';
-
+import Layout from '@/components/Layout';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import Layout from '@/components/Layout';
 
 type Params = { uid: string; lang: string };
 

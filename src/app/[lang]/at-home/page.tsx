@@ -1,10 +1,9 @@
-import { Metadata } from 'next';
-
 import { SliceZone } from '@prismicio/react';
+import type { Metadata } from 'next';
 
+import Layout from '@/components/Layout';
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
-import Layout from '@/components/Layout';
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
   const client = createClient();

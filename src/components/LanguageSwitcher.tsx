@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
 import { PrismicNextLink } from '@prismicio/next';
+import { useEffect, useRef, useState } from 'react';
 
 interface LanguageSwitcherProps {
   locales: {
@@ -46,20 +46,20 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
   return (
     <div ref={dropdownRef} className="relative inline-block w-full max-w-xs">
       <div
-        className="block w-full px-2 py-2 text-base text-gray-900 bg-white cursor-pointer focus:outline-none"
+        className="block w-full cursor-pointer bg-white p-2 text-base text-gray-900 focus:outline-none"
         onClick={toggleDropdown}
       >
         {localeLabels[selectedLocale.lang as keyof typeof localeLabels] || selectedLocale.lang_name}
       </div>
       {isOpen && (
-        <ul className="absolute left-0 z-10 w-full mt-1 bg-white rounded-md shadow-lg">
+        <ul className="absolute left-0 z-10 mt-1 w-full rounded-md bg-white shadow-lg">
           {locales.map((locale) => (
             <li key={locale.lang} className="cursor-pointer hover:bg-gray-50">
               <PrismicNextLink
                 href={locale.url}
                 locale={locale.lang}
                 aria-label={`Change language to ${locale.lang_name}`}
-                className="block px-2 py-2 text-base text-gray-900"
+                className="block p-2 text-base text-gray-900"
                 onClick={() => handleLocaleChange(locale)}
               >
                 {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}

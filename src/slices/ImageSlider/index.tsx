@@ -1,8 +1,8 @@
 'use client';
 
-import { Content } from '@prismicio/client';
+import type { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import { SliceComponentProps } from '@prismicio/react';
+import type { SliceComponentProps } from '@prismicio/react';
 import { useEffect, useState } from 'react';
 
 /**
@@ -40,31 +40,31 @@ const ImageSlider = ({ slice }: ImageSliderProps): JSX.Element => {
   return (
     <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <div id="custom-controls-gallery" className="relative w-full" data-carousel="slide">
-        <div className="relative overflow-hidden h-72 xl:h-[33rem]">
+        <div className="relative h-72 overflow-hidden xl:h-[33rem]">
           {slice.primary.image.map((item, index) => (
             <div
-              className={`absolute w-full inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 w-full transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100' : 'opacity-0'}`}
               data-carousel-item
               key={index}
             >
               <PrismicNextImage
-                className="absolute block object-cover size-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                className="absolute left-1/2 top-1/2 block size-full -translate-x-1/2 -translate-y-1/2 object-cover"
                 field={item.image}
               />
             </div>
           ))}
         </div>
         {slice.primary.display_buttons ? (
-          <div className="flex justify-center items-center pt-4">
+          <div className="flex items-center justify-center pt-4">
             <button
               type="button"
               onClick={goToPrevious}
-              className="flex justify-center items-center me-4 h-full cursor-pointer group focus:outline-none"
+              className="group me-4 flex h-full cursor-pointer items-center justify-center focus:outline-none"
               data-carousel-prev
             >
-              <span className="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+              <span className="text-gray-400 hover:text-gray-900 group-focus:text-gray-900 dark:hover:text-white dark:group-focus:text-white">
                 <svg
-                  className="rtl:rotate-180 w-5 h-5"
+                  className="size-5 rtl:rotate-180"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -84,12 +84,12 @@ const ImageSlider = ({ slice }: ImageSliderProps): JSX.Element => {
             <button
               type="button"
               onClick={goToNext}
-              className="flex justify-center items-center h-full cursor-pointer group focus:outline-none"
+              className="group flex h-full cursor-pointer items-center justify-center focus:outline-none"
               data-carousel-next
             >
-              <span className="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+              <span className="text-gray-400 hover:text-gray-900 group-focus:text-gray-900 dark:hover:text-white dark:group-focus:text-white">
                 <svg
-                  className="rtl:rotate-180 w-5 h-5"
+                  className="size-5 rtl:rotate-180"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

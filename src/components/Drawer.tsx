@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import type { Content } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
+import { useState } from 'react';
 
 interface DrawerProps {
   meta: Content.MetaDocument<string>;
@@ -18,13 +18,13 @@ export default function Drawer({ meta }: DrawerProps) {
           data-collapse-toggle="mobile-menu-2"
           onClick={() => setOpenDrawer(!openDrawer)}
           type="button"
-          className="inline-flex items-center p-1.5 ml-1 text-sm text-gray-900 rounded-lg"
+          className="ml-1 inline-flex items-center rounded-lg p-1.5 text-sm text-gray-900"
           aria-controls="mobile-menu-2"
           aria-expanded="false"
         >
           <span className="sr-only">Open main menu</span>
           <svg
-            className="w-6 h-6"
+            className="size-6"
             fill="none"
             stroke="currentColor"
             strokeWidth="1"
@@ -34,7 +34,7 @@ export default function Drawer({ meta }: DrawerProps) {
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
           <svg
-            className="hidden w-6 h-6"
+            className="hidden size-6"
             fill="none"
             stroke="currentColor"
             strokeWidth="1"
@@ -47,7 +47,7 @@ export default function Drawer({ meta }: DrawerProps) {
         {openDrawer && (
           <div
             id="drawer-navigation"
-            className={`fixed top-0 left-0 z-40 w-72 h-screen px-16 py-32 overflow-y-auto transition-transform transform bg-white ${
+            className={`fixed left-0 top-0 z-40 h-screen w-72 overflow-y-auto bg-white px-16 py-32 transition-transform${
               openDrawer ? 'translate-x-0' : '-translate-x-full'
             }`}
             tabIndex={-1}
@@ -58,11 +58,11 @@ export default function Drawer({ meta }: DrawerProps) {
               onClick={() => setOpenDrawer(!openDrawer)}
               data-drawer-hide="drawer-navigation"
               aria-controls="drawer-navigation"
-              className="text-black bg-transparent text-sm p-1.5 absolute top-16 start-14 inline-flex items-center"
+              className="absolute start-14 top-16 inline-flex items-center bg-transparent p-1.5 text-sm text-black"
             >
               <svg
                 aria-hidden="true"
-                className="w-6 h-6"
+                className="size-6"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="1.2"
@@ -73,12 +73,12 @@ export default function Drawer({ meta }: DrawerProps) {
               </svg>
               <span className="sr-only">Close menu</span>
             </button>
-            <div className="py-4 overflow-y-auto">
+            <div className="overflow-y-auto py-4">
               <ul className="space-y-4 font-medium">
                 {meta.data.sidebar.map(({ link, label }) => (
                   <li key={label}>
                     <PrismicNextLink
-                      className="block py-2 pr-4 pl-3 uppercase font-semibold tracking-widest lg:p-0"
+                      className="block py-2 pl-3 pr-4 font-semibold uppercase tracking-widest lg:p-0"
                       field={link}
                     >
                       {label}
@@ -90,7 +90,7 @@ export default function Drawer({ meta }: DrawerProps) {
           </div>
         )}
       </div>
-      <ul className="hidden xl:flex xl:w-auto flex-col font-medium uppercase tracking-widest xl:flex-row xl:space-x-6 2xl:space-x-8">
+      <ul className="hidden flex-col font-medium uppercase tracking-widest xl:flex xl:w-auto xl:flex-row xl:space-x-6 2xl:space-x-8">
         {meta.data.navigation.map(({ link, label, custom_action }) => (
           <li key={label}>
             {custom_action && custom_action === 'open_drawer' ? (
@@ -98,12 +98,12 @@ export default function Drawer({ meta }: DrawerProps) {
                 data-collapse-toggle="drawer-navigation"
                 onClick={() => setOpenDrawer(!openDrawer)}
                 type="button"
-                className="block py-2 pr-4 pl-3 lg:border-0 lg:p-0 font-medium uppercase tracking-widest"
+                className="block py-2 pl-3 pr-4 font-medium uppercase tracking-widest lg:border-0 lg:p-0"
               >
                 {label}
               </button>
             ) : (
-              <PrismicNextLink className="block py-2 pr-4 pl-3 lg:border-0 lg:p-0" field={link}>
+              <PrismicNextLink className="block py-2 pl-3 pr-4 lg:border-0 lg:p-0" field={link}>
                 {label}
               </PrismicNextLink>
             )}

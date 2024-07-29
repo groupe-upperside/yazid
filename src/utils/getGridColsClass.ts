@@ -1,4 +1,4 @@
-import { NumberField } from '@prismicio/client';
+import type { NumberField } from '@prismicio/client';
 
 export const getGridColsClass = (numberPerRow: NumberField) => {
   switch (numberPerRow) {
