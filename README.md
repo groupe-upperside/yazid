@@ -1,39 +1,16 @@
-# Prismic + Next.js Minimal Starter
+# Prismic + Next.js Yazid bakery website
 
-Want to quickly get started building your own project with [Prismic][prismic] and [Next.js][nextjs]? This project includes basic configurations and nothing else. The project includes one Rich Text Slice, a homepage, and a dynamic page.
-
-- **Demo**: [Open live demo][live-demo]
 - **Learn more about Prismic and Next.js**: [Prismic Next.js Documentation][prismic-docs]
-
-&nbsp;
-
-![Website screenshot](https://user-images.githubusercontent.com/31219208/228821412-fdde92b2-c13c-4287-b799-611fa96a5fd6.png)
-
-&nbsp;
 
 ## 🚀 Quick Start
 
-To start a new project using this starter, run the following commands in your terminal:
-
-```sh
-npx degit prismicio-community/nextjs-starter-prismic-minimal your-project-name
-cd your-project-name
-npx @slicemachine/init@latest
-```
-
-The commands will do the following:
-
-1. Start a new Next.js project using this starter.
-2. Ask you to log in to Prismic or [create an account][prismic-sign-up].
-3. Create a new Prismic content repository with sample content.
-
-When you're ready to start your project, run the following command:
+To start the project, run the following command:
 
 ```sh
 npm run dev
 ```
 
-## How to use your project
+## How to use the project
 
 To edit the content of this project, go to [prismic.io/dashboard](https://prismic.io/dashboard), click on the repository for this website, and start editing.
 
@@ -85,10 +62,6 @@ Learn more about how to edit your components with [Fetch Data in Next.js](https:
 
 Learn more about how to use [TypeScript with Prismic](https://prismic.io/docs/typescript-nextjs).
 
-### Deploy to the web
-
-To put your project online, see [Deploy your Next.js App](https://prismic.io/docs/technologies/deploy-nextjs).
-
 ### Edit content models with Slice Machine
 
 This project includes an application called Slice Machine, which generates models for your Custom Types and Slices. Slice Machine stores the models locally in your codebase, so you can save and version them. It also syncs your models to Prismic. To learn how to use Slice Machine, read [Model Content in Next.js](https://prismic.io/docs/technologies/model-content-nextjs).
@@ -98,24 +71,6 @@ If you change or add to your Custom Types, you'll need to update your route hand
 ## Documentation
 
 For the official Prismic documentation, see [Prismic's guide for Next.js][prismic-docs] or the [technical references for the installed Prismic packages](https://prismic.io/docs/technologies/technical-references).
-
-## License
-
-```
-Copyright 2013-2022 Prismic <contact@prismic.io> (https://prismic.io)
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-```
 
 [prismic]: https://prismic.io/
 [prismic-docs]: https://prismic.io/docs/technologies/nextjs
