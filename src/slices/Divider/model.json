@@ -1,0 +1,33 @@
+{
+  "id": "divider",
+  "type": "SharedSlice",
+  "name": "Divider",
+  "description": "Divider",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "divider_color": {
+          "type": "Color",
+          "config": {
+            "label": "Divider color",
+            "placeholder": ""
+          }
+        },
+        "divider_height": {
+          "type": "Number",
+          "config": {
+            "label": "Divider height",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

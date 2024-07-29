@@ -1,0 +1,57 @@
+{
+  "id": "customer_logos",
+  "type": "SharedSlice",
+  "name": "CustomerLogos",
+  "description": "CustomerLogos",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title_light": {
+          "type": "Text",
+          "config": {
+            "label": "Title light",
+            "placeholder": ""
+          }
+        },
+        "title_bold": {
+          "type": "Text",
+          "config": {
+            "label": "Title bold",
+            "placeholder": ""
+          }
+        },
+        "logos": {
+          "type": "Group",
+          "config": {
+            "label": "logos",
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "link",
+                  "placeholder": "",
+                  "select": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

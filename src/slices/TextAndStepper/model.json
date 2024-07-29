@@ -1,0 +1,67 @@
+{
+  "id": "text_and_stepper",
+  "type": "SharedSlice",
+  "name": "TextAndStepper",
+  "description": "TextAndStepper",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title_light": {
+          "type": "Text",
+          "config": {
+            "label": "Title light",
+            "placeholder": ""
+          }
+        },
+        "title_bold": {
+          "type": "Text",
+          "config": {
+            "label": "Title bold",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "stepper": {
+          "type": "Group",
+          "config": {
+            "label": "Stepper",
+            "repeat": true,
+            "fields": {
+              "step_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Step title",
+                  "placeholder": ""
+                }
+              },
+              "step_description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Step description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

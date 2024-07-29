@@ -1,0 +1,97 @@
+{
+  "id": "form",
+  "type": "SharedSlice",
+  "name": "Form",
+  "description": "Form",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "form_field": {
+          "type": "Group",
+          "config": {
+            "label": "Form field",
+            "repeat": true,
+            "fields": {
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Label",
+                  "placeholder": ""
+                }
+              },
+              "field_type": {
+                "type": "Select",
+                "config": {
+                  "label": "Field type",
+                  "placeholder": "",
+                  "options": ["text", "long text", "email", "phone", "checkbox"]
+                }
+              },
+              "link_to_pdf": {
+                "type": "Link",
+                "config": {
+                  "label": "Link to PDF",
+                  "placeholder": "",
+                  "select": "media"
+                }
+              },
+              "required": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Required",
+                  "default_value": false,
+                  "placeholder_true": "true",
+                  "placeholder_false": "false"
+                }
+              }
+            }
+          }
+        },
+        "submit_button_label": {
+          "type": "Text",
+          "config": {
+            "label": "Submit button label",
+            "placeholder": ""
+          }
+        },
+        "sender_email": {
+          "type": "Text",
+          "config": {
+            "label": "Sender email",
+            "placeholder": ""
+          }
+        },
+        "receiver_email": {
+          "type": "Text",
+          "config": {
+            "label": "Receiver email",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

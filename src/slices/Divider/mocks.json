@@ -1,0 +1,19 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "divider_color": {
+        "__TYPE__": "FieldContent",
+        "value": "#b870af",
+        "type": "Color"
+      },
+      "divider_height": {
+        "__TYPE__": "FieldContent",
+        "value": "61",
+        "type": "Number"
+      }
+    },
+    "items": []
+  }
+]
