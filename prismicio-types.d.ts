@@ -643,6 +643,17 @@ export interface MetaDocumentDataSidebarItem {
  */
 interface MetaDocumentData {
   /**
+   * Top info field in *Header*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: meta.top_info
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  top_info: prismic.KeyTextField;
+
+  /**
    * Site title field in *Header*
    *
    * - **Field Type**: Text
@@ -1289,7 +1300,17 @@ export interface ImageCardWithCtaSliceDefaultPrimaryImageCardItem {
  */
 export interface ImageCardWithCtaSliceDefaultPrimary {
   /**
-   * Title field in *ImageCardWithCta → Default → Primary*
+   * Title light field in *ImageCardWithCta → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_card_with_cta.default.primary.title_light
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_light: prismic.KeyTextField;
+
+  /**
+   * Title bold field in *ImageCardWithCta → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1396,7 +1417,17 @@ export interface ImageGridSliceImagesOnlyBgWhitePrimaryImagesItem {
  */
 export interface ImageGridSliceDefaultPrimary {
   /**
-   * Title field in *ImageGrid → Title and CTA → Primary*
+   * Title light field in *ImageGrid → Title and CTA → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_grid.default.primary.title_light
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_light: prismic.KeyTextField;
+
+  /**
+   * Title bold field in *ImageGrid → Title and CTA → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -1622,6 +1653,26 @@ export interface ImageLeftAndTextGridSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   link_label: prismic.KeyTextField;
+
+  /**
+   * Mobile Description top field in *ImageAndTextGrid → Image left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.default.primary.mobile_description_top
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_top: prismic.RichTextField;
+
+  /**
+   * Mobile description bottom field in *ImageAndTextGrid → Image left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.default.primary.mobile_description_bottom
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_bottom: prismic.RichTextField;
 }
 
 /**
@@ -1710,6 +1761,26 @@ export interface ImageLeftAndTextGridSliceImageRightPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   link_label: prismic.KeyTextField;
+
+  /**
+   * Mobile description top field in *ImageAndTextGrid → Image right → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.imageRight.primary.mobile_description_top
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_top: prismic.RichTextField;
+
+  /**
+   * Mobile description bottom field in *ImageAndTextGrid → Image right → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.imageRight.primary.mobile_description_bottom
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_bottom: prismic.RichTextField;
 }
 
 /**
@@ -1939,6 +2010,26 @@ export interface ImageTextAndCtaGridLeftSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   card: prismic.GroupField<Simplify<ImageTextAndCtaGridLeftSliceDefaultPrimaryCardItem>>;
+
+  /**
+   * Mobile Description top field in *ImageTextAndCtaGridLeft → Image left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text_and_cta_grid_left.default.primary.mobile_description_top
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_top: prismic.RichTextField;
+
+  /**
+   * Mobile description bottom field in *ImageTextAndCtaGridLeft → Image left → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_text_and_cta_grid_left.default.primary.mobile_description_bottom
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_bottom: prismic.RichTextField;
 }
 
 /**
@@ -2260,6 +2351,26 @@ export interface VideoAndTextGridSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#embed
    */
   video: prismic.EmbedField;
+
+  /**
+   * Mobile Description top field in *VideoAndTextGrid → VideoLeft → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_and_text_grid.default.primary.mobile_description_top
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_top: prismic.RichTextField;
+
+  /**
+   * Mobile description bottom field in *VideoAndTextGrid → VideoLeft → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_and_text_grid.default.primary.mobile_description_bottom
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_bottom: prismic.RichTextField;
 }
 
 /**
@@ -2280,14 +2391,24 @@ export type VideoAndTextGridSliceDefault = prismic.SharedSliceVariation<
  */
 export interface VideoAndTextGridSliceVideoRightPrimary {
   /**
-   * Title field in *VideoAndTextGrid → VideoRight → Primary*
+   * Title light field in *VideoAndTextGrid → VideoRight → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: video_and_text_grid.videoRight.primary.title
+   * - **API ID Path**: video_and_text_grid.videoRight.primary.title_light
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title: prismic.KeyTextField;
+  title_light: prismic.KeyTextField;
+
+  /**
+   * Title bold field in *VideoAndTextGrid → VideoRight → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_and_text_grid.videoRight.primary.title_bold
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_bold: prismic.KeyTextField;
 
   /**
    * Description field in *VideoAndTextGrid → VideoRight → Primary*
@@ -2308,6 +2429,26 @@ export interface VideoAndTextGridSliceVideoRightPrimary {
    * - **Documentation**: https://prismic.io/docs/field#embed
    */
   video: prismic.EmbedField;
+
+  /**
+   * Mobile Description top field in *VideoAndTextGrid → VideoRight → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_and_text_grid.videoRight.primary.mobile_description_top
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_top: prismic.RichTextField;
+
+  /**
+   * Mobile description bottom field in *VideoAndTextGrid → VideoRight → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_and_text_grid.videoRight.primary.mobile_description_bottom
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  mobile_description_bottom: prismic.RichTextField;
 }
 
 /**

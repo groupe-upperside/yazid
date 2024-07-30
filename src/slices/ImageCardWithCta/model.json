@@ -12,10 +12,17 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "title_light": {
+          "type": "Text",
+          "config": {
+            "label": "Title light",
+            "placeholder": ""
+          }
+        },
         "title": {
           "type": "Text",
           "config": {
-            "label": "Title",
+            "label": "Title bold",
             "placeholder": ""
           }
         },

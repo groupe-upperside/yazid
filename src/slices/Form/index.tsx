@@ -4,6 +4,8 @@ import { PrismicNextLink } from '@prismicio/next';
 import type { SliceComponentProps } from '@prismicio/react';
 import { PrismicRichText } from '@prismicio/react';
 
+import SectionTitle from '@/components/SectionTitle';
+
 /**
  * Props for `Form`.
  */
@@ -77,9 +79,9 @@ const Form = ({ slice }: FormProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="mx-auto w-full bg-white p-20 font-avenir tracking-widest lg:w-3/4 xl:w-2/3 xl:p-32 2xl:w-1/2"
+      className="mx-auto w-full bg-white p-12 font-avenir tracking-widest md:p-20 lg:w-3/4 xl:w-2/3 xl:p-32 2xl:w-1/2"
     >
-      <h2 className="text-center text-2xl font-semibold uppercase text-gray-900 md:text-3xl">{slice.primary.title}</h2>
+      <SectionTitle text={slice.primary.title} bold={true} />
       <div className="flex flex-col items-center justify-center space-y-2 py-16 xl:py-20">
         <PrismicRichText
           field={slice.primary.description}

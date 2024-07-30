@@ -15,17 +15,23 @@ export default async function Header({ doc }: HeaderProps) {
   const client = createClient();
 
   const meta = await client.getSingle('meta');
+  const footer = await client.getSingle('footer');
+
   const locales = await getLocales(doc, client);
 
   return (
     <header>
-      <nav className="mb-6 border-gray-200 bg-white p-4 lg:px-6 2xl:mb-14">
-        <div className="mx-auto flex max-w-screen-2xl flex-wrap items-center justify-between">
-          <Drawer meta={meta} />
-          <PrismicNextLink field={meta.data.home_link}>
-            <PrismicNextImage className="xl:h-18 h-16 w-auto 2xl:h-20" field={meta.data.og_image} />
-          </PrismicNextLink>
-          <div className="items-center justify-between gap-x-4 lg:flex lg:w-auto" id="mobile-menu-2">
+      <p className="bg-black p-1 px-4 text-center text-sm uppercase text-white md:text-base">{meta.data.top_info}</p>
+      <nav className="relative mb-6 mt-4 border-gray-200 bg-white p-4 md:px-12 lg:px-14 2xl:mb-14 2xl:mt-8 2xl:px-20">
+        <div className="mx-auto flex flex-wrap items-center justify-between">
+          <Drawer meta={meta} footer={footer} locales={locales} />
+          <div className="absolute left-1/2 -translate-x-1/2">
+            <PrismicNextLink field={meta.data.home_link}>
+              <PrismicNextImage className="xl:h-18 h-14 w-auto md:h-16 2xl:h-20" field={meta.data.og_image} />
+            </PrismicNextLink>
+          </div>
+
+          <div className="flex items-center justify-between gap-x-4 lg:flex lg:w-auto" id="mobile-menu-2">
             <ul className="mt-4 hidden font-medium uppercase tracking-widest xl:mt-0 xl:flex xl:flex-row xl:space-x-6 2xl:space-x-8">
               {meta.data.navigation_right.map(({ link, label }) => (
                 <li key={label}>
@@ -42,8 +48,8 @@ export default async function Header({ doc }: HeaderProps) {
               <li className="hidden border-x-2 border-gray-900 px-2 xl:block">
                 <LanguageSwitcher locales={locales} />
               </li>
-              {meta.data.icons.map(({ link, icon }) => (
-                <li>
+              {meta.data.icons.map(({ link, icon }, index) => (
+                <li key={index}>
                   <PrismicNextLink className="py-2" field={link}>
                     <PrismicNextImage className="h-5 w-auto" field={icon} />
                   </PrismicNextLink>

@@ -1,3 +1,4 @@
+import SectionTitle from '@/components/SectionTitle';
 import { createClient } from '@/prismicio';
 
 import Button from './Button';
@@ -9,11 +10,13 @@ export default async function ContactFooter() {
   const footer = await client.getSingle('contact_footer');
 
   return (
-    <section className="bg-[#F7F4EF] p-20 font-avenir tracking-widest xl:p-32">
+    <section className="bg-[#F7F4EF] p-12 font-avenir tracking-widest md:p-20 xl:p-32">
       <div className="grid">
-        <h2 className="text-center text-2xl font-semibold uppercase text-gray-900 md:text-3xl">{footer.data.title}</h2>
+        <SectionTitle text={footer.data.title} bold={true} centered={true} />
         <Divider centered={true} />
-        <p className="text-center text-lg font-medium tracking-widest text-[#9A9A9A]">{footer.data.description}</p>
+        <p className="text-center text-sm font-medium tracking-widest text-[#9A9A9A] md:text-base">
+          {footer.data.description}
+        </p>
         <Button link={footer.data.link} label={footer.data.label} />
       </div>
     </section>

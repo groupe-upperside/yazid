@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 import Button from '@/components/Button';
 import Divider from '@/components/Divider';
+import SectionTitle from '@/components/SectionTitle';
 import { getGridColsClass } from '@/utils/getGridColsClass';
 
 /**
@@ -34,16 +35,15 @@ const ImageCardWithCta = ({ slice }: ImageCardWithCtaProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-[#F7F4EF] p-20 font-avenir tracking-widest xl:p-32"
+      className="bg-[#F7F4EF] px-8 py-16 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="">
-        <h2 className="mb-3 text-center text-2xl font-semibold uppercase text-gray-900 md:text-3xl">
-          {slice.primary.title}
-        </h2>
+        <SectionTitle text={slice.primary.title_light} centered={true} />
+        <SectionTitle text={slice.primary.title} bold={true} centered={true} />
         <Divider centered={true} />
-        <div className={`hidden gap-8 lg:grid lg:grid-cols-2 ${getGridColsClass(slice.primary.number_per_row)}`}>
-          {slice.primary.image_card.map((item) => (
-            <div className="flex w-full flex-col bg-white">
+        <div className={`hidden gap-8 md:grid md:grid-cols-2 ${getGridColsClass(slice.primary.number_per_row)}`}>
+          {slice.primary.image_card.map((item, index) => (
+            <div className="flex w-full flex-col bg-white" key={index}>
               <PrismicNextImage field={item.image} className="h-60 w-full object-cover" />
               <div className="flex flex-1 flex-col justify-between gap-y-3 px-8 py-12">
                 <h5 className="pt-2 text-center text-xl font-bold uppercase tracking-widest text-gray-900">
@@ -67,7 +67,7 @@ const ImageCardWithCta = ({ slice }: ImageCardWithCtaProps): JSX.Element => {
             </div>
           ))}
         </div>
-        <div className="flex flex-row items-center justify-center space-x-8 lg:hidden">
+        <div className="flex flex-row items-center justify-center space-x-4 md:hidden">
           <button
             type="button"
             onClick={goToPrevious}
@@ -96,11 +96,11 @@ const ImageCardWithCta = ({ slice }: ImageCardWithCtaProps): JSX.Element => {
               >
                 <div className="flex w-full flex-col bg-white">
                   <PrismicNextImage field={item.image} className="h-60 w-full object-cover" />
-                  <div className="flex flex-1 flex-col justify-between gap-y-3 px-8 py-12">
-                    <h5 className="pt-2 text-center text-xl font-bold uppercase tracking-widest text-gray-900">
+                  <div className="flex flex-1 flex-col justify-between gap-y-3 px-6 py-12">
+                    <h5 className="pt-2 text-center text-lg font-bold uppercase tracking-widest text-gray-900 md:text-xl">
                       {item.title}
                     </h5>
-                    <p className="text-center text-lg font-bold uppercase tracking-widest text-[#9A9A9A]">
+                    <p className="pt-2 text-center text-base font-bold uppercase tracking-widest text-[#9A9A9A] md:text-lg">
                       {item.location}
                     </p>
                     <div className="space-y-1 pb-2">
@@ -108,7 +108,9 @@ const ImageCardWithCta = ({ slice }: ImageCardWithCtaProps): JSX.Element => {
                         field={item.description}
                         components={{
                           paragraph: ({ children }) => (
-                            <p className="text-center tracking-widest text-[#9A9A9A]">{children}</p>
+                            <p className="text-center text-sm tracking-widest text-[#9A9A9A] md:text-base">
+                              {children}
+                            </p>
                           ),
                         }}
                       />

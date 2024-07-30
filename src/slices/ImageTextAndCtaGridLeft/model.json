@@ -88,6 +88,24 @@
               }
             }
           }
+        },
+        "mobile_description_top": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Mobile Description top",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "mobile_description_bottom": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Mobile description bottom",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
         }
       },
       "items": {}

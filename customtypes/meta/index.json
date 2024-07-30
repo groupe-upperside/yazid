@@ -6,6 +6,13 @@
   "status": true,
   "json": {
     "Main": {
+      "top_info": {
+        "type": "Text",
+        "config": {
+          "label": "Top info",
+          "placeholder": ""
+        }
+      },
       "site_title": {
         "type": "Text",
         "config": {

@@ -3,6 +3,7 @@ import type { SliceComponentProps } from '@prismicio/react';
 import { PrismicRichText } from '@prismicio/react';
 
 import Divider from '@/components/Divider';
+import SectionTitle from '@/components/SectionTitle';
 
 /**
  * Props for `TextAndStepper`.
@@ -17,29 +18,28 @@ const TextAndStepper = ({ slice }: TextAndStepperProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-white p-20 font-avenir tracking-widest xl:p-32"
+      className="p-12 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="me-auto place-self-center xl:col-span-7">
-        <h2 className="mb-3 text-center text-2xl uppercase text-gray-900 md:text-3xl">
-          {slice.primary.title_light}
-          <br />
-          <span className="font-semibold">{slice.primary.title_bold}</span>
-        </h2>
+        <SectionTitle text={slice.primary.title_light} centered={true} />
+        <SectionTitle text={slice.primary.title_bold} bold={true} centered={true} />
         <Divider centered={true} />
-        <div className="mx-auto w-3/4 space-y-6">
+        <div className="mx-auto w-full space-y-6">
           <PrismicRichText
             field={slice.primary.description}
             components={{
-              paragraph: ({ children }) => <p className="text-justify tracking-widest text-[#707070]">{children}</p>,
+              paragraph: ({ children }) => (
+                <p className="text-justify text-sm tracking-widest text-[#707070] md:text-base">{children}</p>
+              ),
             }}
           />
         </div>
       </div>
       <div className="pt-16 xl:pt-24">
-        <div className="mx-auto flex w-3/4 flex-col items-center justify-center gap-y-6">
+        <div className="mx-auto flex w-full flex-col items-center justify-center gap-y-6 md:w-3/4">
           {slice.primary.stepper.map((stepper, index) => (
-            <div className="group w-full">
-              <div className="w-full cursor-pointer bg-black p-6 text-center text-xl uppercase tracking-widest text-white">
+            <div className="group w-full" key={index}>
+              <div className="w-full cursor-pointer bg-black p-6 text-center text-base uppercase tracking-widest text-white md:text-lg">
                 {stepper.step_title}
               </div>
               <div className="hidden p-12 group-hover:block">
@@ -47,7 +47,7 @@ const TextAndStepper = ({ slice }: TextAndStepperProps): JSX.Element => {
                   field={stepper.step_description}
                   components={{
                     paragraph: ({ children }) => (
-                      <p className="text-justify tracking-widest text-[#707070]">{children}</p>
+                      <p className="text-justify text-sm tracking-widest text-[#707070] md:text-base">{children}</p>
                     ),
                     list: ({ children }) => (
                       <ul className="list-inside list-disc tracking-widest text-[#707070]">{children}</ul>

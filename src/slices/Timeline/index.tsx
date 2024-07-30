@@ -4,6 +4,7 @@ import { PrismicRichText } from '@prismicio/react';
 import React from 'react';
 
 import Divider from '@/components/Divider';
+import SectionTitle from '@/components/SectionTitle';
 
 /**
  * Props for `Timeline`.
@@ -25,18 +26,19 @@ const ActiveTimeline = ({ activeDateItem }) => {
 
 const EmptyTimeline = ({ isLast }) => {
   return (
-    <li className={`flex w-fit items-center ${isLast ? 'border-t-0' : ''}`}>
+    <li className={`flex w-fit items-center`}>
       <div className="relative flex flex-col items-center">
         <span className="flex size-8 shrink-0 items-center justify-center rounded-full border-2 border-black xl:size-12"></span>
       </div>
-      <div className={`w-8 flex-auto border-t-2 border-black xl:w-12 ${isLast ? 'border-t-0' : ''}`}></div>
+      <div className={`w-8 flex-auto border-black xl:w-12 ${isLast ? 'border-t-0' : 'border-t-2'}`}></div>
     </li>
   );
 };
 
-const InactiveTimeline = ({ inactiveDateItem }) => {
+const InactiveTimeline = ({ inactiveDateItem, isLeft }) => {
   return (
     <li className="flex w-fit items-center">
+      {isLeft ? <div className="w-8 flex-auto border-t-2 border-black md:hidden xl:w-12"></div> : null}
       <div className="relative flex flex-col items-center">
         <span className="flex size-14 shrink-0 items-center justify-center rounded-full border-2 border-black text-lg font-semibold text-black xl:size-20 xl:text-xl">
           {inactiveDateItem.year}
@@ -56,7 +58,6 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
   const inactiveDateItems = dateItems.slice(1);
   const inactiveDateItemsCount = inactiveDateItems.length;
   const leftInactiveDateItemsCount = Math.floor(inactiveDateItemsCount / 2);
-  const rightInactiveDateItemsCount = inactiveDateItemsCount - leftInactiveDateItemsCount;
   const leftInactiveDateItems = inactiveDateItems.slice(0, leftInactiveDateItemsCount);
   const rightInactiveDateItems = inactiveDateItems.slice(leftInactiveDateItemsCount);
 
@@ -67,20 +68,21 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-[#F7F4EF] p-20 font-avenir tracking-widest xl:p-32"
+      className="bg-[#F7F4EF] p-12 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="me-auto place-self-center xl:col-span-7">
-        <h2 className="mb-3 text-center text-2xl uppercase text-gray-900 md:text-3xl">
-          {slice.primary.title}
-          <br />
-          <span className="font-semibold">{slice.primary.title_bold}</span>
-        </h2>
+        <SectionTitle text={slice.primary.title} centered={true} />
+        <SectionTitle text={slice.primary.title_bold} bold={true} centered={true} />
         <Divider centered={true} />
         <div className="space-y-6">
           <PrismicRichText
             field={slice.primary.description}
             components={{
-              paragraph: ({ children }) => <p className="text-center tracking-widest text-[#707070]">{children}</p>,
+              paragraph: ({ children }) => (
+                <p className="text-justify text-sm tracking-widest text-[#707070] md:text-center md:text-base">
+                  {children}
+                </p>
+              ),
             }}
           />
         </div>
@@ -100,18 +102,18 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
             ))}
           </div>
           {/* Left empty timeline for smaller screens */}
-          <div className="flex w-fit justify-center lg:hidden">
+          <div className="hidden w-fit justify-center md:flex lg:hidden">
             <EmptyTimeline isLast={false} />
           </div>
           {/* Left inactive timelines */}
           {leftInactiveDateItems.map((inactiveDateItem, index) => (
-            <InactiveTimeline inactiveDateItem={inactiveDateItem} key={index} />
+            <InactiveTimeline inactiveDateItem={inactiveDateItem} key={index} isLeft={true} />
           ))}
           {/* Active timeline */}
           <ActiveTimeline activeDateItem={activeDateItem} />
           {/* Right inactive timelines */}
           {rightInactiveDateItems.map((inactiveDateItem, index) => (
-            <InactiveTimeline inactiveDateItem={inactiveDateItem} key={index} />
+            <InactiveTimeline inactiveDateItem={inactiveDateItem} key={index} isLeft={false} />
           ))}
           {/* Right empty timelines for XL screens */}
           <div className="hidden w-fit justify-center xl:flex">
@@ -126,7 +128,7 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
             ))}
           </div>
           {/* Right empty timeline for smaller screens */}
-          <div className="flex w-fit justify-center lg:hidden">
+          <div className="hidden w-fit justify-center md:flex lg:hidden">
             <EmptyTimeline isLast={true} />
           </div>
         </ol>
