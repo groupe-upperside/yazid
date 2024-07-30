@@ -64,6 +64,15 @@
             "label": "Number per row",
             "placeholder": ""
           }
+        },
+        "slider_on_small_screen": {
+          "type": "Boolean",
+          "config": {
+            "label": "Slider on small screen",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
         }
       },
       "items": {}
@@ -99,6 +108,15 @@
               }
             }
           }
+        },
+        "slider_on_small_screen": {
+          "type": "Boolean",
+          "config": {
+            "label": "Slider on small screen",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
         }
       },
       "items": {}
@@ -133,6 +151,15 @@
                 }
               }
             }
+          }
+        },
+        "slider_on_small_screen": {
+          "type": "Boolean",
+          "config": {
+            "label": "Slider on small screen",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
           }
         }
       },

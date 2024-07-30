@@ -27,6 +27,7 @@ const ImageSlider = ({ slice }: ImageSliderProps): JSX.Element => {
       );
       return () => clearInterval(interval);
     }
+    return undefined;
   }, [images.length]);
 
   const goToPrevious = () => {

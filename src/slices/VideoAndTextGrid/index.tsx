@@ -74,7 +74,9 @@ const VideoAndTextGrid = ({ slice }: VideoAndTextGridProps): JSX.Element => {
         </div>
         <div className="me-auto place-self-center xl:col-span-7">
           {slice.primary.title_light ? <SectionTitle text={slice.primary.title_light} /> : null}
-          <SectionTitle text={slice.primary.title} bold={true} />
+          {slice.variation === 'default' && slice.primary.title ? (
+            <SectionTitle text={slice.primary.title} bold={true} />
+          ) : null}
           <Divider />
           <div className="space-y-6">
             <PrismicRichText
@@ -90,7 +92,9 @@ const VideoAndTextGrid = ({ slice }: VideoAndTextGridProps): JSX.Element => {
       </div>
       <div className="relative mx-auto block max-w-screen-2xl gap-12 rounded-lg xl:hidden">
         {slice.primary.title_light ? <SectionTitle text={slice.primary.title_light} /> : null}
-        <SectionTitle text={slice.primary.title} bold={true} />
+        {slice.variation === 'default' && slice.primary.title ? (
+          <SectionTitle text={slice.primary.title} bold={true} />
+        ) : null}
         <Divider />
         <div className="space-y-6">
           <PrismicRichText

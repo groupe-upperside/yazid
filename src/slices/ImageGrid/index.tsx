@@ -3,7 +3,7 @@
 import type { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import type { SliceComponentProps } from '@prismicio/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import Button from '@/components/Button';
 import Divider from '@/components/Divider';
@@ -15,76 +15,41 @@ import { getGridColsClass } from '@/utils/getGridColsClass';
  */
 export type ImageGridProps = SliceComponentProps<Content.ImageGridSlice>;
 
-const DefaultImageGrid = ({ slice }: ImageGridProps): JSX.Element => {
+const ImageGridComponent = ({ slice }: { slice: Content.ImageGridSlice; variation: string }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const images = slice.primary.images || [];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slice.primary.images.length);
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [slice.primary.images.length]);
+  }, [images.length]);
 
-  return (
-    <>
-      <div className="grid">
-        <SectionTitle text={slice.primary.title_light} centered={true} />
-        <SectionTitle text={slice.primary.title} bold={true} centered={true} />
-        <Divider centered={true} />
-        <div
-          className={`lg:grid-cols-${slice.primary.number_per_row - 1} hidden gap-8 md:grid md:grid-cols-3 ${getGridColsClass(slice.primary.number_per_row)}`}
-        >
-          {slice.primary.images.map((item, index) => (
-            <div key={index}>
-              <PrismicNextImage className="aspect-square w-full object-cover" field={item.image} />
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-1 gap-8 md:hidden">
-          <div>
-            <PrismicNextImage
-              className="aspect-square w-full object-cover"
-              field={slice.primary.images[currentIndex].image}
-            />
-          </div>
-        </div>
-      </div>
-      <Button link={slice.primary.link} label={slice.primary.link_label} />
-    </>
-  );
-};
-
-const OnlyImagesGrid = ({ slice }: ImageGridProps): JSX.Element => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % slice.primary.images.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [slice.primary.images.length]);
+  const gridColsClass = useMemo(() => getGridColsClass(slice.primary.number_per_row), [slice.primary.number_per_row]);
+  const lgGridCols = slice.primary.number_per_row
+    ? `lg:grid-cols-${slice.primary.number_per_row - 1}`
+    : 'lg:grid-cols-4';
 
   return (
     <>
       <div
-        className={`lg:grid-cols-${slice.primary.number_per_row - 1} hidden gap-8 md:grid md:grid-cols-3 ${slice.variation === 'imagesOnlyBgWhite' ? 'bg-white' : 'bg-[#F7F4EF]'} ${getGridColsClass(slice.primary.number_per_row)}`}
+        className={`${slice.primary.slider_on_small_screen ? 'hidden lg:grid' : 'grid grid-cols-1'} gap-8 ${lgGridCols} ${gridColsClass}`}
       >
-        {slice.primary.images.map((item, index) => (
+        {images.map((item, index) => (
           <div key={index}>
             <PrismicNextImage className="aspect-square w-full object-cover" field={item.image} />
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 gap-8 md:hidden">
-        <div>
-          <PrismicNextImage
-            className="aspect-square w-full object-cover"
-            field={slice.primary.images[currentIndex].image}
-          />
+      {slice.primary.slider_on_small_screen && (
+        <div className={`grid grid-cols-1 gap-8 lg:hidden`}>
+          <div>
+            <PrismicNextImage className="aspect-square w-full object-cover" field={images[currentIndex].image} />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };
@@ -93,13 +58,26 @@ const OnlyImagesGrid = ({ slice }: ImageGridProps): JSX.Element => {
  * Component for "ImageGrid" Slices.
  */
 const ImageGrid = ({ slice }: ImageGridProps): JSX.Element => {
+  const { variation, primary } = slice;
+  const sectionBgClass = variation === 'imagesOnlyBgWhite' || variation === 'default' ? 'bg-white' : 'bg-[#F7F4EF]';
+
   return (
     <section
       data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      className={`${slice.variation === 'imagesOnlyBgWhite' || slice.variation === 'default' ? 'bg-white' : 'bg-[#F7F4EF]'} p-12 font-avenir tracking-widest md:p-20 xl:p-32`}
+      data-slice-variation={variation}
+      className={`${sectionBgClass} p-12 font-avenir tracking-widest md:p-20 xl:p-32`}
     >
-      {slice.variation === 'default' ? <DefaultImageGrid slice={slice} /> : <OnlyImagesGrid slice={slice} />}
+      {variation === 'default' && (
+        <>
+          {primary.title_light && <SectionTitle text={primary.title_light} centered={true} />}
+          {primary.title && <SectionTitle text={primary.title} bold={true} centered={true} />}
+          <Divider centered={true} />
+        </>
+      )}
+      {primary.images && <ImageGridComponent slice={slice} variation={variation} />}
+      {variation === 'default' && primary.link && primary.link_label && (
+        <Button link={primary.link} label={primary.link_label} />
+      )}
     </section>
   );
 };

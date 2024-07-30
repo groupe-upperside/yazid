@@ -1475,6 +1475,17 @@ export interface ImageGridSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#number
    */
   number_per_row: prismic.NumberField;
+
+  /**
+   * Slider on small screen field in *ImageGrid → Title and CTA → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_grid.default.primary.slider_on_small_screen
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  slider_on_small_screen: prismic.BooleanField;
 }
 
 /**
@@ -1513,6 +1524,17 @@ export interface ImageGridSliceImagesOnlyPrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   images: prismic.GroupField<Simplify<ImageGridSliceImagesOnlyPrimaryImagesItem>>;
+
+  /**
+   * Slider on small screen field in *ImageGrid → Images only BG yellow → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_grid.imagesOnly.primary.slider_on_small_screen
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  slider_on_small_screen: prismic.BooleanField;
 }
 
 /**
@@ -1551,6 +1573,17 @@ export interface ImageGridSliceImagesOnlyBgWhitePrimary {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   images: prismic.GroupField<Simplify<ImageGridSliceImagesOnlyBgWhitePrimaryImagesItem>>;
+
+  /**
+   * Slider on small screen field in *ImageGrid → Images only BG white → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_grid.imagesOnlyBgWhite.primary.slider_on_small_screen
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  slider_on_small_screen: prismic.BooleanField;
 }
 
 /**

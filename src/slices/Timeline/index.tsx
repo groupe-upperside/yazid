@@ -6,17 +6,23 @@ import React from 'react';
 import Divider from '@/components/Divider';
 import SectionTitle from '@/components/SectionTitle';
 
+import type { Simplify } from '../../../prismicio-types';
+
 /**
  * Props for `Timeline`.
  */
 export type TimelineProps = SliceComponentProps<Content.TimelineSlice>;
 
-const ActiveTimeline = ({ activeDateItem }) => {
+interface ActiveDateItemProps {
+  activeDateItem: Simplify<Content.TimelineSliceDefaultPrimaryDateItem> | undefined;
+}
+
+const ActiveTimeline = ({ activeDateItem }: ActiveDateItemProps) => {
   return (
     <li className="flex w-fit items-center">
       <div className="relative flex flex-col items-center">
         <span className="flex size-20 shrink-0 items-center justify-center rounded-full border-2 border-black bg-black text-xl font-medium text-white xl:size-28 xl:text-2xl">
-          {activeDateItem.year}
+          {activeDateItem ? activeDateItem.year : ''}
         </span>
       </div>
       <div className="w-8 flex-auto border-t-2 border-black xl:w-12"></div>
@@ -24,7 +30,11 @@ const ActiveTimeline = ({ activeDateItem }) => {
   );
 };
 
-const EmptyTimeline = ({ isLast }) => {
+interface EmptyTimelineProps {
+  isLast: boolean;
+}
+
+const EmptyTimeline = ({ isLast }: EmptyTimelineProps) => {
   return (
     <li className={`flex w-fit items-center`}>
       <div className="relative flex flex-col items-center">
@@ -35,7 +45,12 @@ const EmptyTimeline = ({ isLast }) => {
   );
 };
 
-const InactiveTimeline = ({ inactiveDateItem, isLeft }) => {
+interface InactiveTimelineProps {
+  inactiveDateItem: Simplify<Content.TimelineSliceDefaultPrimaryDateItem>;
+  isLeft: boolean;
+}
+
+const InactiveTimeline = ({ inactiveDateItem, isLeft }: InactiveTimelineProps) => {
   return (
     <li className="flex w-fit items-center">
       {isLeft ? <div className="w-8 flex-auto border-t-2 border-black md:hidden xl:w-12"></div> : null}
@@ -95,54 +110,48 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
               <EmptyTimeline key={index} isLast={false} />
             ))}
           </div>
-          {/* Left empty timelines for LG screens */}
           <div className="hidden w-fit justify-center lg:flex xl:hidden">
             {[...Array(totalEmptyTimelinesLG)].map((_, index) => (
               <EmptyTimeline key={index} isLast={false} />
             ))}
           </div>
-          {/* Left empty timeline for smaller screens */}
           <div className="hidden w-fit justify-center md:flex lg:hidden">
             <EmptyTimeline isLast={false} />
           </div>
-          {/* Left inactive timelines */}
           {leftInactiveDateItems.map((inactiveDateItem, index) => (
             <InactiveTimeline inactiveDateItem={inactiveDateItem} key={index} isLeft={true} />
           ))}
-          {/* Active timeline */}
           <ActiveTimeline activeDateItem={activeDateItem} />
-          {/* Right inactive timelines */}
           {rightInactiveDateItems.map((inactiveDateItem, index) => (
             <InactiveTimeline inactiveDateItem={inactiveDateItem} key={index} isLeft={false} />
           ))}
-          {/* Right empty timelines for XL screens */}
           <div className="hidden w-fit justify-center xl:flex">
             {[...Array(totalEmptyTimelinesXL)].map((_, index) => (
               <EmptyTimeline key={index} isLast={index === totalEmptyTimelinesXL - 1} />
             ))}
           </div>
-          {/* Right empty timelines for LG screens */}
           <div className="hidden w-fit justify-center lg:flex xl:hidden">
             {[...Array(totalEmptyTimelinesLG)].map((_, index) => (
               <EmptyTimeline key={index} isLast={index === totalEmptyTimelinesLG - 1} />
             ))}
           </div>
-          {/* Right empty timeline for smaller screens */}
           <div className="hidden w-fit justify-center md:flex lg:hidden">
             <EmptyTimeline isLast={true} />
           </div>
         </ol>
-        <div className="mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-between gap-y-4">
-          <div className="text-center font-semibold uppercase">{activeDateItem.title}</div>
-          <div className="space-y-6">
-            <PrismicRichText
-              field={activeDateItem.description}
-              components={{
-                paragraph: ({ children }) => <p className="text-center tracking-widest text-[#707070]">{children}</p>,
-              }}
-            />
+        {activeDateItem ? (
+          <div className="mx-auto mt-4 flex w-full max-w-lg flex-col items-center justify-between gap-y-4">
+            <div className="text-center font-semibold uppercase">{activeDateItem.title}</div>
+            <div className="space-y-6">
+              <PrismicRichText
+                field={activeDateItem.description}
+                components={{
+                  paragraph: ({ children }) => <p className="text-center tracking-widest text-[#707070]">{children}</p>,
+                }}
+              />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </section>
   );

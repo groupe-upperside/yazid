@@ -6,12 +6,14 @@ import { PrismicRichText } from '@prismicio/react';
 
 import SectionTitle from '@/components/SectionTitle';
 
+import type { Simplify } from '../../../prismicio-types';
+
 /**
  * Props for `Form`.
  */
 export type FormProps = SliceComponentProps<Content.FormSlice>;
 
-const ReturnInput = (item) => {
+const ReturnInput = (item: Simplify<Content.FormSliceDefaultPrimaryFormFieldItem>) => {
   const TextInput = () => {
     return (
       <input

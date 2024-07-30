@@ -65,6 +65,10 @@
 				"__TYPE__": "FieldContent",
 				"value": "event",
 				"type": "Text"
+			},
+			"slider_on_small_screen": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []
@@ -113,6 +117,10 @@
 						]
 					}
 				]
+			},
+			"slider_on_small_screen": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [
@@ -166,6 +174,10 @@
 						]
 					}
 				]
+			},
+			"slider_on_small_screen": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": [

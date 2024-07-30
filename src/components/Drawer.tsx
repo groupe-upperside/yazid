@@ -122,10 +122,13 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                             {label}
                           </PrismicNextLink>
                         </li>
-                        {meta.data.sidebar.map(({ link, label }) => (
-                          <li key={label} className="text-xs font-light">
-                            <PrismicNextLink className="block pl-3 pr-4 uppercase tracking-widest lg:p-0" field={link}>
-                              {label}
+                        {meta.data.sidebar.map((item) => (
+                          <li key={item.label} className="text-xs font-light">
+                            <PrismicNextLink
+                              className="block pl-3 pr-4 uppercase tracking-widest lg:p-0"
+                              field={item.link}
+                            >
+                              {item.label}
                             </PrismicNextLink>
                           </li>
                         ))}
