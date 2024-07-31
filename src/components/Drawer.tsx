@@ -101,7 +101,7 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 {meta.data.sidebar.map(({ link, label }) => (
                   <li key={label}>
                     <PrismicNextLink
-                      className="block py-2 pl-3 pr-4 font-semibold uppercase tracking-widest lg:p-0"
+                      className="block py-2 pl-3 pr-4 text-[0.95rem] font-semibold uppercase tracking-widest lg:p-0"
                       field={link}
                     >
                       {label}
@@ -187,12 +187,15 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 data-collapse-toggle="drawer-navigation"
                 onClick={() => setOpenDrawer(!openDrawer)}
                 type="button"
-                className="font-base block py-2 pl-3 pr-4 uppercase tracking-widest lg:border-0 lg:p-0"
+                className="font-base block py-2 pl-3 pr-4 text-[0.95rem] uppercase tracking-widest lg:border-0 lg:p-0"
               >
                 {label}
               </button>
             ) : (
-              <PrismicNextLink className="block py-2 pl-3 pr-4 uppercase lg:border-0 lg:p-0" field={link}>
+              <PrismicNextLink
+                className="block py-2 pl-3 pr-4 text-[0.95rem] uppercase lg:border-0 lg:p-0"
+                field={link}
+              >
                 {label}
               </PrismicNextLink>
             )}
