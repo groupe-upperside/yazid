@@ -46,7 +46,7 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
   return (
     <div ref={dropdownRef} className="relative inline-block w-full max-w-xs">
       <div
-        className="block w-full cursor-pointer bg-white p-2 text-base text-gray-900 focus:outline-none"
+        className="block w-full cursor-pointer bg-white px-0.5 text-base text-gray-900 focus:outline-none 2xl:text-base"
         onClick={toggleDropdown}
       >
         {localeLabels[selectedLocale.lang as keyof typeof localeLabels] || selectedLocale.lang_name}
@@ -59,7 +59,7 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
                 href={locale.url}
                 locale={locale.lang}
                 aria-label={`Change language to ${locale.lang_name}`}
-                className="block p-2 text-base text-gray-900"
+                className="block p-2 text-sm text-gray-900 2xl:text-base"
                 onClick={() => handleLocaleChange(locale)}
               >
                 {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}

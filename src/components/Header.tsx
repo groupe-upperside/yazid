@@ -32,7 +32,7 @@ export default async function Header({ doc }: HeaderProps) {
           </div>
 
           <div className="flex items-center justify-between gap-x-4 lg:flex lg:w-auto" id="mobile-menu-2">
-            <ul className="mt-4 hidden font-medium uppercase tracking-widest xl:mt-0 xl:flex xl:flex-row xl:space-x-6 2xl:space-x-8">
+            <ul className="font-base mt-4 hidden uppercase tracking-widest xl:mt-0 xl:flex xl:flex-row xl:space-x-6 2xl:space-x-8">
               {meta.data.navigation_right.map(({ link, label }) => (
                 <li key={label}>
                   <PrismicNextLink

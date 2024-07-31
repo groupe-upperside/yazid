@@ -179,7 +179,7 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
           </div>
         )}
       </div>
-      <ul className="hidden flex-col font-medium uppercase tracking-widest xl:flex xl:w-auto xl:flex-row xl:space-x-6 2xl:space-x-8">
+      <ul className="font-base hidden flex-col uppercase tracking-widest xl:flex xl:w-auto xl:flex-row xl:space-x-6 2xl:space-x-8">
         {meta.data.navigation.map(({ link, label, custom_action }) => (
           <li key={label}>
             {custom_action && custom_action === 'open_drawer' ? (
@@ -187,7 +187,7 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 data-collapse-toggle="drawer-navigation"
                 onClick={() => setOpenDrawer(!openDrawer)}
                 type="button"
-                className="block py-2 pl-3 pr-4 font-medium uppercase tracking-widest lg:border-0 lg:p-0"
+                className="font-base block py-2 pl-3 pr-4 uppercase tracking-widest lg:border-0 lg:p-0"
               >
                 {label}
               </button>
