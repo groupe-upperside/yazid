@@ -45,7 +45,7 @@ export default async function Header({ doc }: HeaderProps) {
               ))}
             </ul>
             <ul className="mt-4 flex flex-row gap-x-4 font-semibold uppercase lg:mt-0">
-              <li className="hidden border-x-2 border-gray-900 px-2 xl:block">
+              <li className="hidden border-x border-gray-900 px-2 xl:block">
                 <LanguageSwitcher locales={locales} />
               </li>
               {meta.data.icons.map(({ link, icon }, index) => (

@@ -14,7 +14,7 @@ export default async function Footer() {
           {footer.data.protected_brand}
         </p>
         <div className="mx-auto hidden max-w-screen-2xl px-4 pt-4 md:pt-8 lg:flex lg:items-center lg:justify-between">
-          <ul className="my-6 grid w-full grid-cols-2 items-center gap-y-4 font-black uppercase sm:mb-0 xl:grid-cols-4">
+          <ul className="my-6 grid w-full grid-cols-2 gap-y-4 font-black uppercase sm:mb-0 xl:grid-cols-4">
             {footer.data.navigation.map(({ link, label, logo }) => (
               <li key={label} className="me-4 md:me-6">
                 <PrismicNextLink className="me-4 md:me-6" field={link}>

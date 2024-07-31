@@ -171,7 +171,7 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 ))}
               </ul>
               <div className="mt-6 flex w-full justify-end lg:hidden">
-                <div className="border-x-2 border-gray-900 px-2 font-semibold">
+                <div className="border-x border-gray-900 px-2 font-semibold">
                   <LanguageSwitcher locales={locales} />
                 </div>
               </div>
