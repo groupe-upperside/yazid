@@ -10,7 +10,7 @@ export default function Button({ link, label }: ButtonProps) {
   return (
     <div className="flex w-full justify-center">
       <PrismicNextLink
-        className="mx-auto mt-8 bg-black px-8 py-4 text-center text-xs font-medium uppercase text-white md:px-12"
+        className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white md:px-12"
         field={link}
       >
         {label}
