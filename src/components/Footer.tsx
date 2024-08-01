@@ -41,7 +41,7 @@ export default async function Footer() {
           </ul>
         </div>
         <hr className="my-6 block border-2 border-gray-400 sm:mx-auto lg:my-8 lg:hidden" />
-        <p className="block items-center pb-6 text-center font-avenir text-[0.85rem] font-medium uppercase lg:hidden">
+        <p className="block items-center pb-6 text-center font-avenir text-[0.8rem] font-medium uppercase lg:hidden">
           {footer.data.copyright}
         </p>
       </div>
