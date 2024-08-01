@@ -52,7 +52,7 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
         {localeLabels[selectedLocale.lang as keyof typeof localeLabels] || selectedLocale.lang_name}
       </div>
       {isOpen && (
-        <ul className="absolute left-0 z-10 mt-1 w-full rounded-md bg-white shadow-lg">
+        <ul className="absolute left-0 z-10 mt-1 w-auto rounded-md bg-white shadow-lg">
           {locales.map((locale) => (
             <li key={locale.lang} className="cursor-pointer hover:bg-gray-50">
               <PrismicNextLink
