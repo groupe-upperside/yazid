@@ -2267,6 +2267,26 @@ export interface TimelineSliceDefaultPrimaryDateItem {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   description: prismic.RichTextField;
+
+  /**
+   * Title 2 field in *Timeline → Default → Primary → Date*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.default.primary.date[].title_2
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_2: prismic.KeyTextField;
+
+  /**
+   * Title 3 field in *Timeline → Default → Primary → Date*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: timeline.default.primary.date[].title_3
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_3: prismic.KeyTextField;
 }
 
 /**

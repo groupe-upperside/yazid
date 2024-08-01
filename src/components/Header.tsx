@@ -36,7 +36,7 @@ export default async function Header({ doc }: HeaderProps) {
               {meta.data.navigation_right.map(({ link, label }) => (
                 <li key={label}>
                   <PrismicNextLink
-                    className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-[0.89rem] hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent"
+                    className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-[0.85rem] hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent"
                     field={link}
                   >
                     {label}

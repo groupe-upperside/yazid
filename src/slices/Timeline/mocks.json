@@ -1,70 +1,86 @@
 [
-  {
-    "__TYPE__": "SharedSliceContent",
-    "variation": "default",
-    "primary": {
-      "title": {
-        "__TYPE__": "FieldContent",
-        "value": "unhappy",
-        "type": "Text"
-      },
-      "description": {
-        "__TYPE__": "StructuredTextContent",
-        "value": [
-          {
-            "type": "paragraph",
-            "content": {
-              "text": "Ut labore commodo occaecat tempor proident officia commodo. In voluptate incididunt irure fugiat quis elit laborum occaecat ut ea adipisicing velit est. Duis ex mollit laboris adipisicing eu anim."
-            }
-          }
-        ]
-      },
-      "title_bold": {
-        "__TYPE__": "FieldContent",
-        "value": "former",
-        "type": "Text"
-      },
-      "date": {
-        "__TYPE__": "GroupContentType",
-        "value": [
-          {
-            "__TYPE__": "GroupItemContent",
-            "value": [
-              [
-                "year",
-                {
-                  "__TYPE__": "FieldContent",
-                  "value": "whenever",
-                  "type": "Text"
-                }
-              ],
-              [
-                "title",
-                {
-                  "__TYPE__": "FieldContent",
-                  "value": "affect",
-                  "type": "Text"
-                }
-              ],
-              [
-                "description",
-                {
-                  "__TYPE__": "StructuredTextContent",
-                  "value": [
-                    {
-                      "type": "paragraph",
-                      "content": {
-                        "text": "Esse velit quis velit sunt. Do occaecat eu tempor voluptate ad fugiat do commodo dolor irure labore consequat Lorem commodo."
-                      }
-                    }
-                  ]
-                }
-              ]
-            ]
-          }
-        ]
-      }
-    },
-    "items": []
-  }
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "unhappy",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ut labore commodo occaecat tempor proident officia commodo. In voluptate incididunt irure fugiat quis elit laborum occaecat ut ea adipisicing velit est. Duis ex mollit laboris adipisicing eu anim."
+						}
+					}
+				]
+			},
+			"title_bold": {
+				"__TYPE__": "FieldContent",
+				"value": "former",
+				"type": "Text"
+			},
+			"date": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"year",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "whenever",
+									"type": "Text"
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "affect",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Esse velit quis velit sunt. Do occaecat eu tempor voluptate ad fugiat do commodo dolor irure labore consequat Lorem commodo."
+											}
+										}
+									]
+								}
+							],
+							[
+								"title_2",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "attack",
+									"type": "Text"
+								}
+							],
+							[
+								"title_3",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "condition",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
 ]
