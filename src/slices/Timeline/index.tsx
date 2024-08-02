@@ -4,7 +4,7 @@ import type { Content } from '@prismicio/client';
 import { isFilled } from '@prismicio/client';
 import type { SliceComponentProps } from '@prismicio/react';
 import { PrismicRichText } from '@prismicio/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Divider from '@/components/Divider';
 import SectionTitle from '@/components/SectionTitle';
@@ -18,9 +18,10 @@ export type TimelineProps = SliceComponentProps<Content.TimelineSlice>;
 
 interface ActiveDateItemProps {
   activeDateItem: Simplify<Content.TimelineSliceDefaultPrimaryDateItem> | undefined;
+  isLast: boolean;
 }
 
-const ActiveTimeline = ({ activeDateItem }: ActiveDateItemProps) => {
+const ActiveTimeline = ({ activeDateItem, isLast }: ActiveDateItemProps) => {
   return (
     <li className="flex w-fit items-center">
       <div className="relative flex flex-col items-center">
@@ -28,7 +29,7 @@ const ActiveTimeline = ({ activeDateItem }: ActiveDateItemProps) => {
           {activeDateItem ? activeDateItem.year : ''}
         </span>
       </div>
-      <div className="w-6 flex-auto border-t border-black xl:w-12"></div>
+      {!isLast && <div className="w-8 flex-auto border-t border-black xl:w-12"></div>}
     </li>
   );
 };
@@ -36,19 +37,22 @@ const ActiveTimeline = ({ activeDateItem }: ActiveDateItemProps) => {
 interface InactiveTimelineProps {
   inactiveDateItem: Simplify<Content.TimelineSliceDefaultPrimaryDateItem>;
   isLeft: boolean;
-  isLast?: boolean;
+  isLast: boolean;
+  isFirst: boolean;
 }
 
-const InactiveTimeline = ({ inactiveDateItem, isLeft, isLast }: InactiveTimelineProps) => {
+const InactiveTimeline = ({ inactiveDateItem, isLeft, isLast, isFirst }: InactiveTimelineProps) => {
   return (
     <li className="flex w-fit items-center">
-      {isLeft ? <div className="w-6 flex-auto border-t border-black md:hidden xl:w-12"></div> : null}
+      {isLeft && !isFirst && !isLast ? (
+        <div className="w-8 flex-auto border-t border-black md:hidden xl:w-12"></div>
+      ) : null}
       <div className="relative flex flex-col items-center">
         <span className="flex size-12 shrink-0 items-center justify-center rounded-full border border-black text-base font-semibold text-black xl:size-16 xl:text-lg">
           {inactiveDateItem.year}
         </span>
       </div>
-      {!isLast && <div className="w-6 flex-auto border-t border-black xl:w-12"></div>}
+      {!isLast && <div className="w-8 flex-auto border-t border-black xl:w-12"></div>}
     </li>
   );
 };
@@ -59,22 +63,6 @@ const InactiveTimeline = ({ inactiveDateItem, isLeft, isLast }: InactiveTimeline
 const Timeline = ({ slice }: TimelineProps): JSX.Element => {
   const dateItems = slice.primary.date;
   const [currentIndex, setCurrentIndex] = useState(Math.floor(dateItems.length / 2));
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize(); // Set initial state
-    window.addEventListener('resize', handleResize);
-    // eslint-disable-next-line consistent-return
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const scrollLeft = () => {
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? dateItems.length - 1 : prevIndex - 1));
@@ -85,25 +73,24 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
   };
 
   const getVisibleItems = () => {
-    const leftCount = isMobile ? 1 : 2;
-    const rightCount = isMobile ? 1 : 2;
-
-    const totalItems = dateItems.length;
     const leftItems = [];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 2; i > 0; i--) {
+      leftItems.push(dateItems[(currentIndex - i + dateItems.length) % dateItems.length]);
+    }
     const rightItems = [];
-
-    for (let i = 1; i <= leftCount; i + 1) {
-      leftItems.unshift(dateItems[(currentIndex - i + totalItems) % totalItems]);
+    // eslint-disable-next-line no-plusplus
+    for (let i = 1; i < 3; i++) {
+      rightItems.push(dateItems[(currentIndex + i) % dateItems.length]);
     }
-
-    for (let i = 1; i <= rightCount; i + 1) {
-      rightItems.push(dateItems[(currentIndex + i) % totalItems]);
-    }
-
     return [...leftItems, dateItems[currentIndex], ...rightItems];
   };
 
-  const visibleItems = getVisibleItems();
+  const getVisibleItemsMobile = () => {
+    const leftItem = dateItems[(currentIndex - 1 + dateItems.length) % dateItems.length];
+    const rightItem = dateItems[(currentIndex + 1) % dateItems.length];
+    return [leftItem, dateItems[currentIndex], rightItem];
+  };
 
   return (
     <section
@@ -128,10 +115,10 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center pt-16 xl:pt-24">
-        <div className="flex items-center justify-center space-x-4 lg:space-x-12">
+      <div className="pt-16 xl:pt-24">
+        <div className="relative flex items-center justify-center">
           <button
-            className="rounded-full bg-black p-1 text-white hover:text-gray-900 group-focus:text-gray-900 lg:p-2 dark:hover:text-white dark:group-focus:text-white"
+            className="z-10 rounded-full bg-black p-1 text-white hover:text-gray-900 group-focus:text-gray-900 dark:hover:text-white dark:group-focus:text-white"
             onClick={scrollLeft}
           >
             <svg
@@ -146,22 +133,42 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
             </svg>
             <span className="sr-only">Previous</span>
           </button>
-          <div className="mx-auto flex max-w-screen-2xl items-center justify-center overflow-hidden">
-            <div className="scrollbar-hide flex overflow-x-auto">
-              {visibleItems.map((item, index) => {
-                const isLast = index === visibleItems.length - 1;
+          <div className="mx-6 flex max-w-screen-2xl items-center justify-center overflow-hidden lg:mx-12">
+            <div className="scrollbar-hide hidden overflow-x-auto lg:flex">
+              {getVisibleItems().map((item, index) => {
+                const isLast = index === getVisibleItems().length - 1;
                 if (item.year === dateItems[currentIndex].year) {
-                  return <ActiveTimeline activeDateItem={item} key={index} />;
+                  return <ActiveTimeline activeDateItem={item} key={index} isLast={isLast} />;
                 }
+                // @ts-ignore
+                const isLeft = item.year < dateItems[currentIndex].year;
                 return (
                   <InactiveTimeline
                     inactiveDateItem={item}
                     key={index}
-                    isLeft={
-                      item.year && dateItems[currentIndex].year
-                        ? item.year < (dateItems[currentIndex].year as string)
-                        : false
-                    }
+                    isFirst={index === 0}
+                    isLeft={isLeft}
+                    isLast={isLast}
+                  />
+                );
+              })}
+            </div>
+            <div className="scrollbar-hide flex overflow-x-auto lg:hidden">
+              {getVisibleItemsMobile().map((item, index) => {
+                const isLast = index === getVisibleItemsMobile().length - 1;
+                const isFirst = index === 0;
+                if (item.year === dateItems[currentIndex].year) {
+                  return <ActiveTimeline activeDateItem={item} key={index} isLast={isLast} />;
+                }
+                // @ts-ignore
+                const isLeft = item.year < dateItems[currentIndex].year;
+
+                return (
+                  <InactiveTimeline
+                    inactiveDateItem={item}
+                    key={index}
+                    isFirst={isFirst}
+                    isLeft={isLeft}
                     isLast={isLast}
                   />
                 );
@@ -169,7 +176,7 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
             </div>
           </div>
           <button
-            className="rounded-full bg-black p-1 text-white hover:text-gray-900 group-focus:text-gray-900 lg:p-2 dark:hover:text-white dark:group-focus:text-white"
+            className="z-10 rounded-full bg-black p-1 text-white hover:text-gray-900 group-focus:text-gray-900 dark:hover:text-white dark:group-focus:text-white"
             onClick={scrollRight}
           >
             <svg
@@ -193,7 +200,7 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
                 field={dateItems[currentIndex].description}
                 components={{
                   paragraph: ({ children }) => (
-                    <p className="text-center text-sm tracking-widest text-[#707070]">{children}</p>
+                    <p className="text-center text-sm font-semibold tracking-widest text-[#707070]">{children}</p>
                   ),
                 }}
               />
@@ -206,7 +213,7 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
                     field={dateItems[currentIndex].description_2}
                     components={{
                       paragraph: ({ children }) => (
-                        <p className="text-center tracking-widest text-[#707070]">{children}</p>
+                        <p className="text-center text-sm font-semibold tracking-widest text-[#707070]">{children}</p>
                       ),
                     }}
                   />
@@ -219,7 +226,9 @@ const Timeline = ({ slice }: TimelineProps): JSX.Element => {
                         field={dateItems[currentIndex].description_3}
                         components={{
                           paragraph: ({ children }) => (
-                            <p className="text-center text-sm tracking-widest text-[#707070]">{children}</p>
+                            <p className="text-center text-sm font-semibold tracking-widest text-[#707070]">
+                              {children}
+                            </p>
                           ),
                         }}
                       />
