@@ -83,7 +83,7 @@ const Form = ({ slice }: FormProps): JSX.Element => {
       data-slice-variation={slice.variation}
       className="mx-auto w-full bg-white p-12 font-avenir tracking-widest md:p-20 lg:w-3/4 xl:w-2/3 xl:p-32 2xl:w-1/2"
     >
-      <SectionTitle text={slice.primary.title} bold={true} />
+      <SectionTitle text={slice.primary.title} bold={true} centered={true} />
       <div className="flex flex-col items-center justify-center space-y-2 py-16 xl:py-20">
         <PrismicRichText
           field={slice.primary.description}
@@ -121,7 +121,7 @@ const Form = ({ slice }: FormProps): JSX.Element => {
           </div>
         ))}
         <div className="flex w-full justify-center">
-          <button className="mx-auto mt-8 bg-black px-12 py-4 text-center text-xs font-medium uppercase text-white">
+          <button className="text-xs mx-auto mt-8 bg-black px-12 py-4 text-center font-medium uppercase text-white">
             {slice.primary.submit_button_label}
           </button>
         </div>
