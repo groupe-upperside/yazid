@@ -19,8 +19,6 @@ export type FormProps = SliceComponentProps<Content.FormSlice>;
 
 const returnInputType = (item: any) => {
   switch (item.field_type) {
-    case 'text':
-      return 'text';
     case 'email':
       return 'email';
     case 'phone':
@@ -54,31 +52,25 @@ const Form = ({ slice }: FormProps): JSX.Element => {
     email: '',
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const emailData = {
       receiver: 'a.louche@biotech-dental.com',
       templateId: '6182504',
       subject: formValues.subject,
-      variables: {
-        message: formValues.message,
-        indicatif: formValues.indicatif,
-        email: formValues.email,
-        phone: formValues.phone,
-        subject: formValues.subject,
-        name: formValues.name,
-      },
+      variables: { ...formValues },
     };
     try {
       await sendEmail(emailData);
-      return toast.success(slice.primary.success_message);
+      toast.success(slice.primary.success_message);
     } catch (error) {
       console.error(error);
-      return toast.error(slice.primary.error_message);
+      toast.error(slice.primary.error_message);
     }
   };
 
@@ -100,56 +92,61 @@ const Form = ({ slice }: FormProps): JSX.Element => {
           }}
         />
       </div>
-      <form className="">
-        {slice.primary.form_field.map((item, index) => (
-          <div
-            key={index}
-            className={`mb-5 w-full ${item.field_type === 'checkbox' ? 'flex flex-row-reverse gap-x-4' : 'block'}`}
-          >
-            {isFilled.link(item.link_to_pdf) ? (
-              <PrismicNextLink field={item.link_to_pdf} className="text-xs text-[#707070] underline">
-                <label className="peer block w-full appearance-none bg-transparent p-0 text-sm text-[#999999] focus:outline-none focus:ring-0">
-                  {item.label}
-                  {item.required ? <sup className="pl-0.5 font-bold text-red-500">*</sup> : null}
-                </label>
-                <input
-                  type={returnInputType(item)}
-                  onChange={(e) => handleChange(e)}
+      <form onSubmit={handleSubmit}>
+        {slice.primary.form_field.map((item, index) => {
+          const fieldName = item.field_name as keyof FormValuesProps;
+          return (
+            <div
+              key={index}
+              className={`mb-5 w-full ${item.field_type === 'checkbox' ? 'flex flex-row-reverse gap-x-4' : 'block'}`}
+            >
+              {isFilled.link(item.link_to_pdf) && (
+                <PrismicNextLink field={item.link_to_pdf} className="text-xs text-[#707070] underline">
+                  <label className="peer block w-full appearance-none bg-transparent p-0 text-sm text-[#999999] focus:outline-none focus:ring-0">
+                    {item.label}
+                    {item.required && <sup className="pl-0.5 font-bold text-red-500">*</sup>}
+                  </label>
+                  <input
+                    type={returnInputType(item)}
+                    onChange={handleChange}
+                    name={item.field_name as string}
+                    className={`${item.field_type === 'checkbox' ? 'border-2 border-gray-300 accent-black' : 'peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0'}`}
+                    required={item.required}
+                    value={formValues[fieldName]}
+                  />
+                </PrismicNextLink>
+              )}
+              {!isFilled.link(item.link_to_pdf) && item.field_type === 'long text' && (
+                <textarea
+                  onChange={handleChange}
                   name={item.field_name as string}
-                  className={`${item.field_type === 'checkbox' ? 'border-2 border-gray-300 accent-black' : 'peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0'}`}
+                  className="peer mt-8 block min-h-36 w-full appearance-none border-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0"
                   required={item.required}
-                  value={formValues[item.field_name as string]}
+                  value={formValues[fieldName]}
                 />
-              </PrismicNextLink>
-            ) : item.field_type === 'long text' ? (
-              <textarea
-                onChange={(e) => handleChange(e)}
-                name={item.field_name as string}
-                className="peer mt-8 block min-h-36 w-full appearance-none border-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0"
-                required={item.required}
-                value={formValues[item.field_name as string]}
-              />
-            ) : (
-              <>
-                <label className="peer block w-full appearance-none bg-transparent p-0 text-sm text-[#999999] focus:outline-none focus:ring-0">
-                  {item.label}
-                  {item.required ? <sup className="pl-0.5 font-bold text-red-500">*</sup> : null}
-                </label>
-                <input
-                  type={returnInputType(item)}
-                  onChange={(e) => handleChange(e)}
-                  name={item.field_name as string}
-                  className={`${item.field_type === 'checkbox' ? 'border-2 border-gray-300 accent-black' : 'peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0'}`}
-                  required={item.required}
-                  value={formValues[item.field_name as string]}
-                />
-              </>
-            )}
-          </div>
-        ))}
+              )}
+              {!isFilled.link(item.link_to_pdf) && item.field_type !== 'long text' && (
+                <>
+                  <label className="peer block w-full appearance-none bg-transparent p-0 text-sm text-[#999999] focus:outline-none focus:ring-0">
+                    {item.label}
+                    {item.required && <sup className="pl-0.5 font-bold text-red-500">*</sup>}
+                  </label>
+                  <input
+                    type={returnInputType(item)}
+                    onChange={handleChange}
+                    name={item.field_name as string}
+                    className={`${item.field_type === 'checkbox' ? 'border-2 border-gray-300 accent-black' : 'peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent px-0 py-2.5 text-sm text-gray-900 focus:outline-none focus:ring-0'}`}
+                    required={item.required}
+                    value={formValues[fieldName]}
+                  />
+                </>
+              )}
+            </div>
+          );
+        })}
         <div className="flex w-full justify-center">
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
           >
             {slice.primary.submit_button_label}
