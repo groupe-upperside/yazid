@@ -57,7 +57,7 @@ const ImageCardWithCta = ({ slice }: ImageCardWithCtaProps): JSX.Element => {
                     field={item.description}
                     components={{
                       paragraph: ({ children }) => (
-                        <p className="text-center font-light tracking-widest text-[#9A9A9A]">{children}</p>
+                        <p className="text-center tracking-widest text-[#9A9A9A]">{children}</p>
                       ),
                     }}
                   />
