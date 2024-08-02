@@ -46,7 +46,13 @@
                 "config": {
                   "label": "Field type",
                   "placeholder": "",
-                  "options": ["text", "long text", "email", "phone", "checkbox"]
+                  "options": [
+                    "text",
+                    "long text",
+                    "email",
+                    "phone",
+                    "checkbox"
+                  ]
                 }
               },
               "link_to_pdf": {
@@ -64,6 +70,13 @@
                   "default_value": false,
                   "placeholder_true": "true",
                   "placeholder_false": "false"
+                }
+              },
+              "field_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Field name",
+                  "placeholder": ""
                 }
               }
             }
@@ -87,6 +100,20 @@
           "type": "Text",
           "config": {
             "label": "Receiver email",
+            "placeholder": ""
+          }
+        },
+        "success_message": {
+          "type": "Text",
+          "config": {
+            "label": "Success message",
+            "placeholder": ""
+          }
+        },
+        "error_message": {
+          "type": "Text",
+          "config": {
+            "label": "Error message",
             "placeholder": ""
           }
         }

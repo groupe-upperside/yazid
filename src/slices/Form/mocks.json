@@ -1,87 +1,105 @@
 [
-  {
-    "__TYPE__": "SharedSliceContent",
-    "variation": "default",
-    "primary": {
-      "title": {
-        "__TYPE__": "FieldContent",
-        "value": "slight",
-        "type": "Text"
-      },
-      "description": {
-        "__TYPE__": "StructuredTextContent",
-        "value": [
-          {
-            "type": "paragraph",
-            "content": {
-              "text": "Et occaecat dolore culpa tempor officia adipisicing dolore id. Elit pariatur commodo magna veniam amet et incididunt. Incididunt do est eiusmod enim ex et et."
-            }
-          }
-        ]
-      },
-      "form_field": {
-        "__TYPE__": "GroupContentType",
-        "value": [
-          {
-            "__TYPE__": "GroupItemContent",
-            "value": [
-              [
-                "label",
-                {
-                  "__TYPE__": "FieldContent",
-                  "value": "facing",
-                  "type": "Text"
-                }
-              ],
-              [
-                "field_type",
-                {
-                  "__TYPE__": "FieldContent",
-                  "value": "text",
-                  "type": "Select"
-                }
-              ],
-              [
-                "required",
-                {
-                  "__TYPE__": "BooleanContent",
-                  "value": false
-                }
-              ],
-              [
-                "link_to_pdf",
-                {
-                  "__TYPE__": "LinkContent",
-                  "value": {
-                    "id": "mock_Media_link",
-                    "kind": "image/jpeg",
-                    "name": "mock_name",
-                    "url": "https://source.unsplash.com/daily",
-                    "size": "0",
-                    "__TYPE__": "FileLink"
-                  }
-                }
-              ]
-            ]
-          }
-        ]
-      },
-      "submit_button_label": {
-        "__TYPE__": "FieldContent",
-        "value": "themselves",
-        "type": "Text"
-      },
-      "sender_email": {
-        "__TYPE__": "FieldContent",
-        "value": "valley",
-        "type": "Text"
-      },
-      "receiver_email": {
-        "__TYPE__": "FieldContent",
-        "value": "percent",
-        "type": "Text"
-      }
-    },
-    "items": []
-  }
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "slight",
+				"type": "Text"
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Et occaecat dolore culpa tempor officia adipisicing dolore id. Elit pariatur commodo magna veniam amet et incididunt. Incididunt do est eiusmod enim ex et et."
+						}
+					}
+				]
+			},
+			"form_field": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "facing",
+									"type": "Text"
+								}
+							],
+							[
+								"field_type",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "text",
+									"type": "Select"
+								}
+							],
+							[
+								"required",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"link_to_pdf",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"id": "mock_Media_link",
+										"kind": "image/jpeg",
+										"name": "mock_name",
+										"url": "https://source.unsplash.com/daily",
+										"size": "0",
+										"__TYPE__": "FileLink"
+									}
+								}
+							],
+							[
+								"field_name",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "highway",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"submit_button_label": {
+				"__TYPE__": "FieldContent",
+				"value": "themselves",
+				"type": "Text"
+			},
+			"sender_email": {
+				"__TYPE__": "FieldContent",
+				"value": "valley",
+				"type": "Text"
+			},
+			"receiver_email": {
+				"__TYPE__": "FieldContent",
+				"value": "percent",
+				"type": "Text"
+			},
+			"success_message": {
+				"__TYPE__": "FieldContent",
+				"value": "saddle",
+				"type": "Text"
+			},
+			"error_message": {
+				"__TYPE__": "FieldContent",
+				"value": "giant",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
 ]

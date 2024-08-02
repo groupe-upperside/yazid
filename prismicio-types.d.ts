@@ -1140,6 +1140,16 @@ export interface FormSliceDefaultPrimaryFormFieldItem {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   required: prismic.BooleanField;
+
+  /**
+   * Field name field in *Form → Default → Primary → Form field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.default.primary.form_field[].field_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_name: prismic.KeyTextField;
 }
 
 /**
@@ -1205,6 +1215,26 @@ export interface FormSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   receiver_email: prismic.KeyTextField;
+
+  /**
+   * Success message field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.default.primary.success_message
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  success_message: prismic.KeyTextField;
+
+  /**
+   * Error message field in *Form → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: form.default.primary.error_message
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  error_message: prismic.KeyTextField;
 }
 
 /**

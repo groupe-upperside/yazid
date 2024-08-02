@@ -2,6 +2,7 @@ import './global.css';
 
 import { PrismicPreview } from '@prismicio/next';
 import type { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
 
 import MarkerComponent from '@/components/MarkerIoComponent';
 import { createClient, repositoryName } from '@/prismicio';
@@ -25,6 +26,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className="font-avenir tracking-wide">
         <MarkerComponent />
+        <div>
+          <Toaster />
+        </div>
         {children}
       </body>
       <PrismicPreview repositoryName={repositoryName} />
