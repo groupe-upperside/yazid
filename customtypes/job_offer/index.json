@@ -1,0 +1,151 @@
+{
+  "format": "page",
+  "id": "job_offer",
+  "label": "Job offer",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "job_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Job description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "skills_title": {
+        "type": "Text",
+        "config": {
+          "label": "Technical Skills title",
+          "placeholder": ""
+        }
+      },
+      "skills": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Technical Skills",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "soft_skills_title": {
+        "type": "Text",
+        "config": {
+          "label": "Soft skills title",
+          "placeholder": ""
+        }
+      },
+      "soft_skills": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Soft skills",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "profile_title": {
+        "type": "Text",
+        "config": {
+          "label": "Profile title",
+          "placeholder": ""
+        }
+      },
+      "profile": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Profile",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "contracts_details": {
+        "type": "Group",
+        "config": {
+          "label": "Contracts details",
+          "repeat": true,
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "Title",
+                "placeholder": ""
+              }
+            },
+            "description": {
+              "type": "Text",
+              "config": {
+                "label": "description",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "join_us": {
+        "type": "Text",
+        "config": {
+          "label": "Join us",
+          "placeholder": ""
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "job_sidebar": {
+              "type": "SharedSlice"
+            },
+            "divider": {
+              "type": "SharedSlice"
+            },
+            "page_title_underlined": {
+              "type": "SharedSlice"
+            },
+            "banner": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}

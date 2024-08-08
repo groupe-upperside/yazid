@@ -27,6 +27,12 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "job_offers": {
+              "type": "SharedSlice"
+            },
+            "block_text_centered": {
+              "type": "SharedSlice"
+            },
             "text_and_stepper": {
               "type": "SharedSlice"
             },

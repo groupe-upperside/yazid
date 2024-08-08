@@ -22,6 +22,10 @@ const routes: prismic.ClientConfig['routes'] = [
     path: '/:lang/contact/:uid',
   },
   {
+    type: 'job_offer',
+    path: '/:lang/job-offer/:uid',
+  },
+  {
     type: 'creations',
     path: '/:lang/creations',
   },

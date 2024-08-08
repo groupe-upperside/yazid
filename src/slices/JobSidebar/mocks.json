@@ -1,0 +1,66 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"city": {
+				"__TYPE__": "FieldContent",
+				"value": "evening",
+				"type": "Text"
+			},
+			"contract_type": {
+				"__TYPE__": "FieldContent",
+				"value": "family",
+				"type": "Text"
+			},
+			"published_at": {
+				"__TYPE__": "FieldContent",
+				"value": "aid",
+				"type": "Text"
+			},
+			"experience": {
+				"__TYPE__": "FieldContent",
+				"value": "slip",
+				"type": "Text"
+			},
+			"hours_per_week": {
+				"__TYPE__": "FieldContent",
+				"value": "grandmother",
+				"type": "Text"
+			},
+			"hiring_date": {
+				"__TYPE__": "FieldContent",
+				"value": "original",
+				"type": "Text"
+			},
+			"link_to_all_job_offers": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev"
+				}
+			},
+			"cta_title": {
+				"__TYPE__": "FieldContent",
+				"value": "send",
+				"type": "Text"
+			},
+			"summary_title": {
+				"__TYPE__": "FieldContent",
+				"value": "could",
+				"type": "Text"
+			},
+			"share_title": {
+				"__TYPE__": "FieldContent",
+				"value": "negative",
+				"type": "Text"
+			},
+			"see_all_offers_title": {
+				"__TYPE__": "FieldContent",
+				"value": "mainly",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

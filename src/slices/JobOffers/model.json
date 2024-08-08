@@ -1,0 +1,64 @@
+{
+  "id": "job_offers",
+  "type": "SharedSlice",
+  "name": "JobOffers",
+  "description": "JobOffers",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "job": {
+          "type": "Group",
+          "config": {
+            "label": "Job",
+            "repeat": true,
+            "fields": {
+              "job_title": {
+                "type": "Text",
+                "config": {
+                  "label": "Job title",
+                  "placeholder": ""
+                }
+              },
+              "contract_type": {
+                "type": "Text",
+                "config": {
+                  "label": "Contract type",
+                  "placeholder": ""
+                }
+              },
+              "hiring_date": {
+                "type": "Text",
+                "config": {
+                  "label": "Hiring date",
+                  "placeholder": ""
+                }
+              },
+              "link_to_job_page": {
+                "type": "Link",
+                "config": {
+                  "label": "Link to job page",
+                  "placeholder": "",
+                  "select": null
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

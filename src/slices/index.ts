@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 export const components = {
   banner: dynamic(() => import('./Banner')),
   banner_with_text: dynamic(() => import('./BannerWithText')),
+  block_text_centered: dynamic(() => import('./BlockTextCentered')),
   customer_logos: dynamic(() => import('./CustomerLogos')),
   divider: dynamic(() => import('./Divider')),
   form: dynamic(() => import('./Form')),
@@ -13,6 +14,8 @@ export const components = {
   image_left_and_text_grid: dynamic(() => import('./ImageAndTextGrid')),
   image_slider: dynamic(() => import('./ImageSlider')),
   image_text_and_cta_grid_left: dynamic(() => import('./ImageTextAndCtaGridLeft')),
+  job_offers: dynamic(() => import('./JobOffers')),
+  job_sidebar: dynamic(() => import('./JobSidebar')),
   page_title_underlined: dynamic(() => import('./PageTitleUnderlined')),
   text_and_stepper: dynamic(() => import('./TextAndStepper')),
   timeline: dynamic(() => import('./Timeline')),

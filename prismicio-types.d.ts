@@ -529,6 +529,194 @@ export type HomepageDocument<Lang extends string = string> = prismic.PrismicDocu
 >;
 
 /**
+ * Item in *Job offer → Contracts details*
+ */
+export interface JobOfferDocumentDataContractsDetailsItem {
+  /**
+   * Title field in *Job offer → Contracts details*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.contracts_details[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *Job offer → Contracts details*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.contracts_details[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+}
+
+type JobOfferDocumentDataSlicesSlice = JobSidebarSlice | DividerSlice | PageTitleUnderlinedSlice | BannerSlice;
+
+/**
+ * Content for Job offer documents
+ */
+interface JobOfferDocumentData {
+  /**
+   * Job description field in *Job offer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.job_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  job_description: prismic.RichTextField;
+
+  /**
+   * Technical Skills title field in *Job offer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.skills_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  skills_title: prismic.KeyTextField;
+
+  /**
+   * Technical Skills field in *Job offer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.skills
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  skills: prismic.RichTextField;
+
+  /**
+   * Soft skills title field in *Job offer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.soft_skills_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  soft_skills_title: prismic.KeyTextField;
+
+  /**
+   * Soft skills field in *Job offer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.soft_skills
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  soft_skills: prismic.RichTextField;
+
+  /**
+   * Profile title field in *Job offer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.profile_title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  profile_title: prismic.KeyTextField;
+
+  /**
+   * Profile field in *Job offer*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.profile
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  profile: prismic.RichTextField;
+
+  /**
+   * Contracts details field in *Job offer*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.contracts_details[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  contracts_details: prismic.GroupField<Simplify<JobOfferDocumentDataContractsDetailsItem>>;
+
+  /**
+   * Join us field in *Job offer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.join_us
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  join_us: prismic.KeyTextField;
+
+  /**
+   * Slice Zone field in *Job offer*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<JobOfferDocumentDataSlicesSlice> /**
+   * Meta Title field in *Job offer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: job_offer.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Job offer*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: job_offer.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Job offer*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offer.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Job offer document from Prismic
+ *
+ * - **API ID**: `job_offer`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type JobOfferDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<JobOfferDocumentData>,
+  'job_offer',
+  Lang
+>;
+
+/**
  * Item in *Header → Navigation Left*
  */
 export interface MetaDocumentDataNavigationItem {
@@ -758,6 +946,8 @@ export type MetaDocument<Lang extends string = string> = prismic.PrismicDocument
 >;
 
 type PageDocumentDataSlicesSlice =
+  | JobOffersSlice
+  | BlockTextCenteredSlice
   | TextAndStepperSlice
   | CustomerLogosSlice
   | ImageLeftAndTextGridSlice
@@ -848,6 +1038,7 @@ export type AllDocumentTypes =
   | CreationsDocument
   | FooterDocument
   | HomepageDocument
+  | JobOfferDocument
   | MetaDocument
   | PageDocument;
 
@@ -960,6 +1151,48 @@ type BannerWithTextSliceVariation = BannerWithTextSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type BannerWithTextSlice = prismic.SharedSlice<'banner_with_text', BannerWithTextSliceVariation>;
+
+/**
+ * Primary content in *BlockTextCentered → Default → Primary*
+ */
+export interface BlockTextCenteredSliceDefaultPrimary {
+  /**
+   * Text field in *BlockTextCentered → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: block_text_centered.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for BlockTextCentered Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BlockTextCenteredSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<BlockTextCenteredSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BlockTextCentered*
+ */
+type BlockTextCenteredSliceVariation = BlockTextCenteredSliceDefault;
+
+/**
+ * BlockTextCentered Shared Slice
+ *
+ * - **API ID**: `block_text_centered`
+ * - **Description**: BlockTextCentered
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BlockTextCenteredSlice = prismic.SharedSlice<'block_text_centered', BlockTextCenteredSliceVariation>;
 
 /**
  * Item in *CustomerLogos → Default → Primary → logos*
@@ -2126,6 +2359,245 @@ export type ImageTextAndCtaGridLeftSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *JobOffers → Default → Primary → Job*
+ */
+export interface JobOffersSliceDefaultPrimaryJobItem {
+  /**
+   * Job title field in *JobOffers → Default → Primary → Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offers.default.primary.job[].job_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  job_title: prismic.KeyTextField;
+
+  /**
+   * Contract type field in *JobOffers → Default → Primary → Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offers.default.primary.job[].contract_type
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contract_type: prismic.KeyTextField;
+
+  /**
+   * Hiring date field in *JobOffers → Default → Primary → Job*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offers.default.primary.job[].hiring_date
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hiring_date: prismic.KeyTextField;
+
+  /**
+   * Link to job page field in *JobOffers → Default → Primary → Job*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offers.default.primary.job[].link_to_job_page
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_to_job_page: prismic.LinkField;
+}
+
+/**
+ * Primary content in *JobOffers → Default → Primary*
+ */
+export interface JobOffersSliceDefaultPrimary {
+  /**
+   * Title field in *JobOffers → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offers.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Job field in *JobOffers → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_offers.default.primary.job[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  job: prismic.GroupField<Simplify<JobOffersSliceDefaultPrimaryJobItem>>;
+}
+
+/**
+ * Default variation for JobOffers Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JobOffersSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<JobOffersSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *JobOffers*
+ */
+type JobOffersSliceVariation = JobOffersSliceDefault;
+
+/**
+ * JobOffers Shared Slice
+ *
+ * - **API ID**: `job_offers`
+ * - **Description**: JobOffers
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JobOffersSlice = prismic.SharedSlice<'job_offers', JobOffersSliceVariation>;
+
+/**
+ * Primary content in *JobSidebar → Default → Primary*
+ */
+export interface JobSidebarSliceDefaultPrimary {
+  /**
+   * CTA title field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.cta_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_title: prismic.KeyTextField;
+
+  /**
+   * Summary title field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.summary_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  summary_title: prismic.KeyTextField;
+
+  /**
+   * City field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.city
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  city: prismic.KeyTextField;
+
+  /**
+   * Contract type field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.contract_type
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  contract_type: prismic.KeyTextField;
+
+  /**
+   * Published at field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.published_at
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  published_at: prismic.KeyTextField;
+
+  /**
+   * Experience field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.experience
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  experience: prismic.KeyTextField;
+
+  /**
+   * Hours per week field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.hours_per_week
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hours_per_week: prismic.KeyTextField;
+
+  /**
+   * Hiring date field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.hiring_date
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  hiring_date: prismic.KeyTextField;
+
+  /**
+   * Share title field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.share_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  share_title: prismic.KeyTextField;
+
+  /**
+   * See all offers title field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.see_all_offers_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  see_all_offers_title: prismic.KeyTextField;
+
+  /**
+   * Link to all job offers field in *JobSidebar → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_sidebar.default.primary.link_to_all_job_offers
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_to_all_job_offers: prismic.LinkField;
+}
+
+/**
+ * Default variation for JobSidebar Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JobSidebarSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<JobSidebarSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *JobSidebar*
+ */
+type JobSidebarSliceVariation = JobSidebarSliceDefault;
+
+/**
+ * JobSidebar Shared Slice
+ *
+ * - **API ID**: `job_sidebar`
+ * - **Description**: JobSidebar
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type JobSidebarSlice = prismic.SharedSlice<'job_sidebar', JobSidebarSliceVariation>;
+
+/**
  * Primary content in *PageTitleUnderlined → Default → Primary*
  */
 export interface PageTitleUnderlinedSliceDefaultPrimary {
@@ -2609,6 +3081,10 @@ declare module '@prismicio/client' {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
+      JobOfferDocument,
+      JobOfferDocumentData,
+      JobOfferDocumentDataContractsDetailsItem,
+      JobOfferDocumentDataSlicesSlice,
       MetaDocument,
       MetaDocumentData,
       MetaDocumentDataNavigationItem,
@@ -2627,6 +3103,10 @@ declare module '@prismicio/client' {
       BannerWithTextSliceDefaultPrimary,
       BannerWithTextSliceVariation,
       BannerWithTextSliceDefault,
+      BlockTextCenteredSlice,
+      BlockTextCenteredSliceDefaultPrimary,
+      BlockTextCenteredSliceVariation,
+      BlockTextCenteredSliceDefault,
       CustomerLogosSlice,
       CustomerLogosSliceDefaultPrimaryLogosItem,
       CustomerLogosSliceDefaultPrimary,
@@ -2673,6 +3153,15 @@ declare module '@prismicio/client' {
       ImageTextAndCtaGridLeftSliceDefaultPrimary,
       ImageTextAndCtaGridLeftSliceVariation,
       ImageTextAndCtaGridLeftSliceDefault,
+      JobOffersSlice,
+      JobOffersSliceDefaultPrimaryJobItem,
+      JobOffersSliceDefaultPrimary,
+      JobOffersSliceVariation,
+      JobOffersSliceDefault,
+      JobSidebarSlice,
+      JobSidebarSliceDefaultPrimary,
+      JobSidebarSliceVariation,
+      JobSidebarSliceDefault,
       PageTitleUnderlinedSlice,
       PageTitleUnderlinedSliceDefaultPrimary,
       PageTitleUnderlinedSliceVariation,

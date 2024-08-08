@@ -4,7 +4,6 @@ import { PrismicPreview } from '@prismicio/next';
 import type { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 
-import MarkerComponent from '@/components/MarkerIoComponent';
 import { createClient, repositoryName } from '@/prismicio';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,7 +24,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en">
       <body className="font-avenir tracking-wide">
-        <MarkerComponent />
         <div>
           <Toaster />
         </div>

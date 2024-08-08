@@ -1,0 +1,97 @@
+{
+  "id": "job_sidebar",
+  "type": "SharedSlice",
+  "name": "JobSidebar",
+  "description": "JobSidebar",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "cta_title": {
+          "type": "Text",
+          "config": {
+            "label": "CTA title",
+            "placeholder": ""
+          }
+        },
+        "summary_title": {
+          "type": "Text",
+          "config": {
+            "label": "Summary title",
+            "placeholder": ""
+          }
+        },
+        "city": {
+          "type": "Text",
+          "config": {
+            "label": "City",
+            "placeholder": ""
+          }
+        },
+        "contract_type": {
+          "type": "Text",
+          "config": {
+            "label": "Contract type",
+            "placeholder": ""
+          }
+        },
+        "published_at": {
+          "type": "Text",
+          "config": {
+            "label": "Published at",
+            "placeholder": ""
+          }
+        },
+        "experience": {
+          "type": "Text",
+          "config": {
+            "label": "Experience",
+            "placeholder": ""
+          }
+        },
+        "hours_per_week": {
+          "type": "Text",
+          "config": {
+            "label": "Hours per week",
+            "placeholder": ""
+          }
+        },
+        "hiring_date": {
+          "type": "Text",
+          "config": {
+            "label": "Hiring date",
+            "placeholder": ""
+          }
+        },
+        "share_title": {
+          "type": "Text",
+          "config": {
+            "label": "Share title",
+            "placeholder": ""
+          }
+        },
+        "see_all_offers_title": {
+          "type": "Text",
+          "config": {
+            "label": "See all offers title",
+            "placeholder": ""
+          }
+        },
+        "link_to_all_job_offers": {
+          "type": "Link",
+          "config": {
+            "label": "Link to all job offers",
+            "placeholder": "",
+            "select": null
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

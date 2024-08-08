@@ -1,0 +1,58 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "how",
+				"type": "Text"
+			},
+			"job": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"job_title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "idea",
+									"type": "Text"
+								}
+							],
+							[
+								"contract_type",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "fought",
+									"type": "Text"
+								}
+							],
+							[
+								"link_to_job_page",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com"
+									}
+								}
+							],
+							[
+								"hiring_date",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "guide",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
