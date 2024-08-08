@@ -7,15 +7,16 @@ import Header from './Header';
 interface LayoutProps {
   doc: Content.AllDocumentTypes;
   children: React.ReactNode;
+  lang: string;
 }
 
-export default function Layout({ doc, children }: LayoutProps) {
+export default function Layout({ doc, children, lang }: LayoutProps) {
   return (
     <>
-      <Header doc={doc} />
+      <Header doc={doc} lang={lang} />
       <main>{children}</main>
-      <ContactFooter />
-      <Footer />
+      <ContactFooter lang={lang} />
+      <Footer lang={lang} />
     </>
   );
 }

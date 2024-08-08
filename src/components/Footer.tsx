@@ -2,10 +2,10 @@ import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
 
 import { createClient } from '@/prismicio';
 
-export default async function Footer() {
+export default async function Footer({ lang }: { lang: string }) {
   const client = createClient();
 
-  const footer = await client.getSingle('footer');
+  const footer = await client.getSingle('footer', { lang });
 
   return (
     <footer className="bg-white">

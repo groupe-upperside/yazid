@@ -24,7 +24,7 @@ export default async function Index({ params: { lang } }: { params: { lang: stri
   });
 
   return (
-    <Layout doc={home}>
+    <Layout doc={home} lang={lang}>
       <SliceZone slices={home.data.slices} components={components} />
     </Layout>
   );

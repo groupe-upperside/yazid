@@ -9,13 +9,14 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 
 type HeaderProps = {
   doc: Content.AllDocumentTypes;
+  lang: string;
 };
 
-export default async function Header({ doc }: HeaderProps) {
+export default async function Header({ doc, lang }: HeaderProps) {
   const client = createClient();
 
-  const meta = await client.getSingle('meta');
-  const footer = await client.getSingle('footer');
+  const meta = await client.getSingle('meta', { lang });
+  const footer = await client.getSingle('footer', { lang });
 
   const locales = await getLocales(doc, client);
 
@@ -36,7 +37,7 @@ export default async function Header({ doc }: HeaderProps) {
               {meta.data.navigation_right.map(({ link, label }) => (
                 <li key={label}>
                   <PrismicNextLink
-                    className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-[0.85rem] hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent"
+                    className="lg:hover:text-primary-700 block border-b border-gray-100 py-2 pl-3 pr-4 text-base hover:bg-gray-50 lg:border-0 lg:p-0 lg:hover:bg-transparent"
                     field={link}
                   >
                     {label}
