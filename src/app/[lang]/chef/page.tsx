@@ -23,7 +23,7 @@ export default async function Index({ params: { lang } }: { params: { lang: stri
   });
 
   return (
-    <Layout doc={page}>
+    <Layout doc={page} lang={lang}>
       <SliceZone slices={page.data.slices} components={components} />
     </Layout>
   );

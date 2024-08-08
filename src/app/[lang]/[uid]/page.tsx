@@ -40,7 +40,7 @@ export default async function Page({ params }: { params: Params }) {
     .catch(() => notFound());
 
   return (
-    <Layout doc={page}>
+    <Layout doc={page} lang={params.lang}>
       <SliceZone slices={page.data.slices} components={components} />
     </Layout>
   );
