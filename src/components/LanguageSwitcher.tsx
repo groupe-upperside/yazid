@@ -45,29 +45,45 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
 
   return (
     <div ref={dropdownRef} className="relative inline-block w-full max-w-xs">
-      <div
-        className="block w-full cursor-pointer bg-white px-0.5 text-base text-gray-900 focus:outline-none 2xl:text-base"
-        onClick={toggleDropdown}
-      >
-        {localeLabels[selectedLocale.lang as keyof typeof localeLabels] || selectedLocale.lang_name}
+      <div className="block w-full cursor-pointer bg-white px-0.5 text-base text-gray-900 focus:outline-none xl:hidden">
+        {locales.map((locale, index) => (
+          <PrismicNextLink
+            key={locale.lang}
+            href={locale.url}
+            locale={locale.lang}
+            aria-label={`Change language to ${locale.lang_name}`}
+            className={`inline-block p-2 text-sm text-gray-900 ${index !== 0 ? 'border-l border-black pl-4' : 'pr-4'}`}
+            onClick={() => handleLocaleChange(locale)}
+          >
+            {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}
+          </PrismicNextLink>
+        ))}
       </div>
-      {isOpen && (
-        <ul className="absolute left-0 z-10 mt-1 w-auto rounded-md bg-white shadow-lg">
-          {locales.map((locale) => (
-            <li key={locale.lang} className="cursor-pointer hover:bg-gray-50">
-              <PrismicNextLink
-                href={locale.url}
-                locale={locale.lang}
-                aria-label={`Change language to ${locale.lang_name}`}
-                className="block p-2 text-sm text-gray-900 2xl:text-base"
-                onClick={() => handleLocaleChange(locale)}
-              >
-                {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}
-              </PrismicNextLink>
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="hidden xl:block">
+        <div
+          className="block w-full cursor-pointer bg-white px-0.5 text-base text-gray-900 focus:outline-none 2xl:text-base"
+          onClick={toggleDropdown}
+        >
+          {localeLabels[selectedLocale.lang as keyof typeof localeLabels] || selectedLocale.lang_name}
+        </div>
+        {isOpen && (
+          <ul className="absolute left-0 z-10 mt-1 w-auto rounded-md bg-white shadow-lg">
+            {locales.map((locale) => (
+              <li key={locale.lang} className="cursor-pointer hover:bg-gray-50">
+                <PrismicNextLink
+                  href={locale.url}
+                  locale={locale.lang}
+                  aria-label={`Change language to ${locale.lang_name}`}
+                  className="block p-2 text-sm text-gray-900 2xl:text-base"
+                  onClick={() => handleLocaleChange(locale)}
+                >
+                  {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}
+                </PrismicNextLink>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
