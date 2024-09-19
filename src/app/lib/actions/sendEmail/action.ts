@@ -40,8 +40,8 @@ export const sendEmail = async (emailData: IEmailData) => {
     const message: IMessage[] = [
       {
         From: {
-          Email: 'noreply@ygestion.com',
-          Name: 'Site Yazid',
+          Email: 'noreply@yigestion.com',
+          Name: 'Contact Yigestion',
         },
         To: [
           {

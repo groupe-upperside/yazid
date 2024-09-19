@@ -60,7 +60,7 @@ const Form = ({ slice }: FormProps): JSX.Element => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const emailData = {
-      receiver: 'contatc@yigestion.com',
+      receiver: 'a.louche@biotech-dental.com',
       templateId: '6182504',
       subject: formValues.subject,
       variables: { ...formValues },
