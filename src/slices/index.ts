@@ -19,7 +19,6 @@ export const components = {
   job_offers: dynamic(() => import('./JobOffers')),
   job_sidebar: dynamic(() => import('./JobSidebar')),
   page_title_underlined: dynamic(() => import('./PageTitleUnderlined')),
-  product_modal: dynamic(() => import('./ProductModal')),
   text_and_stepper: dynamic(() => import('./TextAndStepper')),
   timeline: dynamic(() => import('./Timeline')),
   video_and_text_grid: dynamic(() => import('./VideoAndTextGrid')),

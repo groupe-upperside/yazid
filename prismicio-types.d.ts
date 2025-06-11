@@ -1394,6 +1394,26 @@ export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
    * - **Documentation**: https://prismic.io/docs/field#number
    */
   product_price: prismic.NumberField;
+
+  /**
+   * Product description field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  product_description: prismic.RichTextField;
+
+  /**
+   * Product allergens field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_allergens
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  product_allergens: prismic.KeyTextField;
 }
 
 /**
@@ -2904,134 +2924,6 @@ type PageTitleUnderlinedSliceVariation = PageTitleUnderlinedSliceDefault;
 export type PageTitleUnderlinedSlice = prismic.SharedSlice<'page_title_underlined', PageTitleUnderlinedSliceVariation>;
 
 /**
- * Item in *ProductModal → Default → Primary → Product images*
- */
-export interface ProductModalSliceDefaultPrimaryProductImagesItem {
-  /**
-   * Image field in *ProductModal → Default → Primary → Product images*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.product_images[].image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-}
-
-/**
- * Primary content in *ProductModal → Default → Primary*
- */
-export interface ProductModalSliceDefaultPrimary {
-  /**
-   * Product name field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.product_name
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  product_name: prismic.KeyTextField;
-
-  /**
-   * Product price field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.product_price
-   * - **Documentation**: https://prismic.io/docs/field#number
-   */
-  product_price: prismic.NumberField;
-
-  /**
-   * Product description field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.product_description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  product_description: prismic.RichTextField;
-
-  /**
-   * Allergens field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.allergens
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  allergens: prismic.RichTextField;
-
-  /**
-   * Product images field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.product_images[]
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  product_images: prismic.GroupField<Simplify<ProductModalSliceDefaultPrimaryProductImagesItem>>;
-
-  /**
-   * Stock field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Number
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.stock
-   * - **Documentation**: https://prismic.io/docs/field#number
-   */
-  stock: prismic.NumberField;
-
-  /**
-   * SKU field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: product_modal.default.primary.sku
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  sku: prismic.KeyTextField;
-
-  /**
-   * Product opened field in *ProductModal → Default → Primary*
-   *
-   * - **Field Type**: Boolean
-   * - **Placeholder**: *None*
-   * - **Default Value**: false
-   * - **API ID Path**: product_modal.default.primary.product_opened
-   * - **Documentation**: https://prismic.io/docs/field#boolean
-   */
-  product_opened: prismic.BooleanField;
-}
-
-/**
- * Default variation for ProductModal Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ProductModalSliceDefault = prismic.SharedSliceVariation<
-  'default',
-  Simplify<ProductModalSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *ProductModal*
- */
-type ProductModalSliceVariation = ProductModalSliceDefault;
-
-/**
- * ProductModal Shared Slice
- *
- * - **API ID**: `product_modal`
- * - **Description**: ProductModal
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type ProductModalSlice = prismic.SharedSlice<'product_modal', ProductModalSliceVariation>;
-
-/**
  * Item in *TextAndStepper → Default → Primary → Stepper*
  */
 export interface TextAndStepperSliceDefaultPrimaryStepperItem {
@@ -3570,11 +3462,6 @@ declare module '@prismicio/client' {
       PageTitleUnderlinedSliceDefaultPrimary,
       PageTitleUnderlinedSliceVariation,
       PageTitleUnderlinedSliceDefault,
-      ProductModalSlice,
-      ProductModalSliceDefaultPrimaryProductImagesItem,
-      ProductModalSliceDefaultPrimary,
-      ProductModalSliceVariation,
-      ProductModalSliceDefault,
       TextAndStepperSlice,
       TextAndStepperSliceDefaultPrimaryStepperItem,
       TextAndStepperSliceDefaultPrimary,

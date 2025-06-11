@@ -88,7 +88,7 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
             </div>
           </>
         )}
-        <div className="mt-6 flex items-center justify-between gap-x-10 bg-white p-6">
+        <div className="mt-6 flex flex-col items-center justify-between gap-10 bg-white p-6 sm:flex-row">
           <div className="space-y-4">
             <p className="text-left text-sm font-bold tracking-widest text-black md:text-base">{pick_up_date_title}</p>
             <div className="space-y-2">

@@ -55,6 +55,28 @@
 									"value": "93",
 									"type": "Number"
 								}
+							],
+							[
+								"product_description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Laboris officia commodo culpa ipsum elit sunt est sit ullamco eu occaecat excepteur in. Sint quis voluptate sunt dolor nisi irure adipisicing commodo. Commodo Lorem enim est elit fugiat sit id ipsum dolor quis duis sunt."
+											}
+										}
+									]
+								}
+							],
+							[
+								"product_allergens",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "brought",
+									"type": "Text"
+								}
 							]
 						]
 					}
