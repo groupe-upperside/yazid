@@ -4,6 +4,70 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type AtHomeDocumentDataSlicesSlice = ClickAndCollectGridSlice | BannerWithCalendarSlice;
+
+/**
+ * Content for At home documents
+ */
+interface AtHomeDocumentData {
+  /**
+   * Slice Zone field in *At home*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: at_home.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<AtHomeDocumentDataSlicesSlice> /**
+   * Meta Title field in *At home*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: at_home.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *At home*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: at_home.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *At home*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: at_home.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * At home document from Prismic
+ *
+ * - **API ID**: `at_home`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AtHomeDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<AtHomeDocumentData>,
+  'at_home',
+  Lang
+>;
+
 type ChefDocumentDataSlicesSlice = VideoAndTextGridSlice | TimelineSlice | ImageLeftAndTextGridSlice | BannerSlice;
 
 /**
@@ -1031,6 +1095,7 @@ export type PageDocument<Lang extends string = string> = prismic.PrismicDocument
 >;
 
 export type AllDocumentTypes =
+  | AtHomeDocument
   | ChefDocument
   | ComingSoonDocument
   | ContactDocument
@@ -1079,6 +1144,108 @@ type BannerSliceVariation = BannerSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type BannerSlice = prismic.SharedSlice<'banner', BannerSliceVariation>;
+
+/**
+ * Primary content in *BannerWithCalendar → Default → Primary*
+ */
+export interface BannerWithCalendarSliceDefaultPrimary {
+  /**
+   * Title bold field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.title_bold
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_bold: prismic.KeyTextField;
+
+  /**
+   * Upper separator text field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.upper_separator_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  upper_separator_text: prismic.RichTextField;
+
+  /**
+   * Lower separator text field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.lower_separator_text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  lower_separator_text: prismic.RichTextField;
+
+  /**
+   * Pick up date title field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.pick_up_date_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pick_up_date_title: prismic.KeyTextField;
+
+  /**
+   * Pick up date description field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.pick_up_date_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  pick_up_date_description: prismic.RichTextField;
+
+  /**
+   * Pick up date day field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.pick_up_date_day
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pick_up_date_day: prismic.KeyTextField;
+
+  /**
+   * Pick up date slot field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.pick_up_date_slot
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pick_up_date_slot: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for BannerWithCalendar Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BannerWithCalendarSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<BannerWithCalendarSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BannerWithCalendar*
+ */
+type BannerWithCalendarSliceVariation = BannerWithCalendarSliceDefault;
+
+/**
+ * BannerWithCalendar Shared Slice
+ *
+ * - **API ID**: `banner_with_calendar`
+ * - **Description**: BannerWithCalendar
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BannerWithCalendarSlice = prismic.SharedSlice<'banner_with_calendar', BannerWithCalendarSliceVariation>;
 
 /**
  * Primary content in *BannerWithText → Default → Primary*
@@ -1193,6 +1360,103 @@ type BlockTextCenteredSliceVariation = BlockTextCenteredSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type BlockTextCenteredSlice = prismic.SharedSlice<'block_text_centered', BlockTextCenteredSliceVariation>;
+
+/**
+ * Item in *ClickAndCollectGrid → Default → Primary → Product*
+ */
+export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
+  /**
+   * Image field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Product name field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  product_name: prismic.KeyTextField;
+
+  /**
+   * Product price field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_price
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  product_price: prismic.NumberField;
+}
+
+/**
+ * Primary content in *ClickAndCollectGrid → Default → Primary*
+ */
+export interface ClickAndCollectGridSliceDefaultPrimary {
+  /**
+   * Grid title bold field in *ClickAndCollectGrid → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.grid_title_bold
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  grid_title_bold: prismic.KeyTextField;
+
+  /**
+   * Number per row field in *ClickAndCollectGrid → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.number_per_row
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  number_per_row: prismic.NumberField;
+
+  /**
+   * Product field in *ClickAndCollectGrid → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  product: prismic.GroupField<Simplify<ClickAndCollectGridSliceDefaultPrimaryProductItem>>;
+}
+
+/**
+ * Default variation for ClickAndCollectGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ClickAndCollectGridSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ClickAndCollectGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ClickAndCollectGrid*
+ */
+type ClickAndCollectGridSliceVariation = ClickAndCollectGridSliceDefault;
+
+/**
+ * ClickAndCollectGrid Shared Slice
+ *
+ * - **API ID**: `click_and_collect_grid`
+ * - **Description**: ClickAndCollectGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ClickAndCollectGridSlice = prismic.SharedSlice<'click_and_collect_grid', ClickAndCollectGridSliceVariation>;
 
 /**
  * Item in *CustomerLogos → Default → Primary → logos*
@@ -2640,6 +2904,134 @@ type PageTitleUnderlinedSliceVariation = PageTitleUnderlinedSliceDefault;
 export type PageTitleUnderlinedSlice = prismic.SharedSlice<'page_title_underlined', PageTitleUnderlinedSliceVariation>;
 
 /**
+ * Item in *ProductModal → Default → Primary → Product images*
+ */
+export interface ProductModalSliceDefaultPrimaryProductImagesItem {
+  /**
+   * Image field in *ProductModal → Default → Primary → Product images*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.product_images[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *ProductModal → Default → Primary*
+ */
+export interface ProductModalSliceDefaultPrimary {
+  /**
+   * Product name field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.product_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  product_name: prismic.KeyTextField;
+
+  /**
+   * Product price field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.product_price
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  product_price: prismic.NumberField;
+
+  /**
+   * Product description field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.product_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  product_description: prismic.RichTextField;
+
+  /**
+   * Allergens field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.allergens
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  allergens: prismic.RichTextField;
+
+  /**
+   * Product images field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.product_images[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  product_images: prismic.GroupField<Simplify<ProductModalSliceDefaultPrimaryProductImagesItem>>;
+
+  /**
+   * Stock field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.stock
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  stock: prismic.NumberField;
+
+  /**
+   * SKU field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: product_modal.default.primary.sku
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sku: prismic.KeyTextField;
+
+  /**
+   * Product opened field in *ProductModal → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: product_modal.default.primary.product_opened
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  product_opened: prismic.BooleanField;
+}
+
+/**
+ * Default variation for ProductModal Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProductModalSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<ProductModalSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ProductModal*
+ */
+type ProductModalSliceVariation = ProductModalSliceDefault;
+
+/**
+ * ProductModal Shared Slice
+ *
+ * - **API ID**: `product_modal`
+ * - **Description**: ProductModal
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProductModalSlice = prismic.SharedSlice<'product_modal', ProductModalSliceVariation>;
+
+/**
  * Item in *TextAndStepper → Default → Primary → Stepper*
  */
 export interface TextAndStepperSliceDefaultPrimaryStepperItem {
@@ -3060,6 +3452,9 @@ declare module '@prismicio/client' {
 
   namespace Content {
     export type {
+      AtHomeDocument,
+      AtHomeDocumentData,
+      AtHomeDocumentDataSlicesSlice,
       ChefDocument,
       ChefDocumentData,
       ChefDocumentDataSlicesSlice,
@@ -3099,6 +3494,10 @@ declare module '@prismicio/client' {
       BannerSliceDefaultPrimary,
       BannerSliceVariation,
       BannerSliceDefault,
+      BannerWithCalendarSlice,
+      BannerWithCalendarSliceDefaultPrimary,
+      BannerWithCalendarSliceVariation,
+      BannerWithCalendarSliceDefault,
       BannerWithTextSlice,
       BannerWithTextSliceDefaultPrimary,
       BannerWithTextSliceVariation,
@@ -3107,6 +3506,11 @@ declare module '@prismicio/client' {
       BlockTextCenteredSliceDefaultPrimary,
       BlockTextCenteredSliceVariation,
       BlockTextCenteredSliceDefault,
+      ClickAndCollectGridSlice,
+      ClickAndCollectGridSliceDefaultPrimaryProductItem,
+      ClickAndCollectGridSliceDefaultPrimary,
+      ClickAndCollectGridSliceVariation,
+      ClickAndCollectGridSliceDefault,
       CustomerLogosSlice,
       CustomerLogosSliceDefaultPrimaryLogosItem,
       CustomerLogosSliceDefaultPrimary,
@@ -3166,6 +3570,11 @@ declare module '@prismicio/client' {
       PageTitleUnderlinedSliceDefaultPrimary,
       PageTitleUnderlinedSliceVariation,
       PageTitleUnderlinedSliceDefault,
+      ProductModalSlice,
+      ProductModalSliceDefaultPrimaryProductImagesItem,
+      ProductModalSliceDefaultPrimary,
+      ProductModalSliceVariation,
+      ProductModalSliceDefault,
       TextAndStepperSlice,
       TextAndStepperSliceDefaultPrimaryStepperItem,
       TextAndStepperSliceDefaultPrimary,

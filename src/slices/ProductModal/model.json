@@ -1,0 +1,91 @@
+{
+  "id": "product_modal",
+  "type": "SharedSlice",
+  "name": "ProductModal",
+  "description": "ProductModal",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "product_name": {
+          "type": "Text",
+          "config": {
+            "label": "Product name",
+            "placeholder": ""
+          }
+        },
+        "product_price": {
+          "type": "Number",
+          "config": {
+            "label": "Product price",
+            "placeholder": ""
+          }
+        },
+        "product_description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Product description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "allergens": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Allergens",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "product_images": {
+          "type": "Group",
+          "config": {
+            "label": "Product images",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        },
+        "stock": {
+          "type": "Number",
+          "config": {
+            "label": "Stock",
+            "placeholder": ""
+          }
+        },
+        "sku": {
+          "type": "Text",
+          "config": {
+            "label": "SKU",
+            "placeholder": ""
+          }
+        },
+        "product_opened": {
+          "type": "Boolean",
+          "config": {
+            "label": "Product opened",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

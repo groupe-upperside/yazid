@@ -22,8 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body className="font-avenir tracking-wide">
+        <script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=yazid"></script>
         <div>
           <Toaster />
         </div>

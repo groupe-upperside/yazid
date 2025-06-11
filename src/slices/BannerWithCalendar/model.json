@@ -1,0 +1,74 @@
+{
+  "id": "banner_with_calendar",
+  "type": "SharedSlice",
+  "name": "BannerWithCalendar",
+  "description": "BannerWithCalendar",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title_bold": {
+          "type": "Text",
+          "config": {
+            "label": "Title bold",
+            "placeholder": ""
+          }
+        },
+        "upper_separator_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Upper separator text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "lower_separator_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Lower separator text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "pick_up_date_title": {
+          "type": "Text",
+          "config": {
+            "label": "Pick up date title",
+            "placeholder": ""
+          }
+        },
+        "pick_up_date_description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Pick up date description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "pick_up_date_day": {
+          "type": "Text",
+          "config": {
+            "label": "Pick up date day",
+            "placeholder": ""
+          }
+        },
+        "pick_up_date_slot": {
+          "type": "Text",
+          "config": {
+            "label": "Pick up date slot",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title_bold": {
+				"__TYPE__": "FieldContent",
+				"value": "tribe",
+				"type": "Text"
+			},
+			"upper_separator_text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Elit consectetur Lorem veniam veniam cillum. Amet ipsum anim incididunt laborum ad sunt eiusmod amet enim aliqua magna do sunt. Ex fugiat dolor esse ex ex cupidatat minim mollit cillum ipsum commodo."
+						}
+					}
+				]
+			},
+			"lower_separator_text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Velit amet dolor mollit labore ut adipisicing excepteur fugiat deserunt aliquip. Enim reprehenderit non consectetur amet velit nisi magna qui labore ipsum exercitation quis."
+						}
+					}
+				]
+			},
+			"pick_up_date_title": {
+				"__TYPE__": "FieldContent",
+				"value": "cell",
+				"type": "Text"
+			},
+			"pick_up_date_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Cupidatat eiusmod consectetur dolore mollit ex est quis in sint anim exercitation eiusmod labore. Mollit velit velit non sit proident eu esse aute ad eiusmod dolore."
+						}
+					}
+				]
+			},
+			"pick_up_date_day": {
+				"__TYPE__": "FieldContent",
+				"value": "planet",
+				"type": "Text"
+			},
+			"pick_up_date_slot": {
+				"__TYPE__": "FieldContent",
+				"value": "ear",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

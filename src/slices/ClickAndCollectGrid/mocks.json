@@ -1,0 +1,71 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"number_per_row": {
+				"__TYPE__": "FieldContent",
+				"value": "35",
+				"type": "Number"
+			},
+			"product": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
+										"width": 3212,
+										"height": 3880
+									},
+									"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
+									"width": 3212,
+									"height": 3880,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"product_name",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "front",
+									"type": "Text"
+								}
+							],
+							[
+								"product_price",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "93",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			},
+			"grid_title_bold": {
+				"__TYPE__": "FieldContent",
+				"value": "using",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

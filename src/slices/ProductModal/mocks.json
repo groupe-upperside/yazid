@@ -1,0 +1,91 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"product_name": {
+				"__TYPE__": "FieldContent",
+				"value": "wet",
+				"type": "Text"
+			},
+			"product_price": {
+				"__TYPE__": "FieldContent",
+				"value": "3",
+				"type": "Number"
+			},
+			"product_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ad nostrud occaecat sint sit aliquip eiusmod ad pariatur duis officia. Exercitation pariatur quis commodo commodo laboris sint velit fugiat dolor non nostrud nostrud nostrud voluptate enim. Nostrud mollit consequat ad nulla sint elit."
+						}
+					}
+				]
+			},
+			"allergens": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Non cillum officia aliqua. Labore magna enim reprehenderit quis id voluptate non occaecat."
+						}
+					}
+				]
+			},
+			"product_images": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+										"width": 3456,
+										"height": 4320
+									},
+									"url": "https://images.unsplash.com/photo-1551739440-5dd934d3a94a",
+									"width": 3456,
+									"height": 4320,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			},
+			"stock": {
+				"__TYPE__": "FieldContent",
+				"value": "0",
+				"type": "Number"
+			},
+			"sku": {
+				"__TYPE__": "FieldContent",
+				"value": "ride",
+				"type": "Text"
+			},
+			"product_opened": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			}
+		},
+		"items": []
+	}
+]

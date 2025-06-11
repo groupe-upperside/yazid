@@ -4,8 +4,10 @@ import dynamic from 'next/dynamic';
 
 export const components = {
   banner: dynamic(() => import('./Banner')),
+  banner_with_calendar: dynamic(() => import('./BannerWithCalendar')),
   banner_with_text: dynamic(() => import('./BannerWithText')),
   block_text_centered: dynamic(() => import('./BlockTextCentered')),
+  click_and_collect_grid: dynamic(() => import('./ClickAndCollectGrid')),
   customer_logos: dynamic(() => import('./CustomerLogos')),
   divider: dynamic(() => import('./Divider')),
   form: dynamic(() => import('./Form')),
@@ -17,6 +19,7 @@ export const components = {
   job_offers: dynamic(() => import('./JobOffers')),
   job_sidebar: dynamic(() => import('./JobSidebar')),
   page_title_underlined: dynamic(() => import('./PageTitleUnderlined')),
+  product_modal: dynamic(() => import('./ProductModal')),
   text_and_stepper: dynamic(() => import('./TextAndStepper')),
   timeline: dynamic(() => import('./Timeline')),
   video_and_text_grid: dynamic(() => import('./VideoAndTextGrid')),
