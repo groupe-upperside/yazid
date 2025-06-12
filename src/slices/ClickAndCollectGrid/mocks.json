@@ -77,6 +77,14 @@
 									"value": "brought",
 									"type": "Text"
 								}
+							],
+							[
+								"product_id",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "83",
+									"type": "Number"
+								}
 							]
 						]
 					}

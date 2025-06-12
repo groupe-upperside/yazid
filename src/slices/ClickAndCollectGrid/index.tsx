@@ -18,6 +18,7 @@ type Product = {
   product_price: NumberField;
   product_description: RichTextField;
   product_allergens: KeyTextField;
+  product_id: NumberField;
 };
 
 /**
@@ -43,8 +44,8 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
   return (
     <>
       <div className={`grid grid-cols-1 gap-8 ${lgGridCols} ${gridColsClass}`}>
-        {products.map((item, index: number) => (
-          <div key={index} onClick={() => onProductClick(item)}>
+        {products.map((item) => (
+          <div key={item.product_id} onClick={() => onProductClick(item)}>
             <div className="group relative mb-3 aspect-square w-full cursor-pointer ">
               <PrismicNextImage className="aspect-square w-full object-cover" field={item.image} />
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 opacity-0 transition-opacity group-hover:opacity-100">
@@ -81,7 +82,7 @@ const ClickAndCollectGrid = ({ slice }: ClickAndCollectGridProps): JSX.Element =
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={variation}
-      className={`bg-white p-12 font-avenir tracking-widest md:p-20 xl:p-32`}
+      className={`bg-white p-6 font-avenir tracking-widest md:p-20 xl:p-32`}
     >
       <SectionTitle text={primary.grid_title_bold} bold={true} centered={true} />
       <Divider centered={true} />

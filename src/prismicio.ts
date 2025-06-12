@@ -39,6 +39,11 @@ const routes: prismic.ClientConfig['routes'] = [
     path: '/:lang/at_home_new',
   },
   {
+    type: 'cart',
+    uid: 'cart',
+    path: '/:lang/cart',
+  },
+  {
     type: 'coming_soon',
     uid: 'click_and_collect',
     path: '/:lang/click-and-collect',

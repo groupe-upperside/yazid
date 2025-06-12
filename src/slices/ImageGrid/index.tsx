@@ -65,7 +65,7 @@ const ImageGrid = ({ slice }: ImageGridProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={variation}
-      className={`${sectionBgClass} p-12 font-avenir tracking-widest md:p-20 xl:p-32`}
+      className={`${sectionBgClass} p-6 font-avenir tracking-widest md:p-20 xl:p-32`}
     >
       {variation === 'default' && (
         <>

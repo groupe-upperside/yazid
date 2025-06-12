@@ -20,7 +20,7 @@ const ImageTextAndCtaGridLeft = ({ slice }: ImageTextAndCtaGridLeftProps): JSX.E
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-12 font-avenir tracking-widest md:p-20 xl:p-32"
+      className="p-6 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="mx-auto grid max-w-screen-2xl gap-12 rounded-lg xl:grid-cols-12 xl:gap-16">
         <div className="order-last hidden xl:order-first xl:col-span-5 xl:mt-0 xl:flex">

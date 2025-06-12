@@ -1,0 +1,32 @@
+{
+  "format": "custom",
+  "id": "dropdown_cart",
+  "label": "Dropdown cart",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title_bold": {
+        "type": "Text",
+        "config": {
+          "label": "Title bold",
+          "placeholder": ""
+        }
+      },
+      "total": {
+        "type": "Text",
+        "config": {
+          "label": "Total ",
+          "placeholder": ""
+        }
+      },
+      "button_label": {
+        "type": "Text",
+        "config": {
+          "label": "Button label",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}

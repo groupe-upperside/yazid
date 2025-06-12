@@ -10,7 +10,7 @@ export default async function ContactFooter({ lang }: { lang: string }) {
   const footer = await client.getSingle('contact_footer', { lang });
 
   return (
-    <section className="bg-[#F7F4EF] p-12 font-avenir tracking-widest md:p-20 xl:p-32">
+    <section className="bg-[#F7F4EF] p-6 font-avenir tracking-widest md:p-20 xl:p-32">
       <div className="grid">
         <SectionTitle text={footer.data.title} bold={true} centered={true} />
         <Divider centered={true} />

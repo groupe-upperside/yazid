@@ -68,6 +68,70 @@ export type AtHomeDocument<Lang extends string = string> = prismic.PrismicDocume
   Lang
 >;
 
+type CartDocumentDataSlicesSlice = BannerWithCalendarSlice;
+
+/**
+ * Content for Cart documents
+ */
+interface CartDocumentData {
+  /**
+   * Slice Zone field in *Cart*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CartDocumentDataSlicesSlice> /**
+   * Meta Title field in *Cart*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: cart.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Cart*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: cart.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Cart*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cart.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Cart document from Prismic
+ *
+ * - **API ID**: `cart`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CartDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<CartDocumentData>,
+  'cart',
+  Lang
+>;
+
 type ChefDocumentDataSlicesSlice = VideoAndTextGridSlice | TimelineSlice | ImageLeftAndTextGridSlice | BannerSlice;
 
 /**
@@ -385,6 +449,59 @@ interface CreationsDocumentData {
 export type CreationsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
   Simplify<CreationsDocumentData>,
   'creations',
+  Lang
+>;
+
+/**
+ * Content for Dropdown cart documents
+ */
+interface DropdownCartDocumentData {
+  /**
+   * Title bold field in *Dropdown cart*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: dropdown_cart.title_bold
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_bold: prismic.KeyTextField;
+
+  /**
+   * Total  field in *Dropdown cart*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: dropdown_cart.total
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  total: prismic.KeyTextField;
+
+  /**
+   * Button label field in *Dropdown cart*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: dropdown_cart.button_label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  button_label: prismic.KeyTextField;
+}
+
+/**
+ * Dropdown cart document from Prismic
+ *
+ * - **API ID**: `dropdown_cart`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type DropdownCartDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<DropdownCartDocumentData>,
+  'dropdown_cart',
   Lang
 >;
 
@@ -1096,11 +1213,13 @@ export type PageDocument<Lang extends string = string> = prismic.PrismicDocument
 
 export type AllDocumentTypes =
   | AtHomeDocument
+  | CartDocument
   | ChefDocument
   | ComingSoonDocument
   | ContactDocument
   | ContactFooterDocument
   | CreationsDocument
+  | DropdownCartDocument
   | FooterDocument
   | HomepageDocument
   | JobOfferDocument
@@ -1234,9 +1353,87 @@ export type BannerWithCalendarSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *BannerWithCalendar → Calendar Only → Primary*
+ */
+export interface BannerWithCalendarSliceCalendarOnlyPrimary {
+  /**
+   * title_bold field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.title_bold
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_bold: prismic.KeyTextField;
+
+  /**
+   * Pick up date title field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.pick_up_date_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pick_up_date_title: prismic.KeyTextField;
+
+  /**
+   * Pick up date description field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.pick_up_date_description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  pick_up_date_description: prismic.RichTextField;
+
+  /**
+   * Pick up date day field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.pick_up_date_day
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pick_up_date_day: prismic.KeyTextField;
+
+  /**
+   * Pick up date slot field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.pick_up_date_slot
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  pick_up_date_slot: prismic.KeyTextField;
+
+  /**
+   * Padding bottom field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.padding_bottom
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  padding_bottom: prismic.KeyTextField;
+}
+
+/**
+ * Calendar Only variation for BannerWithCalendar Slice
+ *
+ * - **API ID**: `calendarOnly`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BannerWithCalendarSliceCalendarOnly = prismic.SharedSliceVariation<
+  'calendarOnly',
+  Simplify<BannerWithCalendarSliceCalendarOnlyPrimary>,
+  never
+>;
+
+/**
  * Slice variation for *BannerWithCalendar*
  */
-type BannerWithCalendarSliceVariation = BannerWithCalendarSliceDefault;
+type BannerWithCalendarSliceVariation = BannerWithCalendarSliceDefault | BannerWithCalendarSliceCalendarOnly;
 
 /**
  * BannerWithCalendar Shared Slice
@@ -1414,6 +1611,16 @@ export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   product_allergens: prismic.KeyTextField;
+
+  /**
+   * Product id field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_id
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  product_id: prismic.NumberField;
 }
 
 /**
@@ -3347,6 +3554,9 @@ declare module '@prismicio/client' {
       AtHomeDocument,
       AtHomeDocumentData,
       AtHomeDocumentDataSlicesSlice,
+      CartDocument,
+      CartDocumentData,
+      CartDocumentDataSlicesSlice,
       ChefDocument,
       ChefDocumentData,
       ChefDocumentDataSlicesSlice,
@@ -3361,6 +3571,8 @@ declare module '@prismicio/client' {
       CreationsDocument,
       CreationsDocumentData,
       CreationsDocumentDataSlicesSlice,
+      DropdownCartDocument,
+      DropdownCartDocumentData,
       FooterDocument,
       FooterDocumentData,
       FooterDocumentDataNavigationItem,
@@ -3388,8 +3600,10 @@ declare module '@prismicio/client' {
       BannerSliceDefault,
       BannerWithCalendarSlice,
       BannerWithCalendarSliceDefaultPrimary,
+      BannerWithCalendarSliceCalendarOnlyPrimary,
       BannerWithCalendarSliceVariation,
       BannerWithCalendarSliceDefault,
+      BannerWithCalendarSliceCalendarOnly,
       BannerWithTextSlice,
       BannerWithTextSliceDefaultPrimary,
       BannerWithTextSliceVariation,

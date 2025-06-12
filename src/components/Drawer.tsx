@@ -93,7 +93,7 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 <span className="sr-only">Close menu</span>
               </button>
               <PrismicNextLink field={meta.data.home_link} className="block w-5/6 md:hidden">
-                <PrismicNextImage className="mx-auto h-16 w-auto sm:h-20" field={meta.data.og_image} />
+                <PrismicNextImage className="mx-auto h-12 w-auto sm:h-20" field={meta.data.og_image} />
               </PrismicNextLink>
             </div>
             <div className="overflow-y-auto py-6 md:py-4">
@@ -101,7 +101,7 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 {meta.data.sidebar.map(({ link, label }) => (
                   <li key={label}>
                     <PrismicNextLink
-                      className="block py-2 pl-3 pr-4 text-[0.85rem] font-semibold uppercase tracking-widest lg:p-0"
+                      className="block py-2 pl-3 pr-4 text-base font-semibold uppercase tracking-widest lg:p-0"
                       field={link}
                     >
                       {label}
@@ -187,15 +187,12 @@ export default function Drawer({ meta, footer, locales }: DrawerProps) {
                 data-collapse-toggle="drawer-navigation"
                 onClick={() => setOpenDrawer(!openDrawer)}
                 type="button"
-                className="font-base block py-2 pl-3 pr-4 text-[0.85rem] uppercase tracking-widest lg:border-0 lg:p-0"
+                className="font-base block py-2 pl-3 pr-4 text-base uppercase tracking-widest lg:border-0 lg:p-0"
               >
                 {label}
               </button>
             ) : (
-              <PrismicNextLink
-                className="block py-2 pl-3 pr-4 text-[0.85rem] uppercase lg:border-0 lg:p-0"
-                field={link}
-              >
+              <PrismicNextLink className="block py-2 pl-3 pr-4 text-base uppercase lg:border-0 lg:p-0" field={link}>
                 {label}
               </PrismicNextLink>
             )}

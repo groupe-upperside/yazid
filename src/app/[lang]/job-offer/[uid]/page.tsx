@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: Params }) {
   return (
     <Layout doc={page} lang={params.lang}>
       <SliceZone slices={renderTopSlices} components={components} />
-      <div className="grid grid-cols-1 gap-20 p-12 font-avenir tracking-widest md:p-20 xl:grid-cols-3 xl:p-32">
+      <div className="grid grid-cols-1 gap-20 p-6 font-avenir tracking-widest md:p-20 xl:grid-cols-3 xl:p-32">
         <div className="col-span-3 xl:col-span-2">
           <div className="space-y-6">
             <PrismicRichText

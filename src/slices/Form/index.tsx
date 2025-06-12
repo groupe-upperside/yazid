@@ -78,7 +78,7 @@ const Form = ({ slice }: FormProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="mx-auto w-full bg-white p-12 font-avenir tracking-widest md:p-20 lg:w-3/4 xl:w-2/3 xl:p-32 2xl:w-1/2"
+      className="mx-auto w-full bg-white p-6 font-avenir tracking-widest md:p-20 lg:w-3/4 xl:w-2/3 xl:p-32 2xl:w-1/2"
     >
       <SectionTitle text={slice.primary.title} bold={true} centered={true} />
       <div className="flex flex-col items-center justify-center space-y-2 py-16 xl:py-20">

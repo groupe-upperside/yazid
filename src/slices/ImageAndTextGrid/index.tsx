@@ -20,7 +20,7 @@ const ImageLeftAndTextGrid = ({ slice }: ImageLeftAndTextGridProps): JSX.Element
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-12 font-avenir tracking-widest md:p-20 xl:p-32"
+      className="p-6 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="mx-auto grid max-w-screen-2xl gap-12 rounded-lg xl:grid-cols-12 xl:gap-16">
         <div

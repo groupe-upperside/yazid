@@ -15,7 +15,7 @@ const BlockTextCentered = ({ slice }: BlockTextCenteredProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-12 font-avenir tracking-widest md:p-20 xl:p-32"
+      className="p-6 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="flex flex-col justify-center space-y-6">
         <PrismicRichText

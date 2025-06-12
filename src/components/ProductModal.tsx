@@ -3,7 +3,7 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
 import type { ImageField, RichTextField } from '@prismicio/types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 type Props = {
@@ -15,10 +15,25 @@ type Props = {
     product_price: NumberField;
     product_description: RichTextField;
     product_allergens: KeyTextField;
+    product_id: NumberField;
   } | null;
 };
 
 export default function ProductModal({ open, onClose, product }: Props) {
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    if (open && window.Snipcart?.store) {
+      const id = product?.product_id?.toString() ?? '';
+      const state = window.Snipcart.store.getState();
+      const cartItems = state.cart.items.items; // ← the array
+      if (Array.isArray(cartItems)) {
+        const existing = cartItems.find((i) => i.id === id);
+        setQuantity(existing?.quantity ?? 1);
+      }
+    }
+  }, [open, product]);
+
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => {
@@ -83,11 +98,23 @@ export default function ProductModal({ open, onClose, product }: Props) {
 
           <div className="mt-auto flex flex-col items-center justify-center gap-4 p-6 md:p-10">
             <div className="flex items-center gap-6 font-bold">
-              <button className=" text-2xl">-</button>
-              <span className=" text-2xl text-[#111827]">1</span>
-              <button className=" text-2xl">+</button>
+              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="text-2xl">
+                -
+              </button>
+              <span className="text-2xl text-[#111827]">{quantity}</span>
+              <button onClick={() => setQuantity((q) => q + 1)} className="text-2xl">
+                +
+              </button>
             </div>
-            <button className="mx-auto bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12">
+            <button
+              className="snipcart-add-item mx-auto bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
+              data-item-id={product.product_id}
+              data-item-name={product.product_name}
+              data-item-price={(product.product_price as number).toFixed(2)}
+              data-item-quantity={quantity}
+              data-item-url={typeof window !== 'undefined' ? window.location.href : ''}
+              data-item-image={product.image.url}
+            >
               Ajouter au panier
             </button>
           </div>

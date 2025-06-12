@@ -18,7 +18,7 @@ const TextAndStepper = ({ slice }: TextAndStepperProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-12 font-avenir tracking-widest md:p-20 xl:p-32"
+      className="p-6 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <div className="me-auto place-self-center xl:col-span-7">
         <SectionTitle text={slice.primary.title_light} centered={true} />

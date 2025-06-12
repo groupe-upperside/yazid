@@ -58,5 +58,53 @@
 			}
 		},
 		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "calendarOnly",
+		"primary": {
+			"pick_up_date_title": {
+				"__TYPE__": "FieldContent",
+				"value": "distant",
+				"type": "Text"
+			},
+			"pick_up_date_description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nostrud enim reprehenderit velit reprehenderit."
+						}
+					}
+				]
+			},
+			"pick_up_date_day": {
+				"__TYPE__": "FieldContent",
+				"value": "cap",
+				"type": "Text"
+			},
+			"pick_up_date_slot": {
+				"__TYPE__": "FieldContent",
+				"value": "hat",
+				"type": "Text"
+			},
+			"title_bold": {
+				"__TYPE__": "FieldContent",
+				"value": "make",
+				"type": "Text"
+			},
+			"padding_bottom": {
+				"__TYPE__": "FieldContent",
+				"value": "knife",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
 	}
 ]
