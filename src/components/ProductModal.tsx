@@ -6,6 +6,8 @@ import type { ImageField, RichTextField } from '@prismicio/types';
 import React, { useEffect, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
+import { useCartItems } from '@/hooks/useSnipcart';
+
 type Props = {
   open: boolean;
   onClose: () => void;
@@ -21,18 +23,7 @@ type Props = {
 
 export default function ProductModal({ open, onClose, product }: Props) {
   const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    if (open && window.Snipcart?.store) {
-      const id = product?.product_id?.toString() ?? '';
-      const state = window.Snipcart.store.getState();
-      const cartItems = state.cart.items.items; // ← the array
-      if (Array.isArray(cartItems)) {
-        const existing = cartItems.find((i) => i.id === id);
-        setQuantity(existing?.quantity ?? 1);
-      }
-    }
-  }, [open, product]);
+  const { items } = useCartItems();
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -40,6 +31,21 @@ export default function ProductModal({ open, onClose, product }: Props) {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  useEffect(() => {
+    if (open && product) {
+      const id = product?.product_id?.toString();
+      const existing = items.find((i) => i.id === id);
+      setQuantity(existing?.quantity ?? 1);
+    }
+  }, [open, product, items]);
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onClose();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.dispatchEvent(new CustomEvent('openCartDropdown'));
+  };
 
   if (!open || !product) return null;
 
@@ -107,6 +113,7 @@ export default function ProductModal({ open, onClose, product }: Props) {
               </button>
             </div>
             <button
+              onClick={(e) => handleClick(e)}
               className="snipcart-add-item mx-auto bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
               data-item-id={product.product_id}
               data-item-name={product.product_name}

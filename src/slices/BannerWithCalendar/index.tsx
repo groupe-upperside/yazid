@@ -4,7 +4,6 @@ import type { Content } from '@prismicio/client';
 import { isFilled } from '@prismicio/client';
 import type { SliceComponentProps } from '@prismicio/react';
 import { PrismicRichText } from '@prismicio/react';
-import { useState } from 'react';
 
 import DatePicker from '@/components/DatePicker';
 import SectionTitle from '@/components/SectionTitle';
@@ -50,18 +49,6 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
     pick_up_date_slot,
     padding_bottom,
   } = slice.primary;
-  const [date, setDate] = useState('');
-  const [slot, setSlot] = useState('');
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const minDate = tomorrow.toISOString().slice(0, 10);
-  const isValidDay = (iso: string) => {
-    if (!iso) return false;
-    const d = new Date(iso);
-    const day = d.getDay();
-    return day >= 2 && day <= 6;
-  };
-  const ready = isValidDay(date) && slot;
 
   return (
     <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
@@ -93,8 +80,8 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
             </div>
           </div>
           <div className="flex flex-col gap-4">
-            <DatePicker value={date} onChange={setDate} min={minDate} placeholder={pick_up_date_day} />
-            <TimeSlotPicker value={slot} onChange={setSlot} placeholder={pick_up_date_slot} />
+            <DatePicker placeholder={pick_up_date_day} />
+            <TimeSlotPicker placeholder={pick_up_date_slot} />
           </div>
         </div>
       </div>

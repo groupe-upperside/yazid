@@ -35,14 +35,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           async
           src="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.js"
           id="snipcart"
-          data-api-key={process.env.NDg3ZGIyYzUtMmM0Yi00MjU1LWI2OTAtM2FmYTE2YWExYmY3NjM4ODUwNjE4MzUwODc4MTQy}
-          data-config-modal-style="side"
+          data-api-key={process.env.SNIPCART_KEY}
+          data-config-add-product-behavior="none"
+          data-cart-custom1-name="Date de retrait"
+          data-cart-custom1-required="true"
+          data-cart-custom2-name="Créneau horaire"
+          data-cart-custom2-required="true"
         ></Script>
         <div>
           <Toaster />
         </div>
         {children}
-        <div hidden id="snipcart" data-api-key={process.env.SNIPCART_KEY} data-config-modal-style="side"></div>
       </body>
       <PrismicPreview repositoryName={repositoryName} />
     </html>

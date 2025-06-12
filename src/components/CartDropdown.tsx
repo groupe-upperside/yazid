@@ -6,48 +6,18 @@ import { useEffect, useRef, useState } from 'react';
 import { FaShoppingBasket } from 'react-icons/fa';
 
 import CartRows from '@/components/CartRows';
+import { useCartItems } from '@/hooks/useSnipcart';
 
 export default function CartDropdown({ lang, meta }: { lang: string; meta: Content.DropdownCartDocument<string> }) {
-  const [items, setItems] = useState<any[]>([]);
-  const [total, setTotal] = useState(0);
-  const [itemsTotal, setItemsTotal] = useState(0);
+  const { items, total, itemsTotal } = useCartItems();
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    function subscribeCart() {
-      if (!window.Snipcart?.store) return;
-      const sync = () => {
-        const state = window.Snipcart.store.getState();
-        const cartItems = Array.isArray(state.cart.items.items) ? state.cart.items.items : [];
-        setItems(cartItems);
-        setTotal(cartItems.reduce((sum, i) => sum + i.quantity * i.price, 0));
-        setItemsTotal(cartItems.reduce((sum, i) => sum + i.quantity, 0));
-      };
-
-      sync();
-
-      return window.Snipcart.store.subscribe(sync);
-    }
-
-    let unsubscribe: (() => void) | undefined;
-    if (typeof window !== 'undefined') {
-      if (window.Snipcart?.store) {
-        unsubscribe = subscribeCart();
-      } else {
-        const onReady = () => {
-          unsubscribe = subscribeCart();
-        };
-        document.addEventListener('snipcart.ready', onReady);
-        return () => {
-          document.removeEventListener('snipcart.ready', onReady);
-          unsubscribe && unsubscribe();
-        };
-      }
-    }
-
+    const handleOpen = () => setOpen(true);
+    document.addEventListener('openCartDropdown', handleOpen);
     return () => {
-      unsubscribe && unsubscribe();
+      document.removeEventListener('openCartDropdown', handleOpen);
     };
   }, []);
 

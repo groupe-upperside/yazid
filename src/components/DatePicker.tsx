@@ -1,43 +1,93 @@
-import { useRef } from 'react';
+'use client';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
+import type { KeyTextField } from '@prismicio/client';
+import fr from 'date-fns/locale/fr';
+import { forwardRef, useEffect, useMemo, useState } from 'react';
+import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { FaRegCalendar } from 'react-icons/fa';
 
+import { useCartCustomFields } from '@/hooks/useSnipcart';
+
+registerLocale('fr', fr);
+
 type Props = {
-  value: string;
-  onChange: (v: string) => void;
-  min: string;
-  placeholder: string | null;
+  placeholder: KeyTextField;
 };
 
-export default function DatePicker({ value, onChange, min, placeholder }: Props) {
-  const format = (iso = '') => {
-    if (!iso) return placeholder;
-    const [y, m, d] = iso.split('-');
-    return `${d}/${m}/${y}`;
-  };
+const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) => {
+  const [date, setDate] = useState('');
 
-  const dateInputRef = useRef<HTMLInputElement>(null);
+  const { 'Date de retrait': savedDate } = useCartCustomFields(['Date de retrait']);
 
-  const openCalendar = () => {
-    // showPicker() works in Chrome, Edge, and Safari 16+
-    dateInputRef.current?.showPicker();
+  useEffect(() => {
+    if (savedDate) setDate(savedDate);
+  }, [savedDate]);
+
+  const now = useMemo(() => new Date(), []);
+  const minDate = useMemo(() => {
+    const m = new Date();
+    m.setDate(m.getDate() + 1);
+    if (now.getHours() >= 20) m.setDate(m.getDate() + 1);
+    return m;
+  }, [now]);
+
+  const selected = date ? new Date(date) : null;
+
+  const handleSelect = async (d: Date | null) => {
+    if (!d) return;
+    const iso = d.toISOString().slice(0, 10);
+    setDate(iso);
+
+    try {
+      // @ts-ignore
+      const state = window.Snipcart.store.getState();
+      const existing: Array<{ name: string; value: string }> = state.cart.customFields || [];
+      const others = existing.filter((f) => f.name !== 'Date de retrait');
+
+      // @ts-ignore
+      await window.Snipcart.api.cart.update({
+        customFields: [...others, { name: 'Date de retrait', value: iso }],
+      });
+    } catch (err) {
+      console.error('Failed to update customFields:', err);
+    }
   };
 
   return (
-    <label className="relative inline-block size-full">
-      <input
-        ref={dateInputRef}
-        type="date"
-        className="picker size-full opacity-0"
-        value={value}
-        min={min}
-        required
-        onChange={(e) => onChange(e.target.value)}
+    <div className="relative inline-block w-full">
+      <ReactDatePicker
+        calendarClassName="calendar-classname"
+        dayClassName={(d) => (selected && d.toDateString() === selected.toDateString() ? 'day-classname' : '')}
+        selected={selected}
+        onChange={handleSelect}
+        minDate={minDate}
+        filterDate={(d: Date) => {
+          const day = d.getDay();
+          return day >= 2 && day <= 6;
+        }}
+        startDate={now}
+        locale="fr"
+        dateFormat="dd/MM/yyyy"
+        customInput={
+          <div className="flex cursor-pointer select-none items-center gap-2 rounded bg-[#111827] px-4 py-2 text-base text-white">
+            <FaRegCalendar className="text-xl" />
+            <span>
+              {selected
+                ? `${selected.getDate().toString().padStart(2, '0')}/${(selected.getMonth() + 1)
+                    .toString()
+                    .padStart(2, '0')}/${selected.getFullYear()}`
+                : placeholder}
+            </span>
+          </div>
+        }
+        ref={ref}
+        wrapperClassName="w-full"
       />
-
-      <div className="align-center flex select-none items-center gap-2 whitespace-nowrap rounded bg-[#111827] px-4 py-2 text-base leading-none text-white">
-        <FaRegCalendar onClick={openCalendar} className="size-4 cursor-pointer" />
-        <p className="select-none">{format(value)}</p>
-      </div>
-    </label>
+    </div>
   );
-}
+});
+
+DatePicker.displayName = 'DatePicker';
+export default DatePicker;

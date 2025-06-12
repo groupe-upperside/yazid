@@ -5001,3 +5001,23 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 .snipcart-sidecart--opened::-webkit-scrollbar {
     width: 0
 }
+
+.calendar-classname{
+    background: white !important;
+    font-family: 'Avenir', serif !important;
+}
+
+.calendar-classname .react-datepicker__header {
+    background: white !important;
+    border: none !important;
+}
+
+.calendar-classname .react-datepicker__day-names {
+    text-transform: uppercase !important;
+}
+
+.day-classname{
+    background: black !important;
+    color: white !important;
+    border-radius: 100%;
+}

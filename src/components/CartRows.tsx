@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
-const DropDownRow = ({ handleRemove, handleUpdate, i }) => {
+const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
   return (
     <div key={i.id} className="flex items-stretch gap-4 border-b border-[#707070] pb-4">
       <img src={i.image} alt={i.name} className="aspect-square size-[74px] object-cover" />
@@ -26,7 +26,14 @@ const DropDownRow = ({ handleRemove, handleUpdate, i }) => {
   );
 };
 
-const CartRow = ({ handleRemove, handleUpdate, i, total }) => {
+const CartRow = ({ handleRemove, handleUpdate, i, total }: any) => {
+  const { 'Date de retrait': pickUpDate, 'Créneau horaire': timeSlot } = useCartCustomFields([
+    'Date de retrait',
+    'Créneau horaire',
+  ]);
+
+  const canCheckout = Boolean(pickUpDate && timeSlot);
+
   return (
     <div key={i.id} className="bg-[#F7F4EF] px-6 font-avenir tracking-widest md:px-20 xl:px-32">
       <div className="relative flex items-stretch gap-2 bg-white p-2 md:gap-4 md:p-6">
@@ -62,56 +69,28 @@ const CartRow = ({ handleRemove, handleUpdate, i, total }) => {
         <div>TOTAL</div>
         <div>{total.toFixed(2).replace('.', ',')} €</div>
       </div>
+      <div className="flex w-full justify-center">
+        <a
+          href={canCheckout ? '#/checkout' : undefined}
+          onClick={(e) => {
+            !canCheckout && e.preventDefault();
+          }}
+          className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
+        >
+          Commander
+        </a>
+      </div>
     </div>
   );
 };
 
 export default function CartRows({ isCartPage = false }) {
-  const [items, setItems] = useState<any[]>([]);
-  const [total, setTotal] = useState(0);
-
-  useEffect(() => {
-    function subscribeCart() {
-      if (!window.Snipcart?.store) return;
-      const sync = () => {
-        const state = window.Snipcart.store.getState();
-        const cartItems = Array.isArray(state.cart.items.items) ? state.cart.items.items : [];
-        setItems(cartItems);
-        setTotal(cartItems.reduce((sum, i) => sum + i.quantity * i.price, 0));
-      };
-
-      sync();
-
-      return window.Snipcart.store.subscribe(sync);
-    }
-
-    let unsubscribe: (() => void) | undefined;
-    if (typeof window !== 'undefined') {
-      if (window.Snipcart?.store) {
-        unsubscribe = subscribeCart();
-      } else {
-        const onReady = () => {
-          unsubscribe = subscribeCart();
-        };
-        document.addEventListener('snipcart.ready', onReady);
-        return () => {
-          document.removeEventListener('snipcart.ready', onReady);
-          unsubscribe && unsubscribe();
-        };
-      }
-    }
-
-    return () => {
-      unsubscribe && unsubscribe();
-    };
-  }, []);
+  const { items, total } = useCartItems();
 
   const handleUpdate = async (uniqueId: string, quantity: number) => {
     try {
-      await window.Snipcart.api.cart.items.update({
-        uniqueId,
-        quantity,
-      });
+      // @ts-ignore
+      await window.Snipcart.api.cart.items.update({ uniqueId, quantity });
     } catch (err) {
       console.error('Failed to update item:', err);
     }
@@ -119,23 +98,24 @@ export default function CartRows({ isCartPage = false }) {
 
   const handleRemove = async (uniqueId: string) => {
     try {
+      // @ts-ignore
       await window.Snipcart.api.cart.items.remove(uniqueId);
     } catch (err) {
       console.error('Failed to remove item:', err);
     }
   };
 
+  if (items.length === 0 && !isCartPage) {
+    return <p className="text-sm">Votre panier est vide</p>;
+  }
+
   return (
     <div className="w-full space-y-4">
-      {items.length === 0 && !isCartPage ? (
-        <p className="text-sm">Votre panier est vide</p>
-      ) : (
-        items.map((i) =>
-          !isCartPage ? (
-            <DropDownRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
-          ) : (
-            <CartRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} total={total} />
-          )
+      {items.map((i) =>
+        !isCartPage ? (
+          <DropDownRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
+        ) : (
+          <CartRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} total={total} />
         )
       )}
     </div>
