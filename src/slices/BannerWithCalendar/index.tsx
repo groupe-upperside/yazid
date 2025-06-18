@@ -41,17 +41,22 @@ const ReusablePrismicRichText = ({ field, centered = false }: { field: any; cent
  */
 const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => {
   const {
+    // @ts-ignore
     upper_separator_text,
     title_bold,
+    // @ts-ignore
     lower_separator_text,
     pick_up_date_title,
     pick_up_date_description,
     pick_up_date_day,
     pick_up_date_slot,
+    // @ts-ignore
     padding_bottom,
     pick_up_date_title_uppercase,
     button_position,
+    // @ts-ignore
     width,
+    // @ts-ignore
     include_cart,
   } = slice.primary;
 

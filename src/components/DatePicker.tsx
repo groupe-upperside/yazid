@@ -10,6 +10,7 @@ import { FaRegCalendar } from 'react-icons/fa';
 
 import { useCartCustomFields } from '@/hooks/useSnipcart';
 
+// @ts-ignore
 registerLocale('fr', fr);
 
 type Props = {
@@ -82,6 +83,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
             </span>
           </div>
         }
+        // @ts-ignore
         ref={ref}
         wrapperClassName="w-full"
       />

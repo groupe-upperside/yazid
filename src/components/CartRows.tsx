@@ -80,6 +80,7 @@ const CartRow = ({ handleRemove, handleUpdate, i, total, isCheckoutPage, lang }:
           <a
             href={canCheckout ? '#/checkout' : undefined}
             onClick={(e) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
               !canCheckout && e.preventDefault();
             }}
             className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"

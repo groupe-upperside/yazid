@@ -41,8 +41,10 @@ export function useCartItems(): CartItemsHook {
         const state = window.Snipcart.store.getState();
         const cartItems = Array.isArray(state.cart.items.items) ? state.cart.items.items : [];
         setItems(cartItems);
-        setTotal(cartItems.reduce((sum, i) => sum + i.quantity * i.price, 0));
-        setItemsTotal(cartItems.reduce((sum, i) => sum + i.quantity, 0));
+        setTotal(
+          cartItems.reduce((sum: number, i: { quantity: number; price: number }) => sum + i.quantity * i.price, 0)
+        );
+        setItemsTotal(cartItems.reduce((sum: any, i: { quantity: any }) => sum + i.quantity, 0));
       };
       sync();
       return window.Snipcart.store.subscribe(sync);
