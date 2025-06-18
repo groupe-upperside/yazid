@@ -64,6 +64,14 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
             <p className="text-sm font-medium tracking-widest text-[#9A9A9A] md:text-base">
               {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
             </p>
+            <button
+              className="sr-only"
+              data-item-id={item.product_id}
+              data-item-name={item.product_name}
+              data-item-price={(item.product_price as number).toFixed(2)}
+              data-item-url="/"
+              data-item-image={item.image.url}
+            ></button>
           </div>
         ))}
       </div>
