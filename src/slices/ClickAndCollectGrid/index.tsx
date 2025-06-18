@@ -65,7 +65,7 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
               {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
             </p>
             <button
-              className="sr-only"
+              className="sr-only snipcart-add-item"
               data-item-id={item.product_id}
               data-item-name={item.product_name}
               data-item-price={(item.product_price as number).toFixed(2)}
