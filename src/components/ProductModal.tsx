@@ -119,7 +119,7 @@ export default function ProductModal({ open, onClose, product }: Props) {
               data-item-name={product.product_name}
               data-item-price={(product.product_price as number).toFixed(2)}
               data-item-quantity={quantity}
-              data-item-url="https://yazid-ichemrahen.com"
+              data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
               data-item-image={product.image.url}
             >
               Ajouter au panier
