@@ -65,11 +65,11 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
               {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
             </p>
             <button
-              className="sr-only snipcart-add-item"
+              className="snipcart-add-item sr-only"
               data-item-id={item.product_id}
               data-item-name={item.product_name}
               data-item-price={(item.product_price as number).toFixed(2)}
-              data-item-url="/"
+              data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
               data-item-image={item.image.url}
             ></button>
           </div>
