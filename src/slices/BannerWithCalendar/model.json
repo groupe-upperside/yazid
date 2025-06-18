@@ -44,6 +44,15 @@
             "placeholder": ""
           }
         },
+        "pick_up_date_title_uppercase": {
+          "type": "Boolean",
+          "config": {
+            "label": "Pick up date title uppercase",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
         "pick_up_date_description": {
           "type": "StructuredText",
           "config": {
@@ -51,6 +60,17 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "button_position": {
+          "type": "Select",
+          "config": {
+            "label": "Button position",
+            "placeholder": "",
+            "options": [
+              "right",
+              "bottom"
+            ]
           }
         },
         "pick_up_date_day": {
@@ -92,6 +112,15 @@
             "placeholder": ""
           }
         },
+        "pick_up_date_title_uppercase": {
+          "type": "Boolean",
+          "config": {
+            "label": "Pick up date title uppercase",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
+        },
         "pick_up_date_description": {
           "type": "StructuredText",
           "config": {
@@ -99,6 +128,17 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "button_position": {
+          "type": "Select",
+          "config": {
+            "label": "Button position",
+            "placeholder": "",
+            "options": [
+              "right",
+              "bottom"
+            ]
           }
         },
         "pick_up_date_day": {
@@ -120,6 +160,22 @@
           "config": {
             "label": "Padding bottom",
             "placeholder": ""
+          }
+        },
+        "width": {
+          "type": "Text",
+          "config": {
+            "label": "Width",
+            "placeholder": ""
+          }
+        },
+        "include_cart": {
+          "type": "Boolean",
+          "config": {
+            "label": "Include cart",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
           }
         }
       },

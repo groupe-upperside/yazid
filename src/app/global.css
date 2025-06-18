@@ -25,7 +25,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 @import url(https://fonts.bunny.net/css?family=Montserrat:300,500|Open+Sans:300,600);
 .snipcart {
-    font-family: Open Sans, sans-serif;
+    font-family: 'Avenir';
     font-size: 14px;
     font-weight: 300;
     color: #2e3338;
@@ -51,7 +51,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart__font--secondary, .snipcart__font--subtitle, .snipcart__font--subtitle-small {
-    font-family: Montserrat, sans-serif
+    font-family: 'Avenir';
 }
 
 .snipcart__font--small {
@@ -89,11 +89,18 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart__font--black, .snipcart__font--subtitle, .snipcart__font--subtitle-small {
-    font-weight: 600
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 1.3rem;
 }
 
 .snipcart__font--subtitle {
     display: flex
+}
+
+.snipcart-cart-summary button {
+    display: none;
 }
 
 .snipcart__font--subtitle-small {
@@ -102,8 +109,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart__font--blue {
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3)
+    color:  #000000;
+    color: var(--color-link,  #000000)
 }
 
 .snipcart__box {
@@ -178,8 +185,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     width: 40px;
     border-radius: 999px;
     border: 3px solid;
-    color: #0d59f2;
-    color: var(--color-badge, #0d59f2);
+    color: rgb(17 24 39 / var(--tw-text-opacity));
     border-color: transparent;
     border-color: var(--borderColor-badge, transparent);
     background-color: #fff;
@@ -217,20 +223,17 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart__box--badge-highlight {
-    color: #0d59f2;
-    color: var(--color-badge-active, #0d59f2);
+    color: white !important;
     border-color: transparent;
     border-color: var(--borderColor-badge-active, transparent);
-    background-color: #d9f0fc;
-    background-color: var(--bgColor-badge-active, #d9f0fc)
+    background-color: black !important;
 }
 
 .snipcart-modal {
     position: relative;
     margin: 0 auto;
     max-width: 100%;
-    background-color: #f1f2f4;
-    background-color: var(--bgColor-modal, #f1f2f4)
+    background-color: #F7F4EF;
 }
 
 @supports (-webkit-overflow-scrolling:touch) {
@@ -248,8 +251,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     min-height: 100%;
     overflow-y: auto;
     z-index: 20;
-    background-color: #f1f2f4;
-    background-color: var(--bgColor-modal, #f1f2f4)
+    background-color: #F7F4EF;
 }
 
 .snipcart-modal__overlay {
@@ -335,8 +337,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart__actions--link {
     text-decoration: none;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3);
+    color:  #000000;
+    color: var(--color-link,  #000000);
     font-family: Open Sans, sans-serif;
     font-size: 14px;
     border: none;
@@ -636,8 +638,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-cart-header {
-    background-color: #f1f2f4;
-    background-color: var(--bgColor-modal, #f1f2f4);
+    background-color: #F7F4EF;
     display: flex;
     align-items: center;
     padding-top: 16px;
@@ -725,8 +726,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-cart-header .snipcart-modal__close-icon, .snipcart-cart-header__icon {
-    color: #0aa7f5;
-    color: var(--color-icon, #0aa7f5)
+    color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
 .snipcart-cart-header--fixed {
@@ -1416,6 +1416,19 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     margin-left: 5px
 }
 
+.snipcart-cart-summary-item__name{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+.snipcart-summary-fees__title--highlight, .snipcart-summary-fees__amount--highlight{
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+
+}
+
 .snipcart-customer-details__payment-methods {
     min-height: 150px
 }
@@ -1499,8 +1512,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart-guest-checkout__link {
     text-align: center;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3)
+    color:  #000000;
+    color: var(--color-link,  #000000)
 }
 
 .snipcart-orders-link {
@@ -1598,8 +1611,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 .snipcart-register__register-link {
     text-decoration: none;
     display: inline;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3);
+    color:  #000000;
+    color: var(--color-link,  #000000);
     cursor: pointer
 }
 
@@ -1650,8 +1663,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart-signin__forgot-password, .snipcart-signin__register-link {
     text-decoration: none;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3)
+    color:  #000000;
+    color: var(--color-link,  #000000)
 }
 
 .snipcart-signin__forgot-password {
@@ -1737,13 +1750,13 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-subscription-details__plan .snipcart-form-radio.snipcart-form-radio--checked + .snipcart-form__label:before {
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary, #1a4db3);
+    background-color:  #000000;
+    background-color: var(--bgColor-buttonPrimary,  #000000);
     border: none
 }
 
 .snipcart-subscription-details__plan .snipcart-form-radio.snipcart-form-radio--checked + .snipcart-form__label:after {
-    content: url(/themes/3.7.0/default/assets/icons/checkmark.svg);
+    content: url(/themes/v3.7.4/default/assets/icons/checkmark.svg);
     background-repeat: no-repeat;
     background-position: 50%;
     z-index: 99;
@@ -1991,8 +2004,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart-order__invoice-number--highlight {
     margin-left: .4em;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3)
+    color:  #000000;
+    color: var(--color-link,  #000000)
 }
 
 .snipcart-base-button {
@@ -2020,9 +2033,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-base-button__icon {
-    grid-area: icon;
-    height: 20px;
-    width: 20px
+  display: none;
 }
 
 .snipcart-base-button:focus, .snipcart-base-button:focus-visible {
@@ -2074,19 +2085,15 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--color-buttonPrimary, #fff);
     border-color: transparent;
     border-color: var(--borderColor-buttonPrimary, transparent);
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary, #1a4db3)
-}
-
-.snipcart-button-primary:hover {
-    color: #fff;
-    color: var(--color-buttonPrimary-hover, #fff);
-    border-color: transparent;
-    border-color: var(--borderColor-buttonPrimary-hover, transparent);
-    background-color: #0d59f2;
-    background-color: var(--bgColor-buttonPrimary-hover, #0d59f2);
-    box-shadow: 0 10px 4px -8px rgba(0, 0, 0, .5);
-    box-shadow: var(--shadow-buttonPrimary-hover, 0 10px 4px -8px rgba(0, 0, 0, .5))
+    background-color:  #000000;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.75rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: var(--bgColor-buttonPrimary,  #000000)
 }
 
 .snipcart-button-primary:focus-visible {
@@ -2094,8 +2101,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--color-buttonPrimary-focus, #fff);
     border-color: transparent;
     border-color: var(--borderColor-buttonPrimary-focus, transparent);
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary-focus, #1a4db3);
+    background-color:  #000000;
+    background-color: var(--bgColor-buttonPrimary-focus,  #000000);
     box-shadow: 0 0 6px 2px #0aa7f5;
     box-shadow: var(--shadow-buttonPrimary-focus, 0 0 6px 2px #0aa7f5)
 }
@@ -2104,8 +2111,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     color: #fff;
     color: var(--color-buttonPrimary-active, #fff);
     border-color: var(--borderColor-buttonPrimary-active,);
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary-active, #1a4db3);
+    background-color:  #000000;
+    background-color: var(--bgColor-buttonPrimary-active,  #000000);
     box-shadow: none;
     box-shadow: var(--shadow-buttonPrimary-active, none)
 }
@@ -2150,8 +2157,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-button-secondary:hover {
-    color: #1a4db3;
-    color: var(--color-buttonSecondary-hover, #1a4db3);
+    color:  #000000;
+    color: var(--color-buttonSecondary-hover,  #000000);
     border-color: transparent;
     border-color: var(--borderColor-buttonSecondary-hover, transparent);
     background-color: #ecf8fe;
@@ -2297,8 +2304,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     border-bottom: 1px solid;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3);
+    color:  #000000;
+    color: var(--color-link,  #000000);
     border-color: currentColor;
     border-color: var(--borderColor-link, currentColor);
     background-color: none;
@@ -2311,18 +2318,9 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     outline: none
 }
 
-.snipcart-button-link:hover {
-    color: #0d59f2;
-    color: var(--color-link-hover, #0d59f2);
-    border-color: currentColor;
-    border-color: var(--borderColor-link-hover, currentColor);
-    background-color: none;
-    background-color: var(--bgColor-link-hover, none)
-}
-
 .snipcart-button-link:focus-visible {
-    color: #1a4db3;
-    color: var(--color-link-focus, #1a4db3);
+    color:  #000000;
+    color: var(--color-link-focus,  #000000);
     border-color: currentColor;
     border-color: var(--borderColor-link-focus, currentColor);
     background-color: #d9f0fc;
@@ -2332,8 +2330,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-button-link:active {
-    color: #1a4db3;
-    color: var(--color-link-active, #1a4db3);
+    color:  #000000;
+    color: var(--color-link-active,  #000000);
     border-color: currentColor;
     border-color: var(--borderColor-link-active, currentColor);
     background-color: none;
@@ -2364,8 +2362,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--color-buttonPrimary, #fff);
     border-color: transparent;
     border-color: var(--borderColor-buttonPrimary, transparent);
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary, #1a4db3)
+    background-color:  #000000;
+    background-color: var(--bgColor-buttonPrimary,  #000000)
 }
 
 .snipcart-button-icon.is-primary:hover {
@@ -2384,8 +2382,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     color: var(--color-buttonPrimary-focus, #fff);
     border-color: transparent;
     border-color: var(--borderColor-buttonPrimary-focus, transparent);
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary-focus, #1a4db3);
+    background-color:  #000000;
+    background-color: var(--bgColor-buttonPrimary-focus,  #000000);
     box-shadow: 0 0 6px 2px #0aa7f5;
     box-shadow: var(--shadow-buttonPrimary-focus, 0 0 6px 2px #0aa7f5)
 }
@@ -2394,8 +2392,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
     color: #fff;
     color: var(--color-buttonPrimary-active, #fff);
     border-color: var(--borderColor-buttonPrimary-active,);
-    background-color: #1a4db3;
-    background-color: var(--bgColor-buttonPrimary-active, #1a4db3);
+    background-color:  #000000;
+    background-color: var(--bgColor-buttonPrimary-active,  #000000);
     box-shadow: none;
     box-shadow: var(--shadow-buttonPrimary-active, none)
 }
@@ -2440,8 +2438,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-button-icon.is-secondary:hover {
-    color: #1a4db3;
-    color: var(--color-buttonSecondary-hover, #1a4db3);
+    color:  #000000;
+    color: var(--color-buttonSecondary-hover,  #000000);
     border-color: transparent;
     border-color: var(--borderColor-buttonSecondary-hover, transparent);
     background-color: #ecf8fe;
@@ -2689,8 +2687,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-billing-completed .snipcart-checkout-step__icon, .snipcart-billing-completed__title .snipcart__icon--left {
-    color: #0aa7f5;
-    color: var(--color-icon, #0aa7f5)
+    color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .snipcart-billing-completed__slide-transition--enter-active {
@@ -2868,8 +2865,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-shipping-completed .snipcart-checkout-step__icon, .snipcart-shipping-completed__title .snipcart__icon--left {
-    color: #0aa7f5;
-    color: var(--color-icon, #0aa7f5)
+    color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .snipcart-shipping-completed--titled .snipcart-shipping-completed__step-title {
@@ -3056,11 +3052,13 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart-cart-summary-item__quantity {
     white-space: nowrap;
-    text-align: center
+    text-align: center;
+    color: #707070;
 }
 
 .snipcart-cart-summary-item__price {
-    text-align: right
+    text-align: right;
+    color: #707070;
 }
 
 .snipcart-cart-summary-item__custom-fields {
@@ -3243,7 +3241,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-summary-fees__amount {
-    text-align: right
+    text-align: right;
 }
 
 .snipcart-summary-fees__notice {
@@ -4313,7 +4311,7 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-form-radio:checked + label:after {
-    content: url(/themes/3.7.0/default/assets/icons/checkmark.svg);
+    content: url(/themes/v3.7.4/default/assets/icons/checkmark.svg);
     background-repeat: no-repeat;
     background-position: 50%;
     z-index: 99;
@@ -4785,8 +4783,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart-flash-message__action {
     cursor: pointer;
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3)
+    color:  #000000;
+    color: var(--color-link,  #000000)
 }
 
 .snipcart-flash-message__action-container {
@@ -4886,8 +4884,8 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .snipcart-error-message__action {
-    color: #1a4db3;
-    color: var(--color-link, #1a4db3)
+    color:  #000000;
+    color: var(--color-link,  #000000)
 }
 
 .snipcart-cart-summary-side {
@@ -5000,24 +4998,4 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 
 .snipcart-sidecart--opened::-webkit-scrollbar {
     width: 0
-}
-
-.calendar-classname{
-    background: white !important;
-    font-family: 'Avenir', serif !important;
-}
-
-.calendar-classname .react-datepicker__header {
-    background: white !important;
-    border: none !important;
-}
-
-.calendar-classname .react-datepicker__day-names {
-    text-transform: uppercase !important;
-}
-
-.day-classname{
-    background: black !important;
-    color: white !important;
-    border-radius: 100%;
 }

@@ -85,6 +85,22 @@
 									"value": "83",
 									"type": "Number"
 								}
+							],
+							[
+								"product_min_quantity",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "93",
+									"type": "Number"
+								}
+							],
+							[
+								"product_max_quantity",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "58",
+									"type": "Number"
+								}
 							]
 						]
 					}

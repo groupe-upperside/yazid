@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <script async defer src="https://static.cdn.prismic.io/prismic.js?new=true&repo=yazid"></script>
         <Script
           async
-          src="https://cdn.snipcart.com/themes/v3.7.0/default/snipcart.js"
+          src="https://cdn.snipcart.com/themes/v3.7.4/default/snipcart.js"
           id="snipcart"
           data-api-key={process.env.SNIPCART_KEY}
           data-config-add-product-behavior="none"

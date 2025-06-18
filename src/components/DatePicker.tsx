@@ -56,7 +56,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
   };
 
   return (
-    <div className="relative inline-block w-full">
+    <div className="relative mx-auto inline-block w-48 xl:w-52">
       <ReactDatePicker
         calendarClassName="calendar-classname"
         dayClassName={(d) => (selected && d.toDateString() === selected.toDateString() ? 'day-classname' : '')}
@@ -71,7 +71,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
         locale="fr"
         dateFormat="dd/MM/yyyy"
         customInput={
-          <div className="flex cursor-pointer select-none items-center gap-2 rounded bg-[#111827] px-4 py-2 text-base text-white">
+          <div className="flex cursor-pointer select-none items-center gap-2 rounded bg-[#111827] px-4 py-3 text-base text-white">
             <FaRegCalendar className="text-xl" />
             <span>
               {selected

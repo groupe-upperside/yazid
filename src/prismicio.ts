@@ -44,6 +44,11 @@ const routes: prismic.ClientConfig['routes'] = [
     path: '/:lang/cart',
   },
   {
+    type: 'checkout',
+    uid: 'checkout',
+    path: '/:lang/checkout',
+  },
+  {
     type: 'coming_soon',
     uid: 'click_and_collect',
     path: '/:lang/click-and-collect',

@@ -1,12 +1,13 @@
 'use client';
 
+import type { KeyTextField } from '@prismicio/client';
 import { useEffect, useRef, useState } from 'react';
 import { FaRegClock } from 'react-icons/fa';
 
 import { useCartCustomFields } from '@/hooks/useSnipcart';
 
 type Props = {
-  placeholder: string;
+  placeholder: KeyTextField;
 };
 
 export default function TimeSlotPicker({ placeholder }: Props) {
@@ -67,10 +68,10 @@ export default function TimeSlotPicker({ placeholder }: Props) {
   };
 
   return (
-    <div className="relative inline-block w-full" ref={pickerRef}>
+    <div className="relative mx-auto inline-block w-48 xl:w-52" ref={pickerRef}>
       <button
         type="button"
-        className="flex w-full select-none items-center gap-2 rounded bg-[#111827] px-4 py-2 text-base text-white"
+        className="flex w-full select-none items-center gap-2 rounded bg-[#111827] px-4 py-3 text-base text-white"
         onClick={() => setOpen((o) => !o)}
       >
         <FaRegClock className="text-xl" />

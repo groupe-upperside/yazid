@@ -55,7 +55,7 @@ export default function ProductModal({ open, onClose, product }: Props) {
       onClick={onClose}
     >
       <div className="relative mx-auto flex  w-4/5 bg-white lg:w-3/4" onClick={(e) => e.stopPropagation()}>
-        <div className="relative hidden sm:block">
+        <div className="relative hidden lg:block">
           <PrismicNextImage field={product.image} className="size-full object-cover" />
         </div>
 
@@ -119,7 +119,7 @@ export default function ProductModal({ open, onClose, product }: Props) {
               data-item-name={product.product_name}
               data-item-price={(product.product_price as number).toFixed(2)}
               data-item-quantity={quantity}
-              data-item-url={typeof window !== 'undefined' ? window.location.href : ''}
+              data-item-url="https://yazid-ichemrahen.com"
               data-item-image={product.image.url}
             >
               Ajouter au panier

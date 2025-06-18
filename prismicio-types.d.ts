@@ -132,6 +132,70 @@ export type CartDocument<Lang extends string = string> = prismic.PrismicDocument
   Lang
 >;
 
+type CheckoutDocumentDataSlicesSlice = BannerWithCalendarSlice | BillingFormSlice;
+
+/**
+ * Content for Checkout documents
+ */
+interface CheckoutDocumentData {
+  /**
+   * Slice Zone field in *Checkout*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: checkout.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<CheckoutDocumentDataSlicesSlice> /**
+   * Meta Title field in *Checkout*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: checkout.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Checkout*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: checkout.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Checkout*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: checkout.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Checkout document from Prismic
+ *
+ * - **API ID**: `checkout`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type CheckoutDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<CheckoutDocumentData>,
+  'checkout',
+  Lang
+>;
+
 type ChefDocumentDataSlicesSlice = VideoAndTextGridSlice | TimelineSlice | ImageLeftAndTextGridSlice | BannerSlice;
 
 /**
@@ -1214,6 +1278,7 @@ export type PageDocument<Lang extends string = string> = prismic.PrismicDocument
 export type AllDocumentTypes =
   | AtHomeDocument
   | CartDocument
+  | CheckoutDocument
   | ChefDocument
   | ComingSoonDocument
   | ContactDocument
@@ -1309,6 +1374,17 @@ export interface BannerWithCalendarSliceDefaultPrimary {
   pick_up_date_title: prismic.KeyTextField;
 
   /**
+   * Pick up date title uppercase field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: banner_with_calendar.default.primary.pick_up_date_title_uppercase
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  pick_up_date_title_uppercase: prismic.BooleanField;
+
+  /**
    * Pick up date description field in *BannerWithCalendar → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -1317,6 +1393,16 @@ export interface BannerWithCalendarSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   pick_up_date_description: prismic.RichTextField;
+
+  /**
+   * Button position field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.button_position
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  button_position: prismic.SelectField<'right' | 'bottom'>;
 
   /**
    * Pick up date day field in *BannerWithCalendar → Default → Primary*
@@ -1377,6 +1463,17 @@ export interface BannerWithCalendarSliceCalendarOnlyPrimary {
   pick_up_date_title: prismic.KeyTextField;
 
   /**
+   * Pick up date title uppercase field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.pick_up_date_title_uppercase
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  pick_up_date_title_uppercase: prismic.BooleanField;
+
+  /**
    * Pick up date description field in *BannerWithCalendar → Calendar Only → Primary*
    *
    * - **Field Type**: Rich Text
@@ -1385,6 +1482,16 @@ export interface BannerWithCalendarSliceCalendarOnlyPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   pick_up_date_description: prismic.RichTextField;
+
+  /**
+   * Button position field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.button_position
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  button_position: prismic.SelectField<'right' | 'bottom'>;
 
   /**
    * Pick up date day field in *BannerWithCalendar → Calendar Only → Primary*
@@ -1415,6 +1522,27 @@ export interface BannerWithCalendarSliceCalendarOnlyPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   padding_bottom: prismic.KeyTextField;
+
+  /**
+   * Width field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.width
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  width: prismic.KeyTextField;
+
+  /**
+   * Include cart field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.include_cart
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  include_cart: prismic.BooleanField;
 }
 
 /**
@@ -1515,6 +1643,124 @@ type BannerWithTextSliceVariation = BannerWithTextSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type BannerWithTextSlice = prismic.SharedSlice<'banner_with_text', BannerWithTextSliceVariation>;
+
+/**
+ * Item in *BillingForm → Default → Primary → Form field*
+ */
+export interface BillingFormSliceDefaultPrimaryFormFieldItem {
+  /**
+   * Label field in *BillingForm → Default → Primary → Form field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.form_field[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Field type field in *BillingForm → Default → Primary → Form field*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.form_field[].field_type
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  field_type: prismic.SelectField<'text' | 'long text' | 'email' | 'phone' | 'checkbox'>;
+
+  /**
+   * Link to pdf field in *BillingForm → Default → Primary → Form field*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.form_field[].link_to_pdf
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link_to_pdf: prismic.LinkToMediaField;
+
+  /**
+   * Required field in *BillingForm → Default → Primary → Form field*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: billing_form.default.primary.form_field[].required
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  required: prismic.BooleanField;
+
+  /**
+   * Field name field in *BillingForm → Default → Primary → Form field*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.form_field[].field_name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  field_name: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *BillingForm → Default → Primary*
+ */
+export interface BillingFormSliceDefaultPrimary {
+  /**
+   * Title bold field in *BillingForm → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.title_bold
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title_bold: prismic.KeyTextField;
+
+  /**
+   * Form field field in *BillingForm → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.form_field[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  form_field: prismic.GroupField<Simplify<BillingFormSliceDefaultPrimaryFormFieldItem>>;
+
+  /**
+   * Submit button label field in *BillingForm → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: billing_form.default.primary.submit_button_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  submit_button_label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for BillingForm Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BillingFormSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<BillingFormSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BillingForm*
+ */
+type BillingFormSliceVariation = BillingFormSliceDefault;
+
+/**
+ * BillingForm Shared Slice
+ *
+ * - **API ID**: `billing_form`
+ * - **Description**: BillingForm
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BillingFormSlice = prismic.SharedSlice<'billing_form', BillingFormSliceVariation>;
 
 /**
  * Primary content in *BlockTextCentered → Default → Primary*
@@ -1621,6 +1867,26 @@ export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
    * - **Documentation**: https://prismic.io/docs/field#number
    */
   product_id: prismic.NumberField;
+
+  /**
+   * Product min quantity field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_min_quantity
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  product_min_quantity: prismic.NumberField;
+
+  /**
+   * Product max quantity field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].product_max_quantity
+   * - **Documentation**: https://prismic.io/docs/field#number
+   */
+  product_max_quantity: prismic.NumberField;
 }
 
 /**
@@ -3557,6 +3823,9 @@ declare module '@prismicio/client' {
       CartDocument,
       CartDocumentData,
       CartDocumentDataSlicesSlice,
+      CheckoutDocument,
+      CheckoutDocumentData,
+      CheckoutDocumentDataSlicesSlice,
       ChefDocument,
       ChefDocumentData,
       ChefDocumentDataSlicesSlice,
@@ -3608,6 +3877,11 @@ declare module '@prismicio/client' {
       BannerWithTextSliceDefaultPrimary,
       BannerWithTextSliceVariation,
       BannerWithTextSliceDefault,
+      BillingFormSlice,
+      BillingFormSliceDefaultPrimaryFormFieldItem,
+      BillingFormSliceDefaultPrimary,
+      BillingFormSliceVariation,
+      BillingFormSliceDefault,
       BlockTextCenteredSlice,
       BlockTextCenteredSliceDefaultPrimary,
       BlockTextCenteredSliceVariation,

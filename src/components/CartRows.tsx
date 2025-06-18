@@ -2,7 +2,7 @@
 
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
-const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
+const DropDownRow = ({ handleRemove, handleUpdate, i, lang }: any) => {
   return (
     <div key={i.id} className="flex items-stretch gap-4 border-b border-[#707070] pb-4">
       <img src={i.image} alt={i.name} className="aspect-square size-[74px] object-cover" />
@@ -26,17 +26,21 @@ const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
   );
 };
 
-const CartRow = ({ handleRemove, handleUpdate, i, total }: any) => {
+const CartRow = ({ handleRemove, handleUpdate, i, total, isCheckoutPage, lang }: any) => {
   const { 'Date de retrait': pickUpDate, 'Créneau horaire': timeSlot } = useCartCustomFields([
     'Date de retrait',
     'Créneau horaire',
   ]);
 
   const canCheckout = Boolean(pickUpDate && timeSlot);
-
   return (
-    <div key={i.id} className="bg-[#F7F4EF] px-6 font-avenir tracking-widest md:px-20 xl:px-32">
-      <div className="relative flex items-stretch gap-2 bg-white p-2 md:gap-4 md:p-6">
+    <div
+      key={i.id}
+      className={`bg-[#F7F4EF] font-avenir tracking-widest ${isCheckoutPage ? '' : 'px-6 md:px-20 xl:px-32'}`}
+    >
+      <div
+        className={`relative flex items-stretch gap-2 bg-white p-2 md:gap-4 ${isCheckoutPage ? 'md:p-4' : 'md:p-6'}`}
+      >
         <button
           onClick={() => handleRemove(i.uniqueId)}
           className="absolute right-1 top-1 text-sm font-bold uppercase text-[#707070] md:right-4 md:top-4"
@@ -46,7 +50,9 @@ const CartRow = ({ handleRemove, handleUpdate, i, total }: any) => {
         <div className="w-[100px] overflow-hidden rounded md:aspect-[4/3] md:w-[178px]">
           <img src={i.image} alt={i.name} className="size-full object-cover" />
         </div>
-        <div className="flex w-full flex-col px-2 md:flex-row md:items-center md:justify-between md:space-x-8 md:px-6">
+        <div
+          className={`flex w-full flex-col px-2 md:flex-row md:items-center md:justify-between ${isCheckoutPage ? '' : 'md:space-x-8 md:px-6'}`}
+        >
           <p className="pb-2 text-sm font-bold uppercase text-black md:pb-0">{i.name}</p>
           <div className="flex flex-col space-y-2 text-[#707070] md:flex-row md:items-center md:space-x-8 md:space-y-0">
             <div className="flex w-fit items-center gap-2 rounded-full border border-[#707070] px-2 font-bold md:gap-5 md:px-4 md:py-1">
@@ -69,22 +75,24 @@ const CartRow = ({ handleRemove, handleUpdate, i, total }: any) => {
         <div>TOTAL</div>
         <div>{total.toFixed(2).replace('.', ',')} €</div>
       </div>
-      <div className="flex w-full justify-center">
-        <a
-          href={canCheckout ? '#/checkout' : undefined}
-          onClick={(e) => {
-            !canCheckout && e.preventDefault();
-          }}
-          className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
-        >
-          Commander
-        </a>
-      </div>
+      {!isCheckoutPage ? (
+        <div className="flex w-full justify-center">
+          <a
+            href={canCheckout ? '#/checkout' : undefined}
+            onClick={(e) => {
+              !canCheckout && e.preventDefault();
+            }}
+            className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
+          >
+            {!lang?.includes('fr') ? 'Order' : 'Commander'}
+          </a>
+        </div>
+      ) : null}
     </div>
   );
 };
 
-export default function CartRows({ isCartPage = false }) {
+export default function CartRows({ isCartPage = false, isCheckoutPage = false, lang = 'fr' }) {
   const { items, total } = useCartItems();
 
   const handleUpdate = async (uniqueId: string, quantity: number) => {
@@ -105,17 +113,25 @@ export default function CartRows({ isCartPage = false }) {
     }
   };
 
-  if (items.length === 0 && !isCartPage) {
-    return <p className="text-sm">Votre panier est vide</p>;
+  if (items.length === 0 && !isCartPage && !isCheckoutPage) {
+    return <p className="text-sm">{!lang?.includes('fr') ? 'Your cart is empty' : 'Votre panier est vide'}</p>;
   }
 
   return (
-    <div className="w-full space-y-4">
+    <div className={`${isCheckoutPage ? 'pt-6' : ''} w-full space-y-4`}>
       {items.map((i) =>
-        !isCartPage ? (
-          <DropDownRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
+        !isCartPage && !isCheckoutPage ? (
+          <DropDownRow lang={lang} key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
         ) : (
-          <CartRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} total={total} />
+          <CartRow
+            key={i.uniqueId}
+            lang={lang}
+            handleRemove={handleRemove}
+            handleUpdate={handleUpdate}
+            i={i}
+            total={total}
+            isCheckoutPage={isCheckoutPage}
+          />
         )
       )}
     </div>

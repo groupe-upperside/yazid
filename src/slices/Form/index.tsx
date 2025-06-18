@@ -101,8 +101,12 @@ const Form = ({ slice }: FormProps): JSX.Element => {
               className={`mb-5 w-full ${item.field_type === 'checkbox' ? 'flex flex-row-reverse gap-x-4' : 'block'}`}
             >
               {isFilled.link(item.link_to_pdf) && (
-                <PrismicNextLink field={item.link_to_pdf} className="text-xs text-[#707070] underline">
-                  <label className="peer block w-full appearance-none bg-transparent p-0 text-sm text-[#999999] focus:outline-none focus:ring-0">
+                <PrismicNextLink
+                  target="_blank"
+                  field={item.link_to_pdf}
+                  className="text-xs flex w-full cursor-pointer flex-row-reverse justify-end gap-x-4 text-[#707070] underline"
+                >
+                  <label className="peer block appearance-none bg-transparent p-0 text-sm text-[#999999] focus:outline-none focus:ring-0">
                     {item.label}
                     {item.required && <sup className="pl-0.5 font-bold text-red-500">*</sup>}
                   </label>

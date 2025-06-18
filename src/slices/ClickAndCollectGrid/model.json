@@ -76,6 +76,20 @@
                   "label": "Product id",
                   "placeholder": ""
                 }
+              },
+              "product_min_quantity": {
+                "type": "Number",
+                "config": {
+                  "label": "Product min quantity",
+                  "placeholder": ""
+                }
+              },
+              "product_max_quantity": {
+                "type": "Number",
+                "config": {
+                  "label": "Product max quantity",
+                  "placeholder": ""
+                }
               }
             }
           }

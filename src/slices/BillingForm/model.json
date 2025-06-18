@@ -1,0 +1,87 @@
+{
+  "id": "billing_form",
+  "type": "SharedSlice",
+  "name": "BillingForm",
+  "description": "BillingForm",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title_bold": {
+          "type": "Text",
+          "config": {
+            "label": "Title bold",
+            "placeholder": ""
+          }
+        },
+        "form_field": {
+          "type": "Group",
+          "config": {
+            "label": "Form field",
+            "repeat": true,
+            "fields": {
+              "label": {
+                "type": "Text",
+                "config": {
+                  "label": "Label",
+                  "placeholder": ""
+                }
+              },
+              "field_type": {
+                "type": "Select",
+                "config": {
+                  "label": "Field type",
+                  "placeholder": "",
+                  "options": [
+                    "text",
+                    "long text",
+                    "email",
+                    "phone",
+                    "checkbox"
+                  ]
+                }
+              },
+              "link_to_pdf": {
+                "type": "Link",
+                "config": {
+                  "label": "Link to pdf",
+                  "placeholder": "",
+                  "select": "media"
+                }
+              },
+              "required": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Required",
+                  "default_value": false,
+                  "placeholder_true": "true",
+                  "placeholder_false": "false"
+                }
+              },
+              "field_name": {
+                "type": "Text",
+                "config": {
+                  "label": "Field name",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "submit_button_label": {
+          "type": "Text",
+          "config": {
+            "label": "Submit button label",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

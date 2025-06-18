@@ -6,6 +6,7 @@ export const components = {
   banner: dynamic(() => import('./Banner')),
   banner_with_calendar: dynamic(() => import('./BannerWithCalendar')),
   banner_with_text: dynamic(() => import('./BannerWithText')),
+  billing_form: dynamic(() => import('./BillingForm')),
   block_text_centered: dynamic(() => import('./BlockTextCentered')),
   click_and_collect_grid: dynamic(() => import('./ClickAndCollectGrid')),
   customer_logos: dynamic(() => import('./CustomerLogos')),
