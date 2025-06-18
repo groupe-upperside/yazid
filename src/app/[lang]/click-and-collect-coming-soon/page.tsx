@@ -7,7 +7,7 @@ import { components } from '@/slices';
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
   const client = createClient();
-  const page = await client.getSingle('at_home', {
+  const page = await client.getByUID('coming_soon', 'click_and_collect', {
     lang,
   });
 
@@ -20,13 +20,13 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: s
 export default async function Index({ params: { lang } }: { params: { lang: string } }) {
   // The client queries content from the Prismic API
   const client = createClient();
-  const page = await client.getSingle('at_home', {
+  const home = await client.getByUID('coming_soon', 'click_and_collect', {
     lang,
   });
 
   return (
-    <Layout doc={page} lang={lang}>
-      <SliceZone slices={page.data.slices} components={components} />
+    <Layout doc={home} lang={lang}>
+      <SliceZone slices={home.data.slices} components={components} />
     </Layout>
   );
 }
