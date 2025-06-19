@@ -3,7 +3,7 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
 import type { ImageField, RichTextField } from '@prismicio/types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 import { useCartItems } from '@/hooks/useSnipcart';
@@ -18,11 +18,13 @@ type Props = {
     product_description: RichTextField;
     product_allergens: KeyTextField;
     product_id: NumberField;
+    product_min_quantity: NumberField;
   } | null;
 };
 
 export default function ProductModal({ open, onClose, product }: Props) {
-  const [quantity, setQuantity] = useState(1);
+  const minQty = useMemo(() => (product?.product_min_quantity as number | undefined) ?? 1, [product]);
+  const [quantity, setQuantity] = useState(minQty);
   const { items } = useCartItems();
 
   useEffect(() => {
@@ -34,11 +36,11 @@ export default function ProductModal({ open, onClose, product }: Props) {
 
   useEffect(() => {
     if (open && product) {
-      const id = product?.product_id?.toString();
+      const id = product.product_id?.toString();
       const existing = items.find((i) => i.id === id);
-      setQuantity(existing?.quantity ?? 1);
+      setQuantity(Math.max(minQty, existing?.quantity ?? minQty));
     }
-  }, [open, product, items]);
+  }, [open, product, items, minQty]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -50,12 +52,12 @@ export default function ProductModal({ open, onClose, product }: Props) {
   if (!open || !product) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-scroll bg-gray-100/40"
-      onClick={onClose}
-    >
-      <div className="relative mx-auto flex  w-4/5 bg-white lg:w-3/4" onClick={(e) => e.stopPropagation()}>
-        <div className="relative hidden lg:block">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100/80" onClick={onClose}>
+      <div
+        className="relative mx-auto flex max-h-[calc(100vh-4rem)] w-4/5 overflow-y-auto bg-white xl:w-3/4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative hidden max-w-[45%] xl:block">
           <PrismicNextImage field={product.image} className="size-full object-cover" />
         </div>
 
@@ -104,7 +106,11 @@ export default function ProductModal({ open, onClose, product }: Props) {
 
           <div className="mt-auto flex flex-col items-center justify-center gap-4 p-6 md:p-10">
             <div className="flex items-center gap-6 font-bold">
-              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))} className="text-2xl">
+              <button
+                disabled={quantity === minQty}
+                onClick={() => setQuantity((q) => Math.max(minQty, q - 1))}
+                className="text-2xl"
+              >
                 -
               </button>
               <span className="text-2xl text-[#111827]">{quantity}</span>
@@ -121,6 +127,7 @@ export default function ProductModal({ open, onClose, product }: Props) {
               data-item-quantity={quantity}
               data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
               data-item-image={product.image.url}
+              data-item-min-quantity={product.product_min_quantity}
             >
               Ajouter au panier
             </button>

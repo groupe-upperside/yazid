@@ -4999,3 +4999,14 @@ input.picker[type="date"]::-webkit-calendar-picker-indicator {
 .snipcart-sidecart--opened::-webkit-scrollbar {
     width: 0
 }
+
+.react-datepicker__day--selected{
+    border-radius: 100% !important;
+    background-color: black !important;
+    color: #fff;
+}
+
+.react-datepicker__header{
+    background-color: white !important;
+    border: none !important;
+}

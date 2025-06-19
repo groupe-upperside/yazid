@@ -3,6 +3,8 @@
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
 const DropDownRow = ({ handleRemove, handleUpdate, i, lang }: any) => {
+  const minQty = i.minQuantity ?? 1;
+
   return (
     <div key={i.id} className="flex items-stretch gap-4 border-b border-[#707070] pb-4">
       <img src={i.image} alt={i.name} className="aspect-square size-[74px] object-cover" />
@@ -15,7 +17,12 @@ const DropDownRow = ({ handleRemove, handleUpdate, i, lang }: any) => {
         </div>
         <div className="flex w-full items-center justify-between space-x-8">
           <div className="flex items-center gap-2 rounded-full border border-[#707070] px-4 text-sm font-bold text-[#707070]">
-            <button onClick={() => handleUpdate(i.uniqueId, Math.max(1, i.quantity - 1))}>-</button>
+            <button
+              disabled={i.quantity === minQty}
+              onClick={() => handleUpdate(i.uniqueId, Math.max(minQty, i.quantity - 1))}
+            >
+              -
+            </button>
             <span>{i.quantity}</span>
             <button onClick={() => handleUpdate(i.uniqueId, i.quantity + 1)}>+</button>
           </div>
@@ -27,12 +34,8 @@ const DropDownRow = ({ handleRemove, handleUpdate, i, lang }: any) => {
 };
 
 const CartRow = ({ handleRemove, handleUpdate, i, total, isCheckoutPage, lang }: any) => {
-  const { 'Date de retrait': pickUpDate, 'Créneau horaire': timeSlot } = useCartCustomFields([
-    'Date de retrait',
-    'Créneau horaire',
-  ]);
+  const minQty = i.minQuantity ?? 1;
 
-  const canCheckout = Boolean(pickUpDate && timeSlot);
   return (
     <div
       key={i.id}
@@ -58,7 +61,8 @@ const CartRow = ({ handleRemove, handleUpdate, i, total, isCheckoutPage, lang }:
             <div className="flex w-fit items-center gap-2 rounded-full border border-[#707070] px-2 font-bold md:gap-5 md:px-4 md:py-1">
               <button
                 className="text-sm md:text-base"
-                onClick={() => handleUpdate(i.uniqueId, Math.max(1, i.quantity - 1))}
+                disabled={i.quantity === minQty}
+                onClick={() => handleUpdate(i.uniqueId, Math.max(minQty, i.quantity - 1))}
               >
                 -
               </button>
@@ -71,30 +75,19 @@ const CartRow = ({ handleRemove, handleUpdate, i, total, isCheckoutPage, lang }:
           </div>
         </div>
       </div>
-      <div className="flex justify-between py-6 text-base font-bold uppercase">
-        <div>TOTAL</div>
-        <div>{total.toFixed(2).replace('.', ',')} €</div>
-      </div>
-      {!isCheckoutPage ? (
-        <div className="flex w-full justify-center">
-          <a
-            href={canCheckout ? '#/checkout' : undefined}
-            onClick={(e) => {
-              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-              !canCheckout && e.preventDefault();
-            }}
-            className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
-          >
-            {!lang?.includes('fr') ? 'Order' : 'Commander'}
-          </a>
-        </div>
-      ) : null}
     </div>
   );
 };
 
 export default function CartRows({ isCartPage = false, isCheckoutPage = false, lang = 'fr' }) {
   const { items, total } = useCartItems();
+
+  const { 'Date de retrait': pickUpDate, 'Créneau horaire': timeSlot } = useCartCustomFields([
+    'Date de retrait',
+    'Créneau horaire',
+  ]);
+
+  const canCheckout = Boolean(pickUpDate && timeSlot);
 
   const handleUpdate = async (uniqueId: string, quantity: number) => {
     try {
@@ -119,7 +112,7 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
   }
 
   return (
-    <div className={`${isCheckoutPage ? 'pt-6' : ''} w-full space-y-4`}>
+    <div className={`${isCheckoutPage ? 'pt-6' : ''} w-full space-y-4 ${isCartPage ? 'bg-[#F7F4EF]' : ''} `}>
       {items.map((i) =>
         !isCartPage && !isCheckoutPage ? (
           <DropDownRow lang={lang} key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
@@ -135,6 +128,26 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
           />
         )
       )}
+      {isCartPage ? (
+        <div className={`bg-[#F7F4EF] font-avenir tracking-widest ${isCheckoutPage ? '' : 'px-6 md:px-20 xl:px-32'}`}>
+          <div className="flex justify-between py-6 text-base font-bold uppercase">
+            <div>TOTAL</div>
+            <div>{total.toFixed(2).replace('.', ',')} €</div>
+          </div>
+          <div className="flex w-full justify-center">
+            <a
+              href={canCheckout ? '#/checkout' : undefined}
+              onClick={(e) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                !canCheckout && e.preventDefault();
+              }}
+              className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
+            >
+              {!lang?.includes('fr') ? 'Order' : 'Commander'}
+            </a>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -3,7 +3,8 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
 import type { KeyTextField } from '@prismicio/client';
-import fr from 'date-fns/locale/fr';
+import { format, isValid, parse } from 'date-fns';
+import { fr } from 'date-fns/locale/fr';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { FaRegCalendar } from 'react-icons/fa';
@@ -34,12 +35,18 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
     return m;
   }, [now]);
 
-  const selected = date ? new Date(date) : null;
+  // @ts-ignore
+  const selected = (() => {
+    if (!date) return null;
+    // @ts-ignore
+    const d = parse(date, 'dd-MM-yyyy', new Date(), { locale: fr });
+    return isValid(d) ? d : null;
+  })();
 
   const handleSelect = async (d: Date | null) => {
     if (!d) return;
-    const iso = d.toISOString().slice(0, 10);
-    setDate(iso);
+    const frFmt = format(d, 'dd-MM-yyyy');
+    setDate(frFmt);
 
     try {
       // @ts-ignore
@@ -49,7 +56,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
 
       // @ts-ignore
       await window.Snipcart.api.cart.update({
-        customFields: [...others, { name: 'Date de retrait', value: iso }],
+        customFields: [...others, { name: 'Date de retrait', value: frFmt }],
       });
     } catch (err) {
       console.error('Failed to update customFields:', err);

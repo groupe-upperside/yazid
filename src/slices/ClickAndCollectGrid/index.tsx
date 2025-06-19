@@ -19,6 +19,7 @@ type Product = {
   product_description: RichTextField;
   product_allergens: KeyTextField;
   product_id: NumberField;
+  product_min_quantity: NumberField;
 };
 
 /**
