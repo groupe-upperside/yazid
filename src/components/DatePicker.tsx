@@ -36,18 +36,16 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
   }, [now]);
 
   // @ts-ignore
-  const selected = (() => {
-    if (!date) return null;
-    // @ts-ignore
-    const d = parse(date, 'dd-MM-yyyy', new Date(), { locale: fr });
+  const selected = useMemo(() => {
+    if (!savedDate) return null;
+    const d = parse(savedDate, 'dd-MM-yyyy', new Date(), { locale: fr });
     return isValid(d) ? d : null;
-  })();
+  }, [savedDate]);
 
   const handleSelect = async (d: Date | null) => {
     if (!d) return;
     const frFmt = format(d, 'dd-MM-yyyy');
     setDate(frFmt);
-
     try {
       // @ts-ignore
       const state = window.Snipcart.store.getState();

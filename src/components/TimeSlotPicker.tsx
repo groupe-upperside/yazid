@@ -11,16 +11,11 @@ type Props = {
 };
 
 export default function TimeSlotPicker({ placeholder }: Props) {
-  const { 'Créneau horaire': savedSlot } = useCartCustomFields(['Créneau horaire']);
-  const [slot, setSlot] = useState<string>('');
+  const { 'Créneau horaire': slot } = useCartCustomFields(['Créneau horaire']);
   const [open, setOpen] = useState<boolean>(false);
   const pickerRef = useRef<HTMLDivElement>(null);
 
   const slots = ['10:00 à 12:00', '12:00 à 15:00', '15:00 à 17:00'];
-
-  useEffect(() => {
-    if (savedSlot) setSlot(savedSlot);
-  }, [savedSlot]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -33,8 +28,6 @@ export default function TimeSlotPicker({ placeholder }: Props) {
   }, []);
 
   const handleSelect = async (slotLabel: string) => {
-    setSlot(slotLabel);
-
     const updateCart = async () => {
       try {
         // @ts-ignore

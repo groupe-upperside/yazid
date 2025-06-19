@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
-const DropDownRow = ({ handleRemove, handleUpdate, i, lang }: any) => {
+const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
   const minQty = i.minQuantity ?? 1;
 
   return (
@@ -33,7 +35,7 @@ const DropDownRow = ({ handleRemove, handleUpdate, i, lang }: any) => {
   );
 };
 
-const CartRow = ({ handleRemove, handleUpdate, i, total, isCheckoutPage, lang }: any) => {
+const CartRow = ({ handleRemove, handleUpdate, i, isCheckoutPage }: any) => {
   const minQty = i.minQuantity ?? 1;
 
   return (
@@ -87,7 +89,12 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
     'Créneau horaire',
   ]);
 
-  const canCheckout = Boolean(pickUpDate && timeSlot);
+  const [canCheckout, setCanCheckout] = useState(false);
+
+  useEffect(() => {
+    const ready = Boolean(pickUpDate && timeSlot);
+    setCanCheckout(ready);
+  }, [pickUpDate, timeSlot]);
 
   const handleUpdate = async (uniqueId: string, quantity: number) => {
     try {
@@ -115,20 +122,18 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
     <div className={`${isCheckoutPage ? 'pt-6' : ''} w-full space-y-4 ${isCartPage ? 'bg-[#F7F4EF]' : ''} `}>
       {items.map((i) =>
         !isCartPage && !isCheckoutPage ? (
-          <DropDownRow lang={lang} key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
+          <DropDownRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
         ) : (
           <CartRow
             key={i.uniqueId}
-            lang={lang}
             handleRemove={handleRemove}
             handleUpdate={handleUpdate}
             i={i}
-            total={total}
             isCheckoutPage={isCheckoutPage}
           />
         )
       )}
-      {isCartPage ? (
+      {isCartPage && items.length > 0 ? (
         <div className={`bg-[#F7F4EF] font-avenir tracking-widest ${isCheckoutPage ? '' : 'px-6 md:px-20 xl:px-32'}`}>
           <div className="flex justify-between py-6 text-base font-bold uppercase">
             <div>TOTAL</div>

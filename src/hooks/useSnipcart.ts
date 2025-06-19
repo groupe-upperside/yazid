@@ -80,33 +80,42 @@ export function useCartItems(): CartItemsHook {
  * @returns object mapping each fieldName to its current value or ''
  */
 export function useCartCustomFields(fieldNames: string[]): CartFieldsHook {
-  const initial: CartFieldsHook = Object.fromEntries(fieldNames.map((name) => [name, '']));
+  const initial = Object.fromEntries(fieldNames.map((n) => [n, '']));
   const [fields, setFields] = useState<CartFieldsHook>(initial);
 
   useEffect(() => {
-    function sync() {
-      if (!window.Snipcart?.store) return;
-      const state = window.Snipcart.store.getState();
-      const cf: CustomField[] = Array.isArray(state.cart.customFields) ? state.cart.customFields : [];
-      const updated = Object.fromEntries(
-        fieldNames.map((name) => {
-          const found = cf.find((f) => f.name === name);
-          return [name, found?.value ?? ''];
-        })
+    if (typeof window === 'undefined') return;
+
+    // Pull the latest values from the Redux store
+    const sync = () => {
+      const state = window.Snipcart.store.getState(); // ← live state
+      const cf = Array.isArray(state.cart.customFields) ? state.cart.customFields : [];
+      setFields(
+        Object.fromEntries(
+          fieldNames.map((name) => [name, cf.find((f: { name: string }) => f.name === name)?.value ?? ''])
+        )
       );
-      setFields(updated);
+    };
+
+    // --- subscribe once Snipcart is ready ---
+    const start = () => {
+      sync(); // initial load
+      return window.Snipcart.store.subscribe(sync); // ← stay in sync 🆕
+    };
+
+    let unsubscribe = () => {};
+    if (window.Snipcart?.store) {
+      unsubscribe = start();
+    } else {
+      // eslint-disable-next-line no-return-assign
+      const onReady = () => (unsubscribe = start());
+      document.addEventListener('snipcart.ready', onReady);
+      // eslint-disable-next-line consistent-return
+      return () => document.removeEventListener('snipcart.ready', onReady);
     }
 
-    if (typeof window !== 'undefined') {
-      if (window.Snipcart?.store) {
-        sync();
-      } else {
-        document.addEventListener('snipcart.ready', sync);
-      }
-    }
-    return () => {
-      document.removeEventListener('snipcart.ready', sync);
-    };
+    // eslint-disable-next-line consistent-return
+    return unsubscribe; // cleanup
   }, [JSON.stringify(fieldNames)]);
 
   return fields;
