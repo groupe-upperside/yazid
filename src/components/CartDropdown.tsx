@@ -48,7 +48,7 @@ export default function CartDropdown({ lang, meta }: { lang: string; meta: Conte
           <div className="relative space-y-6 overflow-hidden bg-white p-8 shadow-lg">
             <div className="text-center text-base font-bold uppercase">{meta.data.title_bold}</div>
 
-            <CartRows />
+            <CartRows lang={lang} />
 
             {items.length > 0 ? (
               <>
