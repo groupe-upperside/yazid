@@ -15,7 +15,7 @@ export default function TimeSlotPicker({ placeholder }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const pickerRef = useRef<HTMLDivElement>(null);
 
-  const slots = ['10:00 à 12:00', '12:00 à 15:00', '15:00 à 17:00'];
+  const slots = ['10:00 à 12:00', '12:00 à 15:00', '15:00 à 19:00'];
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {

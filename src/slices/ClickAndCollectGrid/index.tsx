@@ -4,12 +4,14 @@ import type { Content, KeyTextField, NumberField } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import type { SliceComponentProps } from '@prismicio/react';
 import type { ImageField, RichTextField } from '@prismicio/types';
+import { usePathname } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { FaShoppingBasket } from 'react-icons/fa';
 
 import Divider from '@/components/Divider';
 import ProductModal from '@/components/ProductModal';
 import SectionTitle from '@/components/SectionTitle';
+import { useStock } from '@/hooks/useStock';
 import { getGridColsClass } from '@/utils/getGridColsClass';
 
 type Product = {
@@ -20,6 +22,61 @@ type Product = {
   product_allergens: KeyTextField;
   product_id: NumberField;
   product_min_quantity: NumberField;
+};
+
+const GridComponent = ({
+  item,
+  onProductClick,
+  lang,
+}: {
+  lang: string;
+  item: Product;
+  onProductClick: (p: Product) => void;
+}) => {
+  const { data } = useStock(item.product_id);
+  const outOfStock = data?.stock !== undefined && data.stock <= 0 && !data.allowOutOfStockPurchases;
+  const overlayVisibility = outOfStock ? 'opacity-100 bg-black/65' : 'opacity-0 group-hover:opacity-100 bg-black/75';
+
+  return (
+    <div onClick={outOfStock ? undefined : () => onProductClick(item)}>
+      <div className={`group relative mb-3 aspect-square w-full ${outOfStock ? '' : 'cursor-pointer'}`}>
+        <PrismicNextImage className="aspect-square w-full object-cover" field={item.image} />
+        <div
+          className={`absolute inset-0 flex flex-col items-center justify-center  opacity-0 transition-opacity ${overlayVisibility}`}
+        >
+          {outOfStock ? (
+            <p className="pb-0.5 text-sm font-bold uppercase tracking-widest text-white md:text-base">
+              {lang === 'fr' ? 'Épuisé' : 'Out of stock'}
+            </p>
+          ) : (
+            <>
+              <span className="pb-0.5 text-sm font-bold uppercase tracking-widest text-white md:text-base">
+                {item.product_name}
+              </span>
+              <span className="text-sm font-medium tracking-widest text-white md:text-base">
+                {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
+              </span>
+              <div className="mt-4 flex size-10 items-center justify-center rounded-full bg-white">
+                <FaShoppingBasket className="size-6" />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      <p className="pb-0.5 text-sm font-bold uppercase tracking-widest md:text-base">{item.product_name}</p>
+      <p className="text-sm font-medium tracking-widest text-[#9A9A9A] md:text-base">
+        {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
+      </p>
+      <button
+        className="snipcart-add-item sr-only"
+        data-item-id={item.product_id}
+        data-item-name={item.product_name}
+        data-item-price={(item.product_price as number).toFixed(2)}
+        data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
+        data-item-image={item.image.url}
+      ></button>
+    </div>
+  );
 };
 
 /**
@@ -37,6 +94,10 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
     ? `lg:grid-cols-${slice.primary.number_per_row - 1}`
     : 'lg:grid-cols-4';
 
+  const pathname = usePathname();
+  const localeSegment = pathname.split('/')[1] ?? 'fr';
+  const lang = localeSegment.startsWith('en') ? 'en' : 'fr';
+
   const onProductClick = (item: Product) => {
     setSelectedProduct(item);
     setModalOpen(true);
@@ -46,34 +107,7 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
     <>
       <div className={`grid grid-cols-1 gap-8 ${lgGridCols} ${gridColsClass}`}>
         {products.map((item) => (
-          <div key={item.product_id} onClick={() => onProductClick(item)}>
-            <div className="group relative mb-3 aspect-square w-full cursor-pointer ">
-              <PrismicNextImage className="aspect-square w-full object-cover" field={item.image} />
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/75 opacity-0 transition-opacity group-hover:opacity-100">
-                <span className="pb-0.5 text-sm font-bold uppercase tracking-widest text-white md:text-base">
-                  {item.product_name}
-                </span>
-                <span className="text-sm font-medium tracking-widest text-white md:text-base">
-                  {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
-                </span>
-                <div className="mt-4 flex size-10 items-center justify-center rounded-full bg-white">
-                  <FaShoppingBasket className="size-6" />
-                </div>
-              </div>
-            </div>
-            <p className="pb-0.5 text-sm font-bold uppercase tracking-widest md:text-base">{item.product_name}</p>
-            <p className="text-sm font-medium tracking-widest text-[#9A9A9A] md:text-base">
-              {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
-            </p>
-            <button
-              className="snipcart-add-item sr-only"
-              data-item-id={item.product_id}
-              data-item-name={item.product_name}
-              data-item-price={(item.product_price as number).toFixed(2)}
-              data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
-              data-item-image={item.image.url}
-            ></button>
-          </div>
+          <GridComponent key={item.product_id} item={item} onProductClick={onProductClick} lang={lang} />
         ))}
       </div>
       <ProductModal open={modalOpen} onClose={() => setModalOpen(false)} product={selectedProduct} />

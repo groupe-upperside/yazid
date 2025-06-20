@@ -69,10 +69,6 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
         selected={selected}
         onChange={handleSelect}
         minDate={minDate}
-        filterDate={(d: Date) => {
-          const day = d.getDay();
-          return day >= 2 && day <= 6;
-        }}
         startDate={now}
         locale="fr"
         dateFormat="dd/MM/yyyy"

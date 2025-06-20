@@ -6,6 +6,7 @@ import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
 const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
   const minQty = i.minQuantity ?? 1;
+  const maxQty = i.maxQuantity ?? 1000;
 
   return (
     <div key={i.id} className="flex items-stretch gap-4 border-b border-[#707070] pb-4">
@@ -26,7 +27,12 @@ const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
               -
             </button>
             <span>{i.quantity}</span>
-            <button onClick={() => handleUpdate(i.uniqueId, i.quantity + 1)}>+</button>
+            <button
+              disabled={i.quantity >= maxQty}
+              onClick={() => handleUpdate(i.uniqueId, Math.min(maxQty, i.quantity + 1))}
+            >
+              +
+            </button>
           </div>
           <p className="text-sm text-[#707070]">{(i.quantity * i.price).toFixed(2).replace('.', ',')} €</p>
         </div>
@@ -37,6 +43,7 @@ const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
 
 const CartRow = ({ handleRemove, handleUpdate, i, isCheckoutPage }: any) => {
   const minQty = i.minQuantity ?? 1;
+  const maxQty = i.maxQuantity ?? 1000;
 
   return (
     <div
@@ -69,7 +76,11 @@ const CartRow = ({ handleRemove, handleUpdate, i, isCheckoutPage }: any) => {
                 -
               </button>
               <span className="text-sm">{i.quantity}</span>
-              <button className="text-sm md:text-base" onClick={() => handleUpdate(i.uniqueId, i.quantity + 1)}>
+              <button
+                className="text-sm md:text-base"
+                disabled={i.quantity >= maxQty}
+                onClick={() => handleUpdate(i.uniqueId, Math.min(maxQty, i.quantity + 1))}
+              >
                 +
               </button>
             </div>

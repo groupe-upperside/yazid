@@ -1,5 +1,3 @@
-// hooks/useSnipcart.ts
-
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -11,11 +9,6 @@ interface SnipCartItem {
   price: number;
   quantity: number;
   image: string;
-}
-
-interface CustomField {
-  name: string;
-  value: string;
 }
 
 type CartItemsHook = {

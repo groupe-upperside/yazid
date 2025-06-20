@@ -3,10 +3,12 @@ import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
 import type { ImageField, RichTextField } from '@prismicio/types';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useMemo, useState } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 import { useCartItems } from '@/hooks/useSnipcart';
+import { useStock } from '@/hooks/useStock';
 
 type Props = {
   open: boolean;
@@ -23,9 +25,19 @@ type Props = {
 };
 
 export default function ProductModal({ open, onClose, product }: Props) {
+  const id = product?.product_id ?? 1;
+  const { data } = useStock(id);
+  const outOfStock = data?.stock !== undefined && data.stock <= 0 && !data.allowOutOfStockPurchases;
+
   const minQty = useMemo(() => (product?.product_min_quantity as number | undefined) ?? 1, [product]);
+  const maxQty = data && !data.allowOutOfStockPurchases && Number.isFinite(data.stock) ? data.stock : Infinity;
+
   const [quantity, setQuantity] = useState(minQty);
   const { items } = useCartItems();
+
+  const pathname = usePathname();
+  const localeSegment = pathname.split('/')[1] ?? 'fr';
+  const lang = localeSegment.startsWith('en') ? 'en' : 'fr';
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -36,8 +48,8 @@ export default function ProductModal({ open, onClose, product }: Props) {
 
   useEffect(() => {
     if (open && product) {
-      const id = product.product_id?.toString();
-      const existing = items.find((i) => i.id === id);
+      const productId = product.product_id?.toString();
+      const existing = items.find((i) => i.id === productId);
       setQuantity(Math.max(minQty, existing?.quantity ?? minQty));
     }
   }, [open, product, items, minQty]);
@@ -54,14 +66,14 @@ export default function ProductModal({ open, onClose, product }: Props) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-100/80" onClick={onClose}>
       <div
-        className="relative mx-auto flex max-h-[calc(100vh-4rem)] w-4/5 overflow-y-auto bg-white xl:w-3/4"
+        className="relative mx-auto flex max-h-[calc(100vh-4rem)] w-11/12 bg-white xl:w-4/5"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative hidden max-w-[45%] xl:block">
+        <div className="relative hidden max-w-[45%] lg:flex">
           <PrismicNextImage field={product.image} className="size-full object-cover" />
         </div>
 
-        <div className="relative flex flex-1 flex-col">
+        <div className="relative flex flex-1 flex-col overflow-y-auto">
           <button className="absolute right-4 top-4 text-gray-600 hover:text-gray-800" onClick={onClose}>
             <IoClose size={20} />
           </button>
@@ -114,11 +126,21 @@ export default function ProductModal({ open, onClose, product }: Props) {
                 -
               </button>
               <span className="text-2xl text-[#111827]">{quantity}</span>
-              <button onClick={() => setQuantity((q) => q + 1)} className="text-2xl">
+              <button
+                disabled={quantity >= maxQty}
+                onClick={() => setQuantity((q) => Math.min(maxQty, q + 1))}
+                className="text-2xl"
+              >
                 +
               </button>
             </div>
+            {quantity === maxQty && (
+              <p className="text-justify text-sm tracking-widest text-orange-300 md:text-base">
+                {lang === 'fr' ? 'Quantité maximum atteinte' : 'Max quantity reached'}
+              </p>
+            )}
             <button
+              disabled={outOfStock}
               onClick={(e) => handleClick(e)}
               className="snipcart-add-item mx-auto bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
               data-item-id={product.product_id}
@@ -128,8 +150,9 @@ export default function ProductModal({ open, onClose, product }: Props) {
               data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
               data-item-image={product.image.url}
               data-item-min-quantity={product.product_min_quantity}
+              data-item-max-quantity={maxQty || 1000}
             >
-              Ajouter au panier
+              {lang === 'fr' ? ' Ajouter au panier' : 'Add to cart'}
             </button>
           </div>
         </div>
