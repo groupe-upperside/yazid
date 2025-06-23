@@ -34,7 +34,6 @@ export async function GET(_req: NextRequest, { params }: { params: { id: string 
 
     return NextResponse.json({ stock: product.stock, allowOutOfStockPurchases: product.allowOutOfStockPurchases });
   } catch (err) {
-    console.log('eer', err);
     console.error(err);
     return NextResponse.json({ error: 'Internal error' }, { status: 500 });
   }

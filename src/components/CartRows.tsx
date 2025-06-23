@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import StockGuard from '@/components/StockGuard';
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
 const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
@@ -135,13 +136,16 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
         !isCartPage && !isCheckoutPage ? (
           <DropDownRow key={i.uniqueId} handleRemove={handleRemove} handleUpdate={handleUpdate} i={i} />
         ) : (
-          <CartRow
-            key={i.uniqueId}
-            handleRemove={handleRemove}
-            handleUpdate={handleUpdate}
-            i={i}
-            isCheckoutPage={isCheckoutPage}
-          />
+          <>
+            <CartRow
+              key={i.uniqueId}
+              handleRemove={handleRemove}
+              handleUpdate={handleUpdate}
+              i={i}
+              isCheckoutPage={isCheckoutPage}
+            />
+            <StockGuard cartItem={i} lang={lang} key={`guard-${i.uniqueId}`} />
+          </>
         )
       )}
       {isCartPage && items.length > 0 ? (
@@ -151,16 +155,34 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
             <div>{total.toFixed(2).replace('.', ',')} €</div>
           </div>
           <div className="flex w-full justify-center">
-            <a
-              href={canCheckout ? '#/checkout' : undefined}
-              onClick={(e) => {
-                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                !canCheckout && e.preventDefault();
+            <button
+              type="button"
+              disabled={!canCheckout}
+              onClick={async () => {
+                /* guard-clauses */
+                if (!canCheckout || typeof window === 'undefined') return;
+                const { Snipcart } = window;
+                if (!Snipcart?.api) return;
+
+                const pageLang = lang?.includes('fr') ? 'fr' : 'en';
+                try {
+                  await Snipcart.api.session.setLanguage(pageLang); // ← returns a Promise :contentReference[oaicite:2]{index=2}
+                } catch {
+                  /* ignore – falls back to previous language */
+                }
+
+                /* 2️⃣ open the side-cart */
+                await Snipcart.api.theme.cart.open(); // v3 “open” call :contentReference[oaicite:3]{index=3}
+
+                /* 3️⃣ hop straight to the checkout/payment step */
+                window.location.hash = '/checkout'; // official shortcut :contentReference[oaicite:4]{index=4}
               }}
-              className="mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12"
+              className={`mx-auto mt-8 bg-black px-8 py-4 text-center
+              text-sm font-medium uppercase text-white 2xl:px-12
+              ${canCheckout ? '' : 'cursor-not-allowed opacity-40'}`}
             >
-              {!lang?.includes('fr') ? 'Order' : 'Commander'}
-            </a>
+              {lang?.includes('fr') ? 'Commander' : 'Order'}
+            </button>
           </div>
         </div>
       ) : null}

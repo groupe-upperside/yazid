@@ -1,6 +1,5 @@
 'use client';
 
-import { PrismicNextLink } from '@prismicio/next';
 import { useEffect, useRef, useState } from 'react';
 
 interface LanguageSwitcherProps {
@@ -43,20 +42,36 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const lang2 = selectedLocale.lang.slice(0, 2);
+
+    const apply = () => window.Snipcart?.api?.session.setLanguage?.(lang2);
+
+    if (window.Snipcart?.store?.getState?.().session?.lang) {
+      apply();
+      return;
+    }
+
+    document.addEventListener('snipcart.ready', apply, { once: true });
+    // eslint-disable-next-line consistent-return
+    return () => document.removeEventListener('snipcart.ready', apply);
+  }, [selectedLocale.lang]);
+
   return (
     <div ref={dropdownRef} className="relative inline-block w-full max-w-xs">
       <div className="block w-full cursor-pointer bg-white px-0.5 text-base text-gray-900 focus:outline-none xl:hidden">
         {locales.map((locale, index) => (
-          <PrismicNextLink
+          <a
             key={locale.lang}
             href={locale.url}
-            locale={locale.lang}
             aria-label={`Change language to ${locale.lang_name}`}
             className={`inline-block p-2 text-sm text-gray-900 ${index !== 0 ? 'border-l border-black pl-4' : 'pr-4'}`}
             onClick={() => handleLocaleChange(locale)}
           >
             {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}
-          </PrismicNextLink>
+          </a>
         ))}
       </div>
       <div className="hidden xl:block">
@@ -70,15 +85,14 @@ export const LanguageSwitcher = ({ locales }: LanguageSwitcherProps) => {
           <ul className="absolute left-0 z-10 mt-1 w-auto rounded-md bg-white shadow-lg">
             {locales.map((locale) => (
               <li key={locale.lang} className="cursor-pointer hover:bg-gray-50">
-                <PrismicNextLink
+                <a
                   href={locale.url}
-                  locale={locale.lang}
                   aria-label={`Change language to ${locale.lang_name}`}
                   className="block p-2 text-sm text-gray-900 2xl:text-base"
                   onClick={() => handleLocaleChange(locale)}
                 >
                   {localeLabels[locale.lang as keyof typeof localeLabels] || locale.lang_name}
-                </PrismicNextLink>
+                </a>
               </li>
             ))}
           </ul>

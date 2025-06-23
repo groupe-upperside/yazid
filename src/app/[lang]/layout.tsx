@@ -1,4 +1,4 @@
-import './global.css';
+import '../global.css';
 
 import { PrismicPreview } from '@prismicio/next';
 import type { Metadata } from 'next';
@@ -8,10 +8,10 @@ import { Toaster } from 'react-hot-toast';
 
 import { createClient, repositoryName } from '@/prismicio';
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
   const client = createClient();
 
-  const settings = await client.getSingle('meta');
+  const settings = await client.getSingle('meta', { lang });
 
   return {
     title: settings.data.site_title,
@@ -22,9 +22,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({
+  children,
+  params: { lang },
+}: {
+  children: React.ReactNode;
+  params: { lang: string };
+}) {
   return (
-    <html lang="fr">
+    <html lang={lang}>
       <Head>
         <link rel="preconnect" href="https://app.snipcart.com" />
         <link rel="preconnect" href="https://cdn.snipcart.com" />
