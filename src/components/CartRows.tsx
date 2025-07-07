@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import Discount from '@/components/Discount';
 import StockGuard from '@/components/StockGuard';
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
 
@@ -94,7 +95,16 @@ const CartRow = ({ handleRemove, handleUpdate, i, isCheckoutPage }: any) => {
 };
 
 export default function CartRows({ isCartPage = false, isCheckoutPage = false, lang = 'fr' }) {
-  const { items, total } = useCartItems();
+  const { items, total, discounts, totalSaved } = useCartItems();
+
+  const handleRemoveDiscount = async (code: string) => {
+    if (typeof window === 'undefined' || !window.Snipcart?.api) return;
+    try {
+      await window.Snipcart.api.cart.removeDiscount(code);
+    } catch (err) {
+      console.error('Failed to remove discount:', err);
+    }
+  };
 
   const { 'Date de retrait': pickUpDate, 'Créneau horaire': timeSlot } = useCartCustomFields([
     'Date de retrait',
@@ -145,47 +155,74 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
               isCheckoutPage={isCheckoutPage}
             />
             <StockGuard cartItem={i} lang={lang} key={`guard-${i.uniqueId}`} />
+            <Discount lang={lang} />
           </>
         )
       )}
-      {isCartPage && items.length > 0 ? (
+      {isCartPage && items.length > 0 && (
         <div className={`bg-[#F7F4EF] font-avenir tracking-widest ${isCheckoutPage ? '' : 'px-6 md:px-20 xl:px-32'}`}>
+          {discounts.length > 0 && (
+            <div className="flex justify-between pt-6 text-base font-bold uppercase">
+              <div className="hidden sm:block">{lang.includes('fr') ? 'réductions' : 'discounts'}</div>
+
+              <div className="flex w-full flex-col items-end gap-2">
+                {discounts.map((d) => (
+                  <div key={d.id} className="flex items-baseline justify-end gap-2 text-[#707070] md:gap-4">
+                    <div>{d.code}</div>
+                    <div>-{d.amountSaved.toFixed(2).replace('.', ',')} €</div>
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveDiscount(d.code)}
+                      className="text-sm font-bold uppercase"
+                    >
+                      x
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="flex justify-between py-6 text-base font-bold uppercase">
             <div>TOTAL</div>
-            <div>{total.toFixed(2).replace('.', ',')} €</div>
+            <div className="flex items-baseline gap-2 md:gap-4">
+              {totalSaved > 0 && (
+                <span className="whitespace-nowrap text-[#707070] line-through">
+                  {(total + totalSaved).toFixed(2).replace('.', ',')} €
+                </span>
+              )}
+              <span>{total.toFixed(2).replace('.', ',')} €</span>
+            </div>
           </div>
+
           <div className="flex w-full justify-center">
             <button
               type="button"
               disabled={!canCheckout}
               onClick={async () => {
-                /* guard-clauses */
                 if (!canCheckout || typeof window === 'undefined') return;
                 const { Snipcart } = window;
                 if (!Snipcart?.api) return;
 
-                const pageLang = lang?.includes('fr') ? 'fr' : 'en';
+                const pageLang = lang.includes('fr') ? 'fr' : 'en';
                 try {
-                  await Snipcart.api.session.setLanguage(pageLang); // ← returns a Promise :contentReference[oaicite:2]{index=2}
+                  await Snipcart.api.session.setLanguage(pageLang);
                 } catch {
-                  /* ignore – falls back to previous language */
+                  /* ignore */
                 }
 
-                /* 2️⃣ open the side-cart */
-                await Snipcart.api.theme.cart.open(); // v3 “open” call :contentReference[oaicite:3]{index=3}
-
-                /* 3️⃣ hop straight to the checkout/payment step */
-                window.location.hash = '/checkout'; // official shortcut :contentReference[oaicite:4]{index=4}
+                await Snipcart.api.theme.cart.open();
+                window.location.hash = '/checkout';
               }}
-              className={`mx-auto mt-8 bg-black px-8 py-4 text-center
-              text-sm font-medium uppercase text-white 2xl:px-12
-              ${canCheckout ? '' : 'cursor-not-allowed opacity-40'}`}
+              className={`mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12 ${
+                canCheckout ? '' : 'cursor-not-allowed opacity-40'
+              }`}
             >
-              {lang?.includes('fr') ? 'Commander' : 'Order'}
+              {lang.includes('fr') ? 'Commander' : 'Order'}
             </button>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

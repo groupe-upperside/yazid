@@ -9,7 +9,7 @@ import CartRows from '@/components/CartRows';
 import { useCartItems } from '@/hooks/useSnipcart';
 
 export default function CartDropdown({ lang, meta }: { lang: string; meta: Content.DropdownCartDocument<string> }) {
-  const { items, total, itemsTotal } = useCartItems();
+  const { items, total, itemsTotal, totalSaved } = useCartItems();
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +54,14 @@ export default function CartDropdown({ lang, meta }: { lang: string; meta: Conte
               <>
                 <div className="flex justify-between text-base font-bold uppercase">
                   <div>{meta.data.total}</div>
-                  <div>{total.toFixed(2).replace('.', ',')} €</div>
+                  <div className="flex items-baseline gap-4">
+                    {totalSaved > 0 && (
+                      <span className="whitespace-nowrap text-[#707070] line-through">
+                        {(total + totalSaved).toFixed(2).replace('.', ',')} €
+                      </span>
+                    )}
+                    <span>{total.toFixed(2).replace('.', ',')} €</span>
+                  </div>
                 </div>
 
                 <Link

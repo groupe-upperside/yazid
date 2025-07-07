@@ -11,10 +11,20 @@ interface SnipCartItem {
   image: string;
 }
 
+export interface SnipcartDiscount {
+  id: string;
+  code: string;
+  amountSaved: number;
+  value: number;
+  type: 'Rate' | 'Fixed';
+}
+
 type CartItemsHook = {
   items: SnipCartItem[];
   total: number;
   itemsTotal: number;
+  discounts: SnipcartDiscount[];
+  totalSaved: number;
 };
 
 type CartFieldsHook = Record<string, string>;
@@ -26,6 +36,8 @@ export function useCartItems(): CartItemsHook {
   const [items, setItems] = useState<SnipCartItem[]>([]);
   const [total, setTotal] = useState(0);
   const [itemsTotal, setItemsTotal] = useState(0);
+  const [discounts, setDiscounts] = useState<SnipcartDiscount[]>([]);
+  const [totalSaved, setTotalSaved] = useState(0);
 
   useEffect(() => {
     function subscribe() {
@@ -33,11 +45,13 @@ export function useCartItems(): CartItemsHook {
       const sync = () => {
         const state = window.Snipcart.store.getState();
         const cartItems = Array.isArray(state.cart.items.items) ? state.cart.items.items : [];
+        const cartTotal = state?.cart?.total ?? 0;
         setItems(cartItems);
-        setTotal(
-          cartItems.reduce((sum: number, i: { quantity: number; price: number }) => sum + i.quantity * i.price, 0)
-        );
+        setTotal(cartTotal);
         setItemsTotal(cartItems.reduce((sum: any, i: { quantity: any }) => sum + i.quantity, 0));
+        const d = Array.isArray(state.cart.discounts?.items) ? state.cart.discounts.items : [];
+        setDiscounts(d);
+        setTotalSaved(d.reduce((sum: any, dis: any) => sum + (dis.amountSaved ?? 0), 0));
       };
       sync();
       return window.Snipcart.store.subscribe(sync);
@@ -64,7 +78,7 @@ export function useCartItems(): CartItemsHook {
     };
   }, []);
 
-  return { items, total, itemsTotal };
+  return { items, total, itemsTotal, discounts, totalSaved };
 }
 
 /**
