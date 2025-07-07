@@ -155,73 +155,75 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
               isCheckoutPage={isCheckoutPage}
             />
             <StockGuard cartItem={i} lang={lang} key={`guard-${i.uniqueId}`} />
-            <Discount lang={lang} />
           </>
         )
       )}
       {isCartPage && items.length > 0 && (
-        <div className={`bg-[#F7F4EF] font-avenir tracking-widest ${isCheckoutPage ? '' : 'px-6 md:px-20 xl:px-32'}`}>
-          {discounts.length > 0 && (
-            <div className="flex justify-between pt-6 text-base font-bold uppercase">
-              <div className="hidden sm:block">{lang.includes('fr') ? 'réductions' : 'discounts'}</div>
+        <>
+          <Discount lang={lang} />
+          <div className={`bg-[#F7F4EF] font-avenir tracking-widest ${isCheckoutPage ? '' : 'px-6 md:px-20 xl:px-32'}`}>
+            {discounts.length > 0 && (
+              <div className="flex justify-between pt-6 text-base font-bold uppercase">
+                <div className="hidden sm:block">{lang.includes('fr') ? 'réductions' : 'discounts'}</div>
 
-              <div className="flex w-full flex-col items-end gap-2">
-                {discounts.map((d) => (
-                  <div key={d.id} className="flex items-baseline justify-end gap-2 text-[#707070] md:gap-4">
-                    <div>{d.code}</div>
-                    <div>-{d.amountSaved.toFixed(2).replace('.', ',')} €</div>
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveDiscount(d.code)}
-                      className="text-sm font-bold uppercase"
-                    >
-                      x
-                    </button>
-                  </div>
-                ))}
+                <div className="flex w-full flex-col items-end gap-2">
+                  {discounts.map((d) => (
+                    <div key={d.id} className="flex items-baseline justify-end gap-2 text-[#707070] md:gap-4">
+                      <div>{d.code}</div>
+                      <div>-{d.amountSaved.toFixed(2).replace('.', ',')} €</div>
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveDiscount(d.code)}
+                        className="text-sm font-bold uppercase"
+                      >
+                        x
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="flex justify-between py-6 text-base font-bold uppercase">
+              <div>TOTAL</div>
+              <div className="flex items-baseline gap-2 md:gap-4">
+                {totalSaved > 0 && (
+                  <span className="whitespace-nowrap text-[#707070] line-through">
+                    {(total + totalSaved).toFixed(2).replace('.', ',')} €
+                  </span>
+                )}
+                <span>{total.toFixed(2).replace('.', ',')} €</span>
               </div>
             </div>
-          )}
 
-          <div className="flex justify-between py-6 text-base font-bold uppercase">
-            <div>TOTAL</div>
-            <div className="flex items-baseline gap-2 md:gap-4">
-              {totalSaved > 0 && (
-                <span className="whitespace-nowrap text-[#707070] line-through">
-                  {(total + totalSaved).toFixed(2).replace('.', ',')} €
-                </span>
-              )}
-              <span>{total.toFixed(2).replace('.', ',')} €</span>
+            <div className="flex w-full justify-center">
+              <button
+                type="button"
+                disabled={!canCheckout}
+                onClick={async () => {
+                  if (!canCheckout || typeof window === 'undefined') return;
+                  const { Snipcart } = window;
+                  if (!Snipcart?.api) return;
+
+                  const pageLang = lang.includes('fr') ? 'fr' : 'en';
+                  try {
+                    await Snipcart.api.session.setLanguage(pageLang);
+                  } catch {
+                    /* ignore */
+                  }
+
+                  await Snipcart.api.theme.cart.open();
+                  window.location.hash = '/checkout';
+                }}
+                className={`mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12 ${
+                  canCheckout ? '' : 'cursor-not-allowed opacity-40'
+                }`}
+              >
+                {lang.includes('fr') ? 'Commander' : 'Order'}
+              </button>
             </div>
           </div>
-
-          <div className="flex w-full justify-center">
-            <button
-              type="button"
-              disabled={!canCheckout}
-              onClick={async () => {
-                if (!canCheckout || typeof window === 'undefined') return;
-                const { Snipcart } = window;
-                if (!Snipcart?.api) return;
-
-                const pageLang = lang.includes('fr') ? 'fr' : 'en';
-                try {
-                  await Snipcart.api.session.setLanguage(pageLang);
-                } catch {
-                  /* ignore */
-                }
-
-                await Snipcart.api.theme.cart.open();
-                window.location.hash = '/checkout';
-              }}
-              className={`mx-auto mt-8 bg-black px-8 py-4 text-center text-sm font-medium uppercase text-white 2xl:px-12 ${
-                canCheckout ? '' : 'cursor-not-allowed opacity-40'
-              }`}
-            >
-              {lang.includes('fr') ? 'Commander' : 'Order'}
-            </button>
-          </div>
-        </div>
+        </>
       )}
     </div>
   );
