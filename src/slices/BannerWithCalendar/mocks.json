@@ -64,6 +64,24 @@
 				"__TYPE__": "FieldContent",
 				"value": "bottom",
 				"type": "Select"
+			},
+			"excluded_dates": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"date",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Date",
+									"value": "2021-12-16"
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []
@@ -125,6 +143,24 @@
 			"include_cart": {
 				"__TYPE__": "BooleanContent",
 				"value": false
+			},
+			"excluded_dates": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"date",
+								{
+									"__TYPE__": "FieldContent",
+									"type": "Date",
+									"value": "2014-03-13"
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": [

@@ -58,6 +58,7 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
     width,
     // @ts-ignore
     include_cart,
+    excluded_dates,
   } = slice.primary;
 
   return (
@@ -100,7 +101,7 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
             </div>
           </div>
           <div className={`flex gap-6 ${button_position === 'right' ? 'flex-col' : 'flex-col md:flex-row'}`}>
-            <DatePicker placeholder={pick_up_date_day} />
+            <DatePicker placeholder={pick_up_date_day} excludedDates={excluded_dates} />
             <TimeSlotPicker placeholder={pick_up_date_slot} />
           </div>
         </div>

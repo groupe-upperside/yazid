@@ -1330,6 +1330,36 @@ type BannerSliceVariation = BannerSliceDefault;
 export type BannerSlice = prismic.SharedSlice<'banner', BannerSliceVariation>;
 
 /**
+ * Item in *BannerWithCalendar → Default → Primary → Excluded dates*
+ */
+export interface BannerWithCalendarSliceDefaultPrimaryExcludedDatesItem {
+  /**
+   * Date field in *BannerWithCalendar → Default → Primary → Excluded dates*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.excluded_dates[].date
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date: prismic.DateField;
+}
+
+/**
+ * Item in *BannerWithCalendar → Calendar Only → Primary → Excluded dates*
+ */
+export interface BannerWithCalendarSliceCalendarOnlyPrimaryExcludedDatesItem {
+  /**
+   * Date field in *BannerWithCalendar → Calendar Only → Primary → Excluded dates*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.excluded_dates[].date
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date: prismic.DateField;
+}
+
+/**
  * Primary content in *BannerWithCalendar → Default → Primary*
  */
 export interface BannerWithCalendarSliceDefaultPrimary {
@@ -1423,6 +1453,16 @@ export interface BannerWithCalendarSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   pick_up_date_slot: prismic.KeyTextField;
+
+  /**
+   * Excluded dates field in *BannerWithCalendar → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.default.primary.excluded_dates[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  excluded_dates: prismic.GroupField<Simplify<BannerWithCalendarSliceDefaultPrimaryExcludedDatesItem>>;
 }
 
 /**
@@ -1543,6 +1583,16 @@ export interface BannerWithCalendarSliceCalendarOnlyPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   include_cart: prismic.BooleanField;
+
+  /**
+   * Excluded dates field in *BannerWithCalendar → Calendar Only → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: banner_with_calendar.calendarOnly.primary.excluded_dates[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  excluded_dates: prismic.GroupField<Simplify<BannerWithCalendarSliceCalendarOnlyPrimaryExcludedDatesItem>>;
 }
 
 /**
@@ -3868,7 +3918,9 @@ declare module '@prismicio/client' {
       BannerSliceVariation,
       BannerSliceDefault,
       BannerWithCalendarSlice,
+      BannerWithCalendarSliceDefaultPrimaryExcludedDatesItem,
       BannerWithCalendarSliceDefaultPrimary,
+      BannerWithCalendarSliceCalendarOnlyPrimaryExcludedDatesItem,
       BannerWithCalendarSliceCalendarOnlyPrimary,
       BannerWithCalendarSliceVariation,
       BannerWithCalendarSliceDefault,

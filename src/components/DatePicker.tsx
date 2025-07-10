@@ -2,8 +2,8 @@
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-import type { KeyTextField } from '@prismicio/client';
-import { format, isValid, parse } from 'date-fns';
+import type { GroupField, KeyTextField } from '@prismicio/client';
+import { format, isValid, parse, parseISO } from 'date-fns';
 import { fr } from 'date-fns/locale/fr';
 import { forwardRef, useEffect, useMemo, useState } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
@@ -16,10 +16,13 @@ registerLocale('fr', fr);
 
 type Props = {
   placeholder: KeyTextField;
+  excludedDates: GroupField;
 };
 
-const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) => {
+const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedDates }, ref) => {
   const [date, setDate] = useState('');
+
+  console.log(excludedDates);
 
   const { 'Date de retrait': savedDate } = useCartCustomFields(['Date de retrait']);
 
@@ -34,6 +37,10 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
     if (now.getHours() >= 20) m.setDate(m.getDate() + 1);
     return m;
   }, [now]);
+
+  const excluded = useMemo<Date[]>(() => {
+    return excludedDates.map((item) => parseISO(item.date as string)).filter(isValid);
+  }, [excludedDates]);
 
   // @ts-ignore
   const selected = useMemo(() => {
@@ -72,6 +79,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder }, ref) =>
         startDate={now}
         locale="fr"
         dateFormat="dd/MM/yyyy"
+        excludeDates={excluded}
         customInput={
           <div className="flex cursor-pointer select-none items-center gap-2 rounded bg-[#111827] px-4 py-3 text-base text-white">
             <FaRegCalendar className="text-xl" />
