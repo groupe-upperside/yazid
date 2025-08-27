@@ -48,6 +48,13 @@ export default async function RootLayout({
           data-cart-custom2-name="Créneau horaire"
           data-cart-custom2-required="true"
         ></Script>
+        <Script id="zenchef-sdk" src="https://sdk.zenchef.com/v1/sdk.min.js" strategy="afterInteractive" />
+        <div
+          className="zc-widget-config"
+          data-restaurant="371280"
+          data-open=""
+          data-lang={lang.includes('fr') ? 'fr' : 'en'}
+        ></div>
         <div>
           <Toaster />
         </div>

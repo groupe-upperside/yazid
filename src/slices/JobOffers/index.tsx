@@ -19,7 +19,7 @@ const JobOffers = ({ slice }: JobOffersProps): JSX.Element => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="bg-[#F7F4EF] bg-opacity-50 p-6 font-avenir tracking-widest md:p-20 xl:p-32"
+      className="bg-opacity/50 bg-[#F7F4EF] p-6 font-avenir tracking-widest md:p-20 xl:p-32"
     >
       <SectionTitle text={slice.primary.title} bold={true} centered={true} />
       <Divider centered={true} />

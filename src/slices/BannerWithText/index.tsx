@@ -29,9 +29,9 @@ const BannerWithText = ({ slice }: BannerWithTextProps): JSX.Element => {
           <PrismicNextImage field={image} className="h-[40rem] object-cover xl:h-[45rem]" />
         </div>
       )}
-      <div className="relative z-10 flex h-full flex-col items-center justify-center bg-white bg-opacity-80 p-20 font-avenir tracking-widest xl:p-32">
+      <div className="bg-opacity/80 relative z-10 flex h-full flex-col items-center justify-center bg-white p-20 font-avenir tracking-widest xl:p-32">
         {title_bold && (
-          <h1 className="mb-8 text-center text-5xl font-medium uppercase text-gray-900 md:text-6xl">{title_bold}</h1>
+          <h1 className="md:text-6xl mb-8 text-center text-5xl font-medium uppercase text-gray-900">{title_bold}</h1>
         )}
         {subtitle_light && (
           <p className="mb-3 text-center text-4xl text-[#707070] first-letter:uppercase md:text-5xl">

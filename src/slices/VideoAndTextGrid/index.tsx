@@ -47,7 +47,7 @@ const VideoAndTextGrid = ({ slice }: VideoAndTextGridProps): JSX.Element => {
             ></iframe>
             {!isPlaying ? (
               <div
-                className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white bg-opacity-40 p-6"
+                className="bg-opacity/40 absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-6"
                 onClick={handlePlay}
               >
                 <img
@@ -59,7 +59,7 @@ const VideoAndTextGrid = ({ slice }: VideoAndTextGridProps): JSX.Element => {
               </div>
             ) : (
               <div
-                className="invisible absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white bg-opacity-40 p-6 group-hover:visible"
+                className="bg-opacity/40 invisible absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-6 group-hover:visible"
                 onClick={handlePlay}
               >
                 <img
@@ -118,7 +118,7 @@ const VideoAndTextGrid = ({ slice }: VideoAndTextGridProps): JSX.Element => {
             ></iframe>
             {!isPlaying ? (
               <div
-                className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white bg-opacity-40 p-6"
+                className="bg-opacity/40 absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-6"
                 onClick={handlePlay}
               >
                 <img
@@ -130,7 +130,7 @@ const VideoAndTextGrid = ({ slice }: VideoAndTextGridProps): JSX.Element => {
               </div>
             ) : (
               <div
-                className="invisible absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white bg-opacity-40 p-6 group-hover:visible"
+                className="bg-opacity/40 invisible absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white p-6 group-hover:visible"
                 onClick={handlePlay}
               >
                 <img
