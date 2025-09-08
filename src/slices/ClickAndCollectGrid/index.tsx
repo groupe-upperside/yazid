@@ -5,7 +5,7 @@ import { PrismicNextImage } from '@prismicio/next';
 import type { SliceComponentProps } from '@prismicio/react';
 import type { ImageField, RichTextField } from '@prismicio/types';
 import { usePathname } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FaShoppingBasket } from 'react-icons/fa';
 
 import Divider from '@/components/Divider';
@@ -16,6 +16,7 @@ import { getGridColsClass } from '@/utils/getGridColsClass';
 
 type Product = {
   image: ImageField;
+  image2?: ImageField;
   product_name: KeyTextField;
   product_price: NumberField;
   product_description: RichTextField;
@@ -28,21 +29,35 @@ const GridComponent = ({
   item,
   onProductClick,
   lang,
+  notifyStock,
 }: {
   lang: string;
   item: Product;
   onProductClick: (p: Product) => void;
+  notifyStock: (id: string, outOfStock: boolean) => void;
 }) => {
   const { data } = useStock(item.product_id);
   const outOfStock = data?.stock !== undefined && data.stock <= 0 && !data.allowOutOfStockPurchases;
   const overlayVisibility = outOfStock ? 'opacity-100 bg-black/65' : 'opacity-0 group-hover:opacity-100 bg-black/75';
 
+  // notify parent when stock status is known/changes
+  useEffect(() => {
+    if (data !== undefined) {
+      notifyStock(String(item.product_id), !!outOfStock);
+    }
+  }, [data, outOfStock, item.product_id, notifyStock]);
+
+  // prepare images array (always include first image, optionally second)
+  const images = [item.image, ...(item.image2?.url ? [item.image2] : [])];
+  const [imgIndex, setImgIndex] = useState(0);
+
   return (
     <div onClick={outOfStock ? undefined : () => onProductClick(item)}>
       <div className={`group relative mb-3 aspect-square w-full ${outOfStock ? '' : 'cursor-pointer'}`}>
-        <PrismicNextImage className="aspect-square w-full object-cover" field={item.image} />
+        {/* Use current image */}
+        <PrismicNextImage className="aspect-square w-full object-cover" field={images[imgIndex]} />
         <div
-          className={`absolute inset-0 flex flex-col items-center justify-center  opacity-0 transition-opacity ${overlayVisibility}`}
+          className={`absolute inset-0 flex flex-col items-center justify-center p-2.5  opacity-0 transition-opacity ${overlayVisibility}`}
         >
           {outOfStock ? (
             <p className="pb-0.5 text-sm font-bold uppercase tracking-widest text-white md:text-base">
@@ -50,7 +65,7 @@ const GridComponent = ({
             </p>
           ) : (
             <>
-              <span className="pb-0.5 text-sm font-bold uppercase tracking-widest text-white md:text-base">
+              <span className="pb-0.5 text-center text-sm font-bold uppercase tracking-widest text-white md:text-base">
                 {item.product_name}
               </span>
               <span className="text-sm font-medium tracking-widest text-white md:text-base">
@@ -63,6 +78,27 @@ const GridComponent = ({
           )}
         </div>
       </div>
+
+      {/* three grey dots under the image only when there is a second image */}
+      {item.image2?.url && (
+        <div className="mb-2 flex items-center justify-center gap-2">
+          {Array.from({ length: 3 }).map((_, idx) => (
+            <button
+              key={idx}
+              type="button"
+              aria-label={`Show image ${idx + 1}`}
+              onClick={(e) => {
+                // prevent opening the modal when clicking the dots
+                e.stopPropagation();
+                // map the 3 dots to the available images (wrap using modulo)
+                setImgIndex(idx % images.length);
+              }}
+              className={`size-2 rounded-full transition-all ${imgIndex === idx % images.length ? 'bg-gray-600' : 'bg-gray-300'}`}
+            />
+          ))}
+        </div>
+      )}
+
       <p className="pb-0.5 text-sm font-bold uppercase tracking-widest md:text-base">{item.product_name}</p>
       <p className="text-sm font-medium tracking-widest text-[#9A9A9A] md:text-base">
         {item.product_price ? item.product_price.toFixed(2).replace('.', ',') : ''}€
@@ -89,6 +125,9 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  // map productId -> outOfStock boolean
+  const [stockMap, setStockMap] = useState<Record<string, boolean>>({});
+
   const gridColsClass = useMemo(() => getGridColsClass(slice.primary.number_per_row), [slice.primary.number_per_row]);
   const lgGridCols = slice.primary.number_per_row
     ? `lg:grid-cols-${slice.primary.number_per_row - 1}`
@@ -103,11 +142,33 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
     setModalOpen(true);
   };
 
+  const notifyStock = (id: string, out: boolean) => {
+    setStockMap((prev) => {
+      if (prev[id] === out) return prev;
+      return { ...prev, [id]: out };
+    });
+  };
+
+  // When we have stock info for every product, move out-of-stock to the end
+  const allKnown = products.length > 0 && Object.keys(stockMap).length === products.length;
+  const sortedProducts = allKnown
+    ? [
+        ...products.filter((p) => !stockMap[String(p.product_id)]),
+        ...products.filter((p) => stockMap[String(p.product_id)]),
+      ]
+    : products;
+
   return (
     <>
       <div className={`grid grid-cols-1 gap-8 ${lgGridCols} ${gridColsClass}`}>
-        {products.map((item) => (
-          <GridComponent key={item.product_id} item={item} onProductClick={onProductClick} lang={lang} />
+        {sortedProducts.map((item) => (
+          <GridComponent
+            key={String(item.product_id)}
+            item={item}
+            onProductClick={onProductClick}
+            lang={lang}
+            notifyStock={notifyStock}
+          />
         ))}
       </div>
       <ProductModal open={modalOpen} onClose={() => setModalOpen(false)} product={selectedProduct} />

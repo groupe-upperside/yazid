@@ -1,3 +1,5 @@
+'use client';
+
 import type { KeyTextField, NumberField } from '@prismicio/client';
 import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
@@ -15,6 +17,7 @@ type Props = {
   onClose: () => void;
   product: {
     image: ImageField;
+    image2?: ImageField;
     product_name: KeyTextField;
     product_price: NumberField;
     product_description: RichTextField;
@@ -38,6 +41,15 @@ export default function ProductModal({ open, onClose, product }: Props) {
   const pathname = usePathname();
   const localeSegment = pathname.split('/')[1] ?? 'fr';
   const lang = localeSegment.startsWith('en') ? 'en' : 'fr';
+
+  // images array and index for switching
+  const images = product ? [product.image, ...(product.image2?.url ? [product.image2] : [])] : [];
+  const [imgIndex, setImgIndex] = useState(0);
+
+  // reset index when product/modal changes
+  useEffect(() => {
+    setImgIndex(0);
+  }, [product, open]);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -70,7 +82,36 @@ export default function ProductModal({ open, onClose, product }: Props) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative hidden max-w-[45%] lg:flex">
-          <PrismicNextImage field={product.image} className="size-full object-cover" />
+          {/* clickable image area: clicking cycles images */}
+          <div
+            className="relative size-full cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (images.length > 0) setImgIndex((i) => (i + 1) % images.length);
+            }}
+          >
+            <PrismicNextImage field={images[imgIndex]} className="size-full object-cover" />
+
+            {/* three grey dots over the bottom of the image when there is a second image */}
+            {images.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
+                {Array.from({ length: 3 }).map((_, idx) => {
+                  const mappedIndex = idx % images.length;
+                  return (
+                    <button
+                      key={idx}
+                      aria-label={`Show image ${mappedIndex + 1}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setImgIndex(mappedIndex);
+                      }}
+                      className={`size-2 rounded-full transition-all ${imgIndex === mappedIndex ? 'bg-gray-600' : 'bg-gray-300'}`}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="relative flex flex-1 flex-col overflow-y-auto">
@@ -148,7 +189,7 @@ export default function ProductModal({ open, onClose, product }: Props) {
               data-item-price={(product.product_price as number).toFixed(2)}
               data-item-quantity={quantity}
               data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
-              data-item-image={product.image.url}
+              data-item-image={images[imgIndex]?.url}
               data-item-min-quantity={product.product_min_quantity}
               data-item-max-quantity={maxQty || 1000}
             >

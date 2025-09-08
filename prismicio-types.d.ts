@@ -1869,6 +1869,16 @@ export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
   image: prismic.ImageField<never>;
 
   /**
+   * Image2 field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].image2
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image2: prismic.ImageField<never>;
+
+  /**
    * Product name field in *ClickAndCollectGrid → Default → Primary → Product*
    *
    * - **Field Type**: Text

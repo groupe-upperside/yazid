@@ -40,6 +40,14 @@
                   "thumbnails": []
                 }
               },
+              "image2": {
+                "type": "Image",
+                "config": {
+                  "label": "Image2",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
               "product_name": {
                 "type": "Text",
                 "config": {
