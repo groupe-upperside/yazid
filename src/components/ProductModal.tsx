@@ -321,6 +321,7 @@ export default function ProductModal({ open, onClose, product, linkedProducts }:
                               className={[
                                 'absolute z-40 w-72 md:w-[22rem] rounded-xl border border-gray-200 bg-white p-3 shadow-xl',
                                 popPlace === 'below' ? 'top-full mt-2' : 'bottom-full mb-2',
+                                // eslint-disable-next-line no-nested-ternary
                                 popAlign === 'left'
                                   ? 'left-0'
                                   : popAlign === 'right'
@@ -334,6 +335,7 @@ export default function ProductModal({ open, onClose, product, linkedProducts }:
                                 className={[
                                   'absolute h-0 w-0 border-x-8 border-b-8 border-x-transparent border-b-white',
                                   popPlace === 'below' ? '-top-2' : '-bottom-2 rotate-180',
+                                  // eslint-disable-next-line no-nested-ternary
                                   popAlign === 'left'
                                     ? 'left-4'
                                     : popAlign === 'right'
