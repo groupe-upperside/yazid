@@ -127,6 +127,14 @@
 									"__TYPE__": "ImageContent",
 									"thumbnails": {}
 								}
+							],
+							[
+								"linked_products_ids",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "waste",
+									"type": "Text"
+								}
 							]
 						]
 					}

@@ -83,6 +83,37 @@
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
+        },
+        "background_color": {
+          "type": "Color",
+          "config": {
+            "label": "background color",
+            "placeholder": ""
+          }
+        },
+        "link2": {
+          "type": "Link",
+          "config": {
+            "label": "Link2",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "link2_label": {
+          "type": "Text",
+          "config": {
+            "label": "Link2 label",
+            "placeholder": ""
+          }
+        },
+        "link2_zenchef": {
+          "type": "Boolean",
+          "config": {
+            "label": "link2_zenchef",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
+          }
         }
       },
       "items": {}
@@ -165,6 +196,37 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "background_color": {
+          "type": "Color",
+          "config": {
+            "label": "background color",
+            "placeholder": ""
+          }
+        },
+        "link2": {
+          "type": "Link",
+          "config": {
+            "label": "Link2",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "link2_label": {
+          "type": "Text",
+          "config": {
+            "label": "Link2 label",
+            "placeholder": ""
+          }
+        },
+        "link2_zenchef": {
+          "type": "Boolean",
+          "config": {
+            "label": "link2_zenchef",
+            "default_value": false,
+            "placeholder_true": "true",
+            "placeholder_false": "false"
           }
         }
       },

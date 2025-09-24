@@ -1191,6 +1191,7 @@ export type MetaDocument<Lang extends string = string> = prismic.PrismicDocument
 >;
 
 type PageDocumentDataSlicesSlice =
+  | CtaRowSlice
   | JobOffersSlice
   | BlockTextCenteredSlice
   | TextAndStepperSlice
@@ -1947,6 +1948,16 @@ export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
    * - **Documentation**: https://prismic.io/docs/field#number
    */
   product_max_quantity: prismic.NumberField;
+
+  /**
+   * Linked products ids field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].linked_products_ids
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  linked_products_ids: prismic.KeyTextField;
 }
 
 /**
@@ -2010,6 +2021,69 @@ type ClickAndCollectGridSliceVariation = ClickAndCollectGridSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type ClickAndCollectGridSlice = prismic.SharedSlice<'click_and_collect_grid', ClickAndCollectGridSliceVariation>;
+
+/**
+ * Item in *CtaRow → Default → Primary → CTA group*
+ */
+export interface CtaRowSliceDefaultPrimaryCtaGroupItem {
+  /**
+   * CTA link field in *CtaRow → Default → Primary → CTA group*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_row.default.primary.cta_group[].cta_link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  cta_link: prismic.LinkToMediaField;
+
+  /**
+   * CTA text field in *CtaRow → Default → Primary → CTA group*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_row.default.primary.cta_group[].cta_text
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  cta_text: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *CtaRow → Default → Primary*
+ */
+export interface CtaRowSliceDefaultPrimary {
+  /**
+   * CTA group field in *CtaRow → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_row.default.primary.cta_group[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  cta_group: prismic.GroupField<Simplify<CtaRowSliceDefaultPrimaryCtaGroupItem>>;
+}
+
+/**
+ * Default variation for CtaRow Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaRowSliceDefault = prismic.SharedSliceVariation<'default', Simplify<CtaRowSliceDefaultPrimary>, never>;
+
+/**
+ * Slice variation for *CtaRow*
+ */
+type CtaRowSliceVariation = CtaRowSliceDefault;
+
+/**
+ * CtaRow Shared Slice
+ *
+ * - **API ID**: `cta_row`
+ * - **Description**: CtaRow
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaRowSlice = prismic.SharedSlice<'cta_row', CtaRowSliceVariation>;
 
 /**
  * Item in *CustomerLogos → Default → Primary → logos*
@@ -2786,6 +2860,47 @@ export interface ImageLeftAndTextGridSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   mobile_description_bottom: prismic.RichTextField;
+
+  /**
+   * background color field in *ImageAndTextGrid → Image left → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.default.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  background_color: prismic.ColorField;
+
+  /**
+   * Link2 field in *ImageAndTextGrid → Image left → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.default.primary.link2
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link2: prismic.LinkField;
+
+  /**
+   * Link2 label field in *ImageAndTextGrid → Image left → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.default.primary.link2_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link2_label: prismic.KeyTextField;
+
+  /**
+   * link2_zenchef field in *ImageAndTextGrid → Image left → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_left_and_text_grid.default.primary.link2_zenchef
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  link2_zenchef: prismic.BooleanField;
 }
 
 /**
@@ -2894,6 +3009,47 @@ export interface ImageLeftAndTextGridSliceImageRightPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   mobile_description_bottom: prismic.RichTextField;
+
+  /**
+   * background color field in *ImageAndTextGrid → Image right → Primary*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.imageRight.primary.background_color
+   * - **Documentation**: https://prismic.io/docs/field#color
+   */
+  background_color: prismic.ColorField;
+
+  /**
+   * Link2 field in *ImageAndTextGrid → Image right → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.imageRight.primary.link2
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link2: prismic.LinkField;
+
+  /**
+   * Link2 label field in *ImageAndTextGrid → Image right → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_left_and_text_grid.imageRight.primary.link2_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link2_label: prismic.KeyTextField;
+
+  /**
+   * link2_zenchef field in *ImageAndTextGrid → Image right → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_left_and_text_grid.imageRight.primary.link2_zenchef
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  link2_zenchef: prismic.BooleanField;
 }
 
 /**
@@ -3953,6 +4109,11 @@ declare module '@prismicio/client' {
       ClickAndCollectGridSliceDefaultPrimary,
       ClickAndCollectGridSliceVariation,
       ClickAndCollectGridSliceDefault,
+      CtaRowSlice,
+      CtaRowSliceDefaultPrimaryCtaGroupItem,
+      CtaRowSliceDefaultPrimary,
+      CtaRowSliceVariation,
+      CtaRowSliceDefault,
       CustomerLogosSlice,
       CustomerLogosSliceDefaultPrimaryLogosItem,
       CustomerLogosSliceDefaultPrimary,

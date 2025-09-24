@@ -121,6 +121,27 @@
 						}
 					}
 				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "#54f60b",
+				"type": "Color"
+			},
+			"link2": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io"
+				}
+			},
+			"link2_label": {
+				"__TYPE__": "FieldContent",
+				"value": "boy",
+				"type": "Text"
+			},
+			"link2_zenchef": {
+				"__TYPE__": "BooleanContent",
+				"value": false
 			}
 		},
 		"items": []
@@ -229,6 +250,27 @@
 						}
 					}
 				]
+			},
+			"background_color": {
+				"__TYPE__": "FieldContent",
+				"value": "#346b34",
+				"type": "Color"
+			},
+			"link2": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io"
+				}
+			},
+			"link2_label": {
+				"__TYPE__": "FieldContent",
+				"value": "arrow",
+				"type": "Text"
+			},
+			"link2_zenchef": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [

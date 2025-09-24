@@ -98,6 +98,13 @@
                   "label": "Product max quantity",
                   "placeholder": ""
                 }
+              },
+              "linked_products_ids": {
+                "type": "Text",
+                "config": {
+                  "label": "Linked products ids",
+                  "placeholder": ""
+                }
               }
             }
           }

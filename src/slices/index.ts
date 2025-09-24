@@ -9,6 +9,7 @@ export const components = {
   billing_form: dynamic(() => import('./BillingForm')),
   block_text_centered: dynamic(() => import('./BlockTextCentered')),
   click_and_collect_grid: dynamic(() => import('./ClickAndCollectGrid')),
+  cta_row: dynamic(() => import('./CtaRow')),
   customer_logos: dynamic(() => import('./CustomerLogos')),
   divider: dynamic(() => import('./Divider')),
   form: dynamic(() => import('./Form')),

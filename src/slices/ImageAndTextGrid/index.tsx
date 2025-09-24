@@ -16,11 +16,12 @@ export type ImageLeftAndTextGridProps = SliceComponentProps<Content.ImageLeftAnd
  * Component for "ImageLeftAndTextGrid" Slices.
  */
 const ImageLeftAndTextGrid = ({ slice }: ImageLeftAndTextGridProps): JSX.Element => {
+  const bg = `bg-[${slice.primary.background_color ? slice.primary.background_color : 'white'}]`;
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="p-6 font-avenir tracking-widest md:p-20 xl:p-32"
+      className={`p-6 font-avenir tracking-widest md:p-20 xl:p-32 ${bg}`}
     >
       <div className="mx-auto grid max-w-screen-2xl gap-12 rounded-lg xl:grid-cols-12 xl:gap-16">
         <div
@@ -55,16 +56,18 @@ const ImageLeftAndTextGrid = ({ slice }: ImageLeftAndTextGridProps): JSX.Element
               }}
             />
           </div>
-          <div className="block space-y-6 xl:hidden">
-            <PrismicRichText
-              field={slice.primary.mobile_description_top}
-              components={{
-                paragraph: ({ children }) => (
-                  <p className="text-justify text-sm tracking-widest text-[#707070] md:text-base">{children}</p>
-                ),
-              }}
-            />
-          </div>
+          {slice.primary.mobile_description_top.length > 0 ? (
+            <div className="block space-y-6 xl:hidden">
+              <PrismicRichText
+                field={slice.primary.mobile_description_top}
+                components={{
+                  paragraph: ({ children }) => (
+                    <p className="text-justify text-sm tracking-widest text-[#707070] md:text-base">{children}</p>
+                  ),
+                }}
+              />
+            </div>
+          ) : null}
           <div
             className={`order-last block py-16 xl:col-span-5 xl:mt-0 xl:hidden ${slice.variation === 'imageRight' ? 'xl:order-last' : 'xl:order-first'}`}
           >
@@ -92,8 +95,20 @@ const ImageLeftAndTextGrid = ({ slice }: ImageLeftAndTextGridProps): JSX.Element
             />
           </div>
           {slice.primary.link_label ? (
-            <div className="mx-auto w-fit xl:mx-0">
-              <Button link={slice.primary.link} label={slice.primary.link_label} />
+            <div className="flex flex-col gap-4 md:flex-row">
+              <div className="mx-auto w-fit xl:mx-0">
+                <Button link={slice.primary.link} label={slice.primary.link_label} />
+              </div>
+              {slice.primary.link2_label ? (
+                <div className="mx-auto w-fit xl:mx-0">
+                  <button
+                    className="border-1 mx-auto mt-8 border border-black bg-white px-8 py-4 text-center text-sm font-medium uppercase text-black 2xl:px-12"
+                    data-zc-action={slice?.primary?.link2_zenchef ? 'open' : undefined}
+                  >
+                    {slice.primary.link2_label}
+                  </button>
+                </div>
+              ) : null}
             </div>
           ) : null}
         </div>

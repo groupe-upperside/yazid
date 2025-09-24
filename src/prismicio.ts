@@ -55,11 +55,6 @@ const routes: prismic.ClientConfig['routes'] = [
   },
   {
     type: 'coming_soon',
-    uid: 'bookings',
-    path: '/:lang/reservations',
-  },
-  {
-    type: 'coming_soon',
     uid: 'at_home',
     path: '/:lang/at-home',
   },

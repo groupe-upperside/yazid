@@ -23,6 +23,7 @@ type Product = {
   product_allergens: KeyTextField;
   product_id: NumberField;
   product_min_quantity: NumberField;
+  linked_products_ids?: KeyTextField;
 };
 
 const GridComponent = ({
@@ -124,6 +125,7 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
   const products: Product[] = slice.primary.product ?? [];
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [linkedProducts, setLinkedProducts] = useState<Product[]>([]);
 
   // map productId -> outOfStock boolean
   const [stockMap, setStockMap] = useState<Record<string, boolean>>({});
@@ -139,6 +141,8 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
 
   const onProductClick = (item: Product) => {
     setSelectedProduct(item);
+    const linkArray: number[] | undefined = item?.linked_products_ids?.split(',').map((x) => parseInt(x.trim(), 10));
+    setLinkedProducts(products.filter((p) => p.product_id && linkArray?.includes(p.product_id)) ?? []);
     setModalOpen(true);
   };
 
@@ -171,7 +175,12 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
           />
         ))}
       </div>
-      <ProductModal open={modalOpen} onClose={() => setModalOpen(false)} product={selectedProduct} />
+      <ProductModal
+        open={modalOpen}
+        linkedProducts={linkedProducts}
+        onClose={() => setModalOpen(false)}
+        product={selectedProduct}
+      />
     </>
   );
 };
