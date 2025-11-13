@@ -4,11 +4,13 @@ import type { Content } from '@prismicio/client';
 import { isFilled } from '@prismicio/client';
 import type { SliceComponentProps } from '@prismicio/react';
 import { PrismicRichText } from '@prismicio/react';
+import { useMemo } from 'react';
 
 import CartRows from '@/components/CartRows';
 import DatePicker from '@/components/DatePicker';
 import SectionTitle from '@/components/SectionTitle';
 import TimeSlotPicker from '@/components/TimeSlotPicker';
+import { useCartItems } from '@/hooks/useSnipcart';
 
 /**
  * Props for `BannerWithCalendar`.
@@ -61,6 +63,62 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
     excluded_dates,
   } = slice.primary;
 
+  const { items } = useCartItems();
+
+  const christmasIds = [32, 33];
+  const kingsDayIds = [34, 35, 36];
+
+  const hasChristmasItem = useMemo(() => {
+    if (!items || !Array.isArray(items)) return false;
+    try {
+      return items.some((it: any) => {
+        const raw = (it && (it.id ?? it.productId ?? it.slug ?? '')) as string;
+        const num = parseInt(raw as string, 10);
+        return Number.isInteger(num) && christmasIds.includes(num);
+      });
+    } catch {
+      return false;
+    }
+  }, [items]);
+
+  const hasKingsDayItems = useMemo(() => {
+    if (!items || !Array.isArray(items)) return false;
+    try {
+      return items.some((it: any) => {
+        const raw = (it && (it.id ?? it.productId ?? it.slug ?? '')) as string;
+        const num = parseInt(raw as string, 10);
+        return Number.isInteger(num) && kingsDayIds.includes(num);
+      });
+    } catch {
+      return false;
+    }
+  }, [items]);
+
+  const dateOverrides = useMemo(() => {
+    // Default: no overrides
+    if (!hasChristmasItem && !hasKingsDayItems) {
+      return {} as Record<string, Date>;
+    }
+
+    let min: Date;
+    let max: Date;
+
+    if (hasKingsDayItems) {
+      // King's Day dates take priority
+      min = new Date(2026, 0, 2); // Jan 2, 2026
+      max = new Date(2026, 0, 30); // Jan 30, 2026
+    } else if (hasChristmasItem) {
+      // Christmas dates only if no King's Day items
+      min = new Date(2025, 11, 19); // Dec 19, 2025
+      max = new Date(2026, 0, 3); // Jan 3, 2026
+    }
+
+    return {
+      minDateOverride: min!,
+      maxDateOverride: max!,
+    } as { minDateOverride: Date; maxDateOverride: Date };
+  }, [hasChristmasItem, hasKingsDayItems]);
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -101,7 +159,7 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
             </div>
           </div>
           <div className={`flex gap-6 ${button_position === 'right' ? 'flex-col' : 'flex-col md:flex-row'}`}>
-            <DatePicker placeholder={pick_up_date_day} excludedDates={excluded_dates} />
+            <DatePicker placeholder={pick_up_date_day} excludedDates={excluded_dates} {...dateOverrides} />
             <TimeSlotPicker placeholder={pick_up_date_slot} />
           </div>
         </div>
