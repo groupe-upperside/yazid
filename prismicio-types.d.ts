@@ -1191,6 +1191,7 @@ export type MetaDocument<Lang extends string = string> = prismic.PrismicDocument
 >;
 
 type PageDocumentDataSlicesSlice =
+  | FeatureGridSlice
   | CtaRowSlice
   | JobOffersSlice
   | BlockTextCenteredSlice
@@ -1276,6 +1277,92 @@ export type PageDocument<Lang extends string = string> = prismic.PrismicDocument
   Lang
 >;
 
+type PressDocumentDataSlicesSlice = PressCardSlice;
+
+/**
+ * Content for Press documents
+ */
+interface PressDocumentData {
+  /**
+   * title field in *Press*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *Press*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *Press*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<PressDocumentDataSlicesSlice> /**
+   * Meta Title field in *Press*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: press.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Press*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: press.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Press*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Press document from Prismic
+ *
+ * - **API ID**: `press`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PressDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<PressDocumentData>,
+  'press',
+  Lang
+>;
+
 export type AllDocumentTypes =
   | AtHomeDocument
   | CartDocument
@@ -1290,7 +1377,8 @@ export type AllDocumentTypes =
   | HomepageDocument
   | JobOfferDocument
   | MetaDocument
-  | PageDocument;
+  | PageDocument
+  | PressDocument;
 
 /**
  * Primary content in *Banner → Default → Primary*
@@ -2221,6 +2309,84 @@ type DividerSliceVariation = DividerSliceDefault;
 export type DividerSlice = prismic.SharedSlice<'divider', DividerSliceVariation>;
 
 /**
+ * Item in *FeatureGrid → Default → Primary → feature*
+ */
+export interface FeatureGridSliceDefaultPrimaryFeatureItem {
+  /**
+   * image field in *FeatureGrid → Default → Primary → feature*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.default.primary.feature[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * text field in *FeatureGrid → Default → Primary → feature*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.default.primary.feature[].text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * image left field in *FeatureGrid → Default → Primary → feature*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: feature_grid.default.primary.feature[].image_left
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  image_left: prismic.BooleanField;
+}
+
+/**
+ * Primary content in *FeatureGrid → Default → Primary*
+ */
+export interface FeatureGridSliceDefaultPrimary {
+  /**
+   * feature field in *FeatureGrid → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: feature_grid.default.primary.feature[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  feature: prismic.GroupField<Simplify<FeatureGridSliceDefaultPrimaryFeatureItem>>;
+}
+
+/**
+ * Default variation for FeatureGrid Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeatureGridSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<FeatureGridSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *FeatureGrid*
+ */
+type FeatureGridSliceVariation = FeatureGridSliceDefault;
+
+/**
+ * FeatureGrid Shared Slice
+ *
+ * - **API ID**: `feature_grid`
+ * - **Description**: FeatureGrid
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FeatureGridSlice = prismic.SharedSlice<'feature_grid', FeatureGridSliceVariation>;
+
+/**
  * Item in *Form → Default → Primary → Form field*
  */
 export interface FormSliceDefaultPrimaryFormFieldItem {
@@ -2552,6 +2718,31 @@ export interface ImageGridSliceImagesOnlyPrimaryImagesItem {
 }
 
 /**
+ * Item in *ImageGrid → Images only BG yellow → Primary → CTA*
+ */
+export interface ImageGridSliceImagesOnlyPrimaryCtaItem {
+  /**
+   * Link field in *ImageGrid → Images only BG yellow → Primary → CTA*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_grid.imagesOnly.primary.cta[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * Link label field in *ImageGrid → Images only BG yellow → Primary → CTA*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_grid.imagesOnly.primary.cta[].link_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_label: prismic.KeyTextField;
+}
+
+/**
  * Item in *ImageGrid → Images only BG white → Primary → Images*
  */
 export interface ImageGridSliceImagesOnlyBgWhitePrimaryImagesItem {
@@ -2689,6 +2880,16 @@ export interface ImageGridSliceImagesOnlyPrimary {
    * - **Documentation**: https://prismic.io/docs/field#boolean
    */
   slider_on_small_screen: prismic.BooleanField;
+
+  /**
+   * CTA field in *ImageGrid → Images only BG yellow → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_grid.imagesOnly.primary.cta[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  cta: prismic.GroupField<Simplify<ImageGridSliceImagesOnlyPrimaryCtaItem>>;
 }
 
 /**
@@ -3214,6 +3415,28 @@ export interface ImageTextAndCtaGridLeftSliceDefaultPrimaryCardItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   link_label: prismic.KeyTextField;
+
+  /**
+   * Link dark field in *ImageTextAndCtaGridLeft → Image left → Primary → Card*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: image_text_and_cta_grid_left.default.primary.card[].link_dark
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  link_dark: prismic.BooleanField;
+
+  /**
+   * Link 2 zenchef field in *ImageTextAndCtaGridLeft → Image left → Primary → Card*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: image_text_and_cta_grid_left.default.primary.card[].link_2_zenchef
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  link_2_zenchef: prismic.BooleanField;
 }
 
 /**
@@ -3611,6 +3834,88 @@ type PageTitleUnderlinedSliceVariation = PageTitleUnderlinedSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type PageTitleUnderlinedSlice = prismic.SharedSlice<'page_title_underlined', PageTitleUnderlinedSliceVariation>;
+
+/**
+ * Primary content in *PressCard → Default → Primary*
+ */
+export interface PressCardSliceDefaultPrimary {
+  /**
+   * Image field in *PressCard → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press_card.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * title field in *PressCard → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press_card.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * description field in *PressCard → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press_card.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * link field in *PressCard → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press_card.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * link label field in *PressCard → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: press_card.default.primary.link_label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  link_label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for PressCard Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PressCardSliceDefault = prismic.SharedSliceVariation<
+  'default',
+  Simplify<PressCardSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *PressCard*
+ */
+type PressCardSliceVariation = PressCardSliceDefault;
+
+/**
+ * PressCard Shared Slice
+ *
+ * - **API ID**: `press_card`
+ * - **Description**: PressCard
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PressCardSlice = prismic.SharedSlice<'press_card', PressCardSliceVariation>;
 
 /**
  * Item in *TextAndStepper → Default → Primary → Stepper*
@@ -4078,6 +4383,9 @@ declare module '@prismicio/client' {
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
+      PressDocument,
+      PressDocumentData,
+      PressDocumentDataSlicesSlice,
       AllDocumentTypes,
       BannerSlice,
       BannerSliceDefaultPrimary,
@@ -4123,6 +4431,11 @@ declare module '@prismicio/client' {
       DividerSliceDefaultPrimary,
       DividerSliceVariation,
       DividerSliceDefault,
+      FeatureGridSlice,
+      FeatureGridSliceDefaultPrimaryFeatureItem,
+      FeatureGridSliceDefaultPrimary,
+      FeatureGridSliceVariation,
+      FeatureGridSliceDefault,
       FormSlice,
       FormSliceDefaultPrimaryFormFieldItem,
       FormSliceDefaultPrimary,
@@ -4137,6 +4450,7 @@ declare module '@prismicio/client' {
       ImageGridSliceDefaultPrimaryImagesItem,
       ImageGridSliceDefaultPrimary,
       ImageGridSliceImagesOnlyPrimaryImagesItem,
+      ImageGridSliceImagesOnlyPrimaryCtaItem,
       ImageGridSliceImagesOnlyPrimary,
       ImageGridSliceImagesOnlyBgWhitePrimaryImagesItem,
       ImageGridSliceImagesOnlyBgWhitePrimary,
@@ -4173,6 +4487,10 @@ declare module '@prismicio/client' {
       PageTitleUnderlinedSliceDefaultPrimary,
       PageTitleUnderlinedSliceVariation,
       PageTitleUnderlinedSliceDefault,
+      PressCardSlice,
+      PressCardSliceDefaultPrimary,
+      PressCardSliceVariation,
+      PressCardSliceDefault,
       TextAndStepperSlice,
       TextAndStepperSliceDefaultPrimaryStepperItem,
       TextAndStepperSliceDefaultPrimary,

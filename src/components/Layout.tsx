@@ -15,7 +15,7 @@ export default function Layout({ doc, children, lang }: LayoutProps) {
     <>
       <Header doc={doc} lang={lang} />
       <main>{children}</main>
-      <ContactFooter lang={lang} />
+      {doc.type !== 'press' && <ContactFooter lang={lang} />}
       <Footer lang={lang} />
     </>
   );

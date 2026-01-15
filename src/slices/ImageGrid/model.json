@@ -117,6 +117,30 @@
             "placeholder_true": "true",
             "default_value": true
           }
+        },
+        "cta": {
+          "type": "Group",
+          "config": {
+            "label": "CTA",
+            "repeat": true,
+            "fields": {
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "Link",
+                  "placeholder": "",
+                  "select": null
+                }
+              },
+              "link_label": {
+                "type": "Text",
+                "config": {
+                  "label": "Link label",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
         }
       },
       "items": {}

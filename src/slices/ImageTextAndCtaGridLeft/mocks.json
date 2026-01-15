@@ -104,6 +104,20 @@
 									"value": "machinery",
 									"type": "Text"
 								}
+							],
+							[
+								"link_dark",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							],
+							[
+								"link_2_zenchef",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
 							]
 						]
 					}

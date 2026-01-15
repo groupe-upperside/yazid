@@ -121,6 +121,34 @@
 			"slider_on_small_screen": {
 				"__TYPE__": "BooleanContent",
 				"value": true
+			},
+			"cta": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"link",
+								{
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "ExternalLink",
+										"url": "http://google.com"
+									}
+								}
+							],
+							[
+								"link_label",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "nearby",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": [

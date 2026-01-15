@@ -78,6 +78,15 @@ const ImageGrid = ({ slice }: ImageGridProps): JSX.Element => {
       {variation === 'default' && primary.link && primary.link_label && (
         <Button link={primary.link} label={primary.link_label} />
       )}
+      {variation === 'imagesOnly' && primary.cta && (
+        <div className="mx-auto mt-16 grid grid-cols-1 gap-y-16 md:grid-cols-3">
+          {slice.primary.cta.map((link, index) => (
+            <div key={index} className="mx-auto w-fit">
+              <Button link={link.link} label={link.link_label} />
+            </div>
+          ))}
+        </div>
+      )}
     </section>
   );
 };

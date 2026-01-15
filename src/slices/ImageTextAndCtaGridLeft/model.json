@@ -85,6 +85,24 @@
                   "label": "Link label",
                   "placeholder": ""
                 }
+              },
+              "link_dark": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Link dark",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": true
+                }
+              },
+              "link_2_zenchef": {
+                "type": "Boolean",
+                "config": {
+                  "label": "Link 2 zenchef",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
               }
             }
           }

@@ -98,13 +98,24 @@ const ImageTextAndCtaGridLeft = ({ slice }: ImageTextAndCtaGridLeftProps): JSX.E
                 key={index}
                 className={`flex flex-col items-center justify-between gap-4 md:items-start ${slice.primary.card.length === 1 ? 'col-span-2 xl:col-span-1 xl:mx-0' : ''}`}
               >
-                <hr className="border-0.5 h-0.5 w-12 border-black" />
-                <h3 className="text-center text-xl font-semibold uppercase tracking-widest text-gray-900 md:text-start">
-                  {card.title}
-                </h3>
-                <p className="text-justify text-sm tracking-widest text-[#707070] md:text-base">{card.subtitle}</p>
+                {card.title && (
+                  <>
+                    <hr className="border-0.5 h-0.5 w-12 border-black" />
+                    <h3 className="text-center text-xl font-semibold uppercase tracking-widest text-gray-900 md:text-start">
+                      {card.title}
+                    </h3>
+                  </>
+                )}
+                {card.subtitle && (
+                  <p className="text-justify text-sm tracking-widest text-[#707070] md:text-base">{card.subtitle}</p>
+                )}
                 <div className="w-fit">
-                  <Button link={card.link} label={card.link_label} />
+                  <Button
+                    link={card.link}
+                    label={card.link_label}
+                    dark={!!card?.link_dark}
+                    link2_zenchef={!!card?.link_2_zenchef}
+                  />
                 </div>
               </div>
             ))}
