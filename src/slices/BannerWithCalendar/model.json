@@ -67,10 +67,7 @@
           "config": {
             "label": "Button position",
             "placeholder": "",
-            "options": [
-              "right",
-              "bottom"
-            ]
+            "options": ["right", "bottom"]
           }
         },
         "pick_up_date_day": {
@@ -151,10 +148,7 @@
           "config": {
             "label": "Button position",
             "placeholder": "",
-            "options": [
-              "right",
-              "bottom"
-            ]
+            "options": ["right", "bottom"]
           }
         },
         "pick_up_date_day": {

@@ -46,13 +46,7 @@
                 "config": {
                   "label": "Field type",
                   "placeholder": "",
-                  "options": [
-                    "text",
-                    "long text",
-                    "email",
-                    "phone",
-                    "checkbox"
-                  ]
+                  "options": ["text", "long text", "email", "phone", "checkbox"]
                 }
               },
               "link_to_pdf": {

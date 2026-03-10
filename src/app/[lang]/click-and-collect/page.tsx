@@ -18,7 +18,6 @@ export async function generateMetadata({ params: { lang } }: { params: { lang: s
 }
 
 export default async function Index({ params: { lang } }: { params: { lang: string } }) {
-  // The client queries content from the Prismic API
   const client = createClient();
   const page = await client.getSingle('at_home', {
     lang,

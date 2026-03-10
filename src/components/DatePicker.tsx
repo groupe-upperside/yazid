@@ -3,32 +3,28 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
 import type { GroupField, KeyTextField } from '@prismicio/client';
-import { addDays, format, isValid, parse, parseISO, startOfDay } from 'date-fns';
+import { format, isValid, parse, parseISO, startOfDay } from 'date-fns';
 import { fr } from 'date-fns/locale/fr';
-import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { forwardRef, useMemo } from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { FaRegCalendar } from 'react-icons/fa';
 
 import { useCartCustomFields } from '@/hooks/useSnipcart';
 
-// @ts-ignore
 registerLocale('fr', fr);
 
 type Props = {
   placeholder: KeyTextField;
   excludedDates: GroupField;
+  minDate?: Date;
 };
 
-const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedDates }, ref) => {
-  const [date, setDate] = useState('');
-
+const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedDates, minDate }, ref) => {
   const { 'Date de retrait': savedDate } = useCartCustomFields(['Date de retrait']);
 
-  useEffect(() => {
-    if (savedDate) setDate(savedDate);
-  }, [savedDate]);
-
-  const minDate = useMemo(() => startOfDay(addDays(new Date(), 2)), []);
+  const effectiveMinDate = useMemo(() => {
+    return minDate ? startOfDay(minDate) : startOfDay(new Date());
+  }, [minDate]);
 
   const excluded = useMemo<Date[]>(() => {
     return excludedDates
@@ -45,22 +41,21 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
 
     const sd = startOfDay(d);
 
-    if (sd < minDate) return null;
+    if (sd < effectiveMinDate) return null;
     if (excluded.some((ex) => ex.getTime() === sd.getTime())) return null;
 
     return d;
-  }, [savedDate, minDate, excluded]);
+  }, [savedDate, effectiveMinDate, excluded]);
 
   const handleSelect = async (d: Date | null) => {
     if (!d) return;
 
     const sd = startOfDay(d);
 
-    if (sd < minDate) return;
+    if (sd < effectiveMinDate) return;
     if (excluded.some((ex) => ex.getTime() === sd.getTime())) return;
 
     const frFmt = format(d, 'dd-MM-yyyy');
-    setDate(frFmt);
 
     try {
       // @ts-ignore
@@ -84,7 +79,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
         dayClassName={(d) => (selected && d.toDateString() === selected.toDateString() ? 'day-classname' : '')}
         selected={selected}
         onChange={handleSelect}
-        minDate={minDate}
+        minDate={effectiveMinDate}
         excludeDates={excluded}
         locale="fr"
         dateFormat="dd/MM/yyyy"

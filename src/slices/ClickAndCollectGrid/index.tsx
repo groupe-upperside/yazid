@@ -41,21 +41,18 @@ const GridComponent = ({
   const outOfStock = data?.stock !== undefined && data.stock <= 0 && !data.allowOutOfStockPurchases;
   const overlayVisibility = outOfStock ? 'opacity-100 bg-black/65' : 'opacity-0 group-hover:opacity-100 bg-black/75';
 
-  // notify parent when stock status is known/changes
   useEffect(() => {
     if (data !== undefined) {
       notifyStock(String(item.product_id), !!outOfStock);
     }
   }, [data, outOfStock, item.product_id, notifyStock]);
 
-  // prepare images array (always include first image, optionally second)
   const images = [item.image, ...(item.image2?.url ? [item.image2] : [])];
   const [imgIndex, setImgIndex] = useState(0);
 
   return (
     <div onClick={outOfStock ? undefined : () => onProductClick(item)}>
       <div className={`group relative mb-3 aspect-square w-full ${outOfStock ? '' : 'cursor-pointer'}`}>
-        {/* Use current image */}
         <PrismicNextImage className="aspect-square w-full object-cover" field={images[imgIndex]} />
         <div
           className={`absolute inset-0 flex flex-col items-center justify-center p-2.5  opacity-0 transition-opacity ${overlayVisibility}`}
@@ -80,7 +77,6 @@ const GridComponent = ({
         </div>
       </div>
 
-      {/* three grey dots under the image only when there is a second image */}
       {item.image2?.url && (
         <div className="mb-2 flex items-center justify-center gap-2">
           {Array.from({ length: 3 }).map((_, idx) => (
@@ -89,9 +85,7 @@ const GridComponent = ({
               type="button"
               aria-label={`Show image ${idx + 1}`}
               onClick={(e) => {
-                // prevent opening the modal when clicking the dots
                 e.stopPropagation();
-                // map the 3 dots to the available images (wrap using modulo)
                 setImgIndex(idx % images.length);
               }}
               className={`size-2 rounded-full transition-all ${imgIndex === idx % images.length ? 'bg-gray-600' : 'bg-gray-300'}`}
@@ -127,7 +121,6 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [linkedProducts, setLinkedProducts] = useState<Product[]>([]);
 
-  // map productId -> outOfStock boolean
   const [stockMap, setStockMap] = useState<Record<string, boolean>>({});
 
   const gridColsClass = useMemo(() => getGridColsClass(slice.primary.number_per_row), [slice.primary.number_per_row]);
@@ -153,7 +146,6 @@ const ImageGridComponent = ({ slice }: ClickAndCollectGridProps) => {
     });
   };
 
-  // When we have stock info for every product, move out-of-stock to the end
   const allKnown = products.length > 0 && Object.keys(stockMap).length === products.length;
   const sortedProducts = allKnown
     ? [

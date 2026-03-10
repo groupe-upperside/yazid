@@ -1,151 +1,151 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"number_per_row": {
-				"__TYPE__": "FieldContent",
-				"value": "35",
-				"type": "Number"
-			},
-			"product": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"image",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
-										"width": 3212,
-										"height": 3880
-									},
-									"url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
-									"width": 3212,
-									"height": 3880,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"credits": null,
-									"alt": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
-								"product_name",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "front",
-									"type": "Text"
-								}
-							],
-							[
-								"product_price",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "93",
-									"type": "Number"
-								}
-							],
-							[
-								"product_description",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Laboris officia commodo culpa ipsum elit sunt est sit ullamco eu occaecat excepteur in. Sint quis voluptate sunt dolor nisi irure adipisicing commodo. Commodo Lorem enim est elit fugiat sit id ipsum dolor quis duis sunt."
-											}
-										}
-									]
-								}
-							],
-							[
-								"product_allergens",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "brought",
-									"type": "Text"
-								}
-							],
-							[
-								"product_id",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "83",
-									"type": "Number"
-								}
-							],
-							[
-								"product_min_quantity",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "93",
-									"type": "Number"
-								}
-							],
-							[
-								"product_max_quantity",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "58",
-									"type": "Number"
-								}
-							],
-							[
-								"image2",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
-										"width": 12288,
-										"height": 16384
-									},
-									"url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
-									"width": 12288,
-									"height": 16384,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"credits": null,
-									"alt": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
-								"linked_products_ids",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "waste",
-									"type": "Text"
-								}
-							]
-						]
-					}
-				]
-			},
-			"grid_title_bold": {
-				"__TYPE__": "FieldContent",
-				"value": "using",
-				"type": "Text"
-			}
-		},
-		"items": []
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "number_per_row": {
+        "__TYPE__": "FieldContent",
+        "value": "35",
+        "type": "Number"
+      },
+      "product": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "image",
+                {
+                  "origin": {
+                    "id": "main",
+                    "url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
+                    "width": 3212,
+                    "height": 3880
+                  },
+                  "url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6",
+                  "width": 3212,
+                  "height": 3880,
+                  "edit": {
+                    "zoom": 1,
+                    "crop": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "background": "transparent"
+                  },
+                  "credits": null,
+                  "alt": null,
+                  "__TYPE__": "ImageContent",
+                  "thumbnails": {}
+                }
+              ],
+              [
+                "product_name",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "front",
+                  "type": "Text"
+                }
+              ],
+              [
+                "product_price",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "93",
+                  "type": "Number"
+                }
+              ],
+              [
+                "product_description",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "paragraph",
+                      "content": {
+                        "text": "Laboris officia commodo culpa ipsum elit sunt est sit ullamco eu occaecat excepteur in. Sint quis voluptate sunt dolor nisi irure adipisicing commodo. Commodo Lorem enim est elit fugiat sit id ipsum dolor quis duis sunt."
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "product_allergens",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "brought",
+                  "type": "Text"
+                }
+              ],
+              [
+                "product_id",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "83",
+                  "type": "Number"
+                }
+              ],
+              [
+                "product_min_quantity",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "93",
+                  "type": "Number"
+                }
+              ],
+              [
+                "product_max_quantity",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "58",
+                  "type": "Number"
+                }
+              ],
+              [
+                "image2",
+                {
+                  "origin": {
+                    "id": "main",
+                    "url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
+                    "width": 12288,
+                    "height": 16384
+                  },
+                  "url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
+                  "width": 12288,
+                  "height": 16384,
+                  "edit": {
+                    "zoom": 1,
+                    "crop": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "background": "transparent"
+                  },
+                  "credits": null,
+                  "alt": null,
+                  "__TYPE__": "ImageContent",
+                  "thumbnails": {}
+                }
+              ],
+              [
+                "linked_products_ids",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "waste",
+                  "type": "Text"
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "grid_title_bold": {
+        "__TYPE__": "FieldContent",
+        "value": "using",
+        "type": "Text"
+      }
+    },
+    "items": []
+  }
 ]
