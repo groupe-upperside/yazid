@@ -11,6 +11,48 @@ import DatePicker from '@/components/DatePicker';
 import SectionTitle from '@/components/SectionTitle';
 import TimeSlotPicker from '@/components/TimeSlotPicker';
 
+const parisDateTimeFormatter = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Paris',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  hour12: false,
+});
+
+const isBlockedWeekday = (date: Date) => {
+  const day = date.getDay();
+  return day === 0 || day === 1;
+};
+
+const getParisDateParts = (date: Date) => {
+  const parts = parisDateTimeFormatter.formatToParts(date);
+  const values = Object.fromEntries(
+    parts.filter((part) => part.type !== 'literal').map((part) => [part.type, part.value] as const)
+  ) as Record<'year' | 'month' | 'day' | 'hour', string>;
+
+  return {
+    year: Number(values.year),
+    month: Number(values.month),
+    day: Number(values.day),
+    hour: Number(values.hour),
+  };
+};
+
+const getNextPickupDate = (now: Date) => {
+  const { year, month, day, hour } = getParisDateParts(now);
+  const minDate = new Date(year, month - 1, day);
+
+  minDate.setHours(0, 0, 0, 0);
+  minDate.setDate(minDate.getDate() + (hour < 21 ? 1 : 2));
+
+  while (isBlockedWeekday(minDate)) {
+    minDate.setDate(minDate.getDate() + 1);
+  }
+
+  return minDate;
+};
+
 /**
  * Props for `BannerWithCalendar`.
  */
@@ -63,20 +105,7 @@ const BannerWithCalendar = ({ slice }: BannerWithCalendarProps): JSX.Element => 
   } = slice.primary;
 
   const dateOverrides = useMemo(() => {
-    const now = new Date();
-
-    const parisHour = Number(
-      new Intl.DateTimeFormat('en-GB', {
-        timeZone: 'Europe/Paris',
-        hour: '2-digit',
-        hour12: false,
-      }).format(now)
-    );
-
-    const minDate = new Date();
-    minDate.setHours(0, 0, 0, 0);
-    minDate.setDate(minDate.getDate() + (parisHour < 21 ? 1 : 2));
-
+    const minDate = getNextPickupDate(new Date());
     return { minDate };
   }, []);
 

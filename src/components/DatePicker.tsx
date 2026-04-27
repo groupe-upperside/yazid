@@ -19,6 +19,11 @@ type Props = {
   minDate?: Date;
 };
 
+const isBlockedDate = (date: Date, excludedDates: Date[]) => {
+  const day = startOfDay(date);
+  return day.getDay() === 0 || day.getDay() === 1 || excludedDates.some((ex) => ex.getTime() === day.getTime());
+};
+
 const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedDates, minDate }, ref) => {
   const { 'Date de retrait': savedDate } = useCartCustomFields(['Date de retrait']);
 
@@ -42,7 +47,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
     const sd = startOfDay(d);
 
     if (sd < effectiveMinDate) return null;
-    if (excluded.some((ex) => ex.getTime() === sd.getTime())) return null;
+    if (isBlockedDate(sd, excluded)) return null;
 
     return d;
   }, [savedDate, effectiveMinDate, excluded]);
@@ -53,7 +58,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
     const sd = startOfDay(d);
 
     if (sd < effectiveMinDate) return;
-    if (excluded.some((ex) => ex.getTime() === sd.getTime())) return;
+    if (isBlockedDate(sd, excluded)) return;
 
     const frFmt = format(d, 'dd-MM-yyyy');
 
@@ -81,6 +86,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
         onChange={handleSelect}
         minDate={effectiveMinDate}
         excludeDates={excluded}
+        filterDate={(date) => date.getDay() !== 0 && date.getDay() !== 1}
         locale="fr"
         dateFormat="dd/MM/yyyy"
         customInput={
