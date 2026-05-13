@@ -19,9 +19,15 @@ type Props = {
   minDate?: Date;
 };
 
+const ALLOWED_OVERRIDE_DATES: Date[] = [startOfDay(new Date(2026, 4, 31))];
+
+const isAllowedOverride = (date: Date) => ALLOWED_OVERRIDE_DATES.some((d) => d.getTime() === date.getTime());
+
 const isBlockedDate = (date: Date, excludedDates: Date[]) => {
   const day = startOfDay(date);
-  return day.getDay() === 0 || day.getDay() === 1 || excludedDates.some((ex) => ex.getTime() === day.getTime());
+  if (excludedDates.some((ex) => ex.getTime() === day.getTime())) return true;
+  if (isAllowedOverride(day)) return false;
+  return day.getDay() === 0 || day.getDay() === 1;
 };
 
 const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedDates, minDate }, ref) => {
@@ -86,7 +92,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
         onChange={handleSelect}
         minDate={effectiveMinDate}
         excludeDates={excluded}
-        filterDate={(date) => date.getDay() !== 0 && date.getDay() !== 1}
+        filterDate={(date) => !isBlockedDate(date, excluded)}
         locale="fr"
         dateFormat="dd/MM/yyyy"
         customInput={
