@@ -4,6 +4,9 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Aurore louche",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "concurrently \"npm:next:dev\" \"npm:slicemachine\" --names \"next,slicemachine\" --prefix-colors blue,magenta",
     "next:dev": "next dev",
