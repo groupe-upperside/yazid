@@ -27,7 +27,7 @@ type IMessage = {
 };
 
 export type IEmailData = {
-  receiver: string;
+  receiver: string | string[];
   templateId: string;
   subject: string;
   variables: any;
@@ -43,11 +43,7 @@ export const sendEmail = async (emailData: IEmailData) => {
           Email: 'noreply@yigestion.com',
           Name: 'Contact Yigestion',
         },
-        To: [
-          {
-            Email: receiver,
-          },
-        ],
+        To: (Array.isArray(receiver) ? receiver : [receiver]).map((email) => ({ Email: email })),
         TemplateID: parseInt(templateId, 10),
         TemplateLanguage: true,
         Subject: subject,
