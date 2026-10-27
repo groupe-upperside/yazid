@@ -2046,6 +2046,26 @@ export interface ClickAndCollectGridSliceDefaultPrimaryProductItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   linked_products_ids: prismic.KeyTextField;
+
+  /**
+   * Orderable from field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: Premier jour de retrait possible (inclus)
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].orderable_from
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  orderable_from: prismic.DateField;
+
+  /**
+   * Orderable to field in *ClickAndCollectGrid → Default → Primary → Product*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: Dernier jour de retrait possible (inclus)
+   * - **API ID Path**: click_and_collect_grid.default.primary.product[].orderable_to
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  orderable_to: prismic.DateField;
 }
 
 /**

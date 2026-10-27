@@ -1,6 +1,6 @@
 'use client';
 
-import type { Content, KeyTextField, NumberField } from '@prismicio/client';
+import type { Content, DateField, KeyTextField, NumberField } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import type { SliceComponentProps } from '@prismicio/react';
 import type { ImageField, RichTextField } from '@prismicio/types';
@@ -13,6 +13,7 @@ import ProductModal from '@/components/ProductModal';
 import SectionTitle from '@/components/SectionTitle';
 import { useStock } from '@/hooks/useStock';
 import { getGridColsClass } from '@/utils/getGridColsClass';
+import { getOrderableMetadata } from '@/utils/orderableDates';
 
 type Product = {
   image: ImageField;
@@ -24,6 +25,8 @@ type Product = {
   product_id: NumberField;
   product_min_quantity: NumberField;
   linked_products_ids?: KeyTextField;
+  orderable_from?: DateField;
+  orderable_to?: DateField;
 };
 
 const GridComponent = ({
@@ -105,6 +108,7 @@ const GridComponent = ({
         data-item-price={(item.product_price as number).toFixed(2)}
         data-item-url="https://yazid-ichemrahen.com/fr-fr/click-and-collect"
         data-item-image={item.image.url}
+        data-item-metadata={getOrderableMetadata(item.orderable_from, item.orderable_to)}
       ></button>
     </div>
   );

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import Discount from '@/components/Discount';
 import StockGuard from '@/components/StockGuard';
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
+import { getOrderableWindow } from '@/utils/orderableDates';
 
 const DropDownRow = ({ handleRemove, handleUpdate, i }: any) => {
   const minQty = i.minQuantity ?? 1;
@@ -114,9 +115,10 @@ export default function CartRows({ isCartPage = false, isCheckoutPage = false, l
   const [canCheckout, setCanCheckout] = useState(false);
 
   useEffect(() => {
-    const ready = Boolean(pickUpDate && timeSlot);
+    // Block checkout when restricted items in the cart share no pickup date.
+    const ready = Boolean(pickUpDate && timeSlot) && getOrderableWindow(items).status !== 'unavailable';
     setCanCheckout(ready);
-  }, [pickUpDate, timeSlot]);
+  }, [pickUpDate, timeSlot, items]);
 
   const handleUpdate = async (uniqueId: string, quantity: number) => {
     try {

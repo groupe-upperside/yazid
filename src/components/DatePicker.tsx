@@ -3,7 +3,7 @@
 import 'react-datepicker/dist/react-datepicker.css';
 
 import type { GroupField, KeyTextField } from '@prismicio/client';
-import { format, isValid, parse, parseISO, startOfDay } from 'date-fns';
+import { format, isValid, max, parse, parseISO, startOfDay } from 'date-fns';
 import { fr } from 'date-fns/locale/fr';
 import { usePathname } from 'next/navigation';
 import { forwardRef, useEffect, useMemo } from 'react';
@@ -11,6 +11,7 @@ import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { FaRegCalendar } from 'react-icons/fa';
 
 import { useCartCustomFields, useCartItems } from '@/hooks/useSnipcart';
+import { getOrderableWindow, type OrderableWindow } from '@/utils/orderableDates';
 
 registerLocale('fr', fr);
 
@@ -24,19 +25,34 @@ const ALLOWED_OVERRIDE_DATES: Date[] = [startOfDay(new Date(2026, 4, 31))];
 
 const isAllowedOverride = (date: Date) => ALLOWED_OVERRIDE_DATES.some((d) => d.getTime() === date.getTime());
 
-// When the cart contains any of these products, pickup is restricted to the dates below.
-const RESTRICTED_PRODUCT_IDS = ['41', '42', '43', '44', '45'];
-const RESTRICTED_PICKUP_DATES: Date[] = [startOfDay(new Date(2026, 4, 30)), startOfDay(new Date(2026, 4, 31))];
-
-const isRestrictedPickupDate = (date: Date) =>
-  RESTRICTED_PICKUP_DATES.some((d) => d.getTime() === startOfDay(date).getTime());
-
-const isBlockedDate = (date: Date, excludedDates: Date[], restrictToPickupDates: boolean) => {
+// Products may restrict pickup to an inclusive date range (set in Prismic); the cart keeps the intersection.
+const isBlockedDate = (date: Date, excludedDates: Date[], orderable: OrderableWindow) => {
   const day = startOfDay(date);
-  if (restrictToPickupDates) return !isRestrictedPickupDate(day);
+  if (orderable.status === 'unavailable') return true;
+  if (orderable.status === 'ok') {
+    if (orderable.start && day < orderable.start) return true;
+    if (orderable.end && day > orderable.end) return true;
+  }
   if (excludedDates.some((ex) => ex.getTime() === day.getTime())) return true;
   if (isAllowedOverride(day)) return false;
   return day.getDay() === 0 || day.getDay() === 1;
+};
+
+const getRestrictionMessage = (start: Date | null, end: Date | null, isFr: boolean) => {
+  const fmt = (d: Date) => format(d, 'dd/MM/yyyy');
+  if (start && end) {
+    return isFr
+      ? `En raison d'un produit de votre panier, le retrait est disponible uniquement du ${fmt(start)} au ${fmt(end)}.`
+      : `Due to an item in your cart, pickup is only available from ${fmt(start)} to ${fmt(end)}.`;
+  }
+  if (start) {
+    return isFr
+      ? `En raison d'un produit de votre panier, le retrait est disponible à partir du ${fmt(start)}.`
+      : `Due to an item in your cart, pickup is only available from ${fmt(start)}.`;
+  }
+  return isFr
+    ? `En raison d'un produit de votre panier, le retrait est disponible jusqu'au ${fmt(end as Date)}.`
+    : `Due to an item in your cart, pickup is only available until ${fmt(end as Date)}.`;
 };
 
 const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedDates, minDate }, ref) => {
@@ -45,15 +61,14 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
   const pathname = usePathname();
   const isFr = (pathname?.split('/')[1] ?? 'fr').includes('fr');
 
-  const restrictToPickupDates = useMemo(
-    () => items.some((it) => RESTRICTED_PRODUCT_IDS.includes(String(it.id))),
-    [items]
-  );
+  const orderable = useMemo(() => getOrderableWindow(items), [items]);
 
   const effectiveMinDate = useMemo(() => {
-    if (restrictToPickupDates) return RESTRICTED_PICKUP_DATES[0];
-    return minDate ? startOfDay(minDate) : startOfDay(new Date());
-  }, [minDate, restrictToPickupDates]);
+    const base = minDate ? startOfDay(minDate) : startOfDay(new Date());
+    return orderable.status === 'ok' && orderable.start ? max([base, orderable.start]) : base;
+  }, [minDate, orderable]);
+
+  const effectiveMaxDate = orderable.status === 'ok' ? (orderable.end ?? undefined) : undefined;
 
   const excluded = useMemo<Date[]>(() => {
     return excludedDates
@@ -71,10 +86,10 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
     const sd = startOfDay(d);
 
     if (sd < effectiveMinDate) return null;
-    if (isBlockedDate(sd, excluded, restrictToPickupDates)) return null;
+    if (isBlockedDate(sd, excluded, orderable)) return null;
 
     return d;
-  }, [savedDate, effectiveMinDate, excluded, restrictToPickupDates]);
+  }, [savedDate, effectiveMinDate, excluded, orderable]);
 
   // Clear a persisted pickup date that is no longer valid (e.g. now blocked, in
   // the past, or outside the restricted window after a restricted product was
@@ -105,7 +120,7 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
     const sd = startOfDay(d);
 
     if (sd < effectiveMinDate) return;
-    if (isBlockedDate(sd, excluded, restrictToPickupDates)) return;
+    if (isBlockedDate(sd, excluded, orderable)) return;
 
     const frFmt = format(d, 'dd-MM-yyyy');
 
@@ -133,8 +148,11 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
           selected={selected}
           onChange={handleSelect}
           minDate={effectiveMinDate}
+          maxDate={effectiveMaxDate}
+          openToDate={selected ?? effectiveMinDate}
+          disabled={orderable.status === 'unavailable'}
           excludeDates={excluded}
-          filterDate={(date) => !isBlockedDate(date, excluded, restrictToPickupDates)}
+          filterDate={(date) => !isBlockedDate(date, excluded, orderable)}
           locale="fr"
           dateFormat="dd/MM/yyyy"
           customInput={
@@ -154,11 +172,16 @@ const DatePicker = forwardRef<HTMLInputElement, Props>(({ placeholder, excludedD
           wrapperClassName="w-full"
         />
       </div>
-      {restrictToPickupDates && (
+      {orderable.status === 'ok' && (
         <p className="paragraph-style mt-2 text-left text-sm font-medium tracking-widest text-gray-400 md:text-base">
+          {getRestrictionMessage(orderable.start, orderable.end, isFr)}
+        </p>
+      )}
+      {orderable.status === 'unavailable' && (
+        <p className="paragraph-style mt-2 text-left text-sm font-medium tracking-widest text-red-500 md:text-base">
           {isFr
-            ? "En raison d'un produit de votre panier, le retrait est disponible uniquement le 30 ou 31 mai."
-            : 'Due to an item in your cart, pickup is only available on May 30 or 31.'}
+            ? `Aucune date de retrait commune n'est disponible pour les articles de votre panier (${orderable.names.join(', ')}). Veuillez en retirer un pour pouvoir commander.`
+            : `No common pickup date is available for the items in your cart (${orderable.names.join(', ')}). Please remove one to place your order.`}
         </p>
       )}
     </div>

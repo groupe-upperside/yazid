@@ -1,6 +1,6 @@
 'use client';
 
-import type { KeyTextField, NumberField } from '@prismicio/client';
+import type { DateField, KeyTextField, NumberField } from '@prismicio/client';
 import { isFilled } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
@@ -11,6 +11,7 @@ import { IoClose } from 'react-icons/io5';
 
 import { useCartItems } from '@/hooks/useSnipcart';
 import { useStock } from '@/hooks/useStock';
+import { getOrderableMetadata } from '@/utils/orderableDates';
 
 type Product = {
   image: ImageField;
@@ -22,6 +23,8 @@ type Product = {
   product_id: NumberField;
   product_min_quantity: NumberField;
   linked_products_ids?: KeyTextField;
+  orderable_from?: DateField;
+  orderable_to?: DateField;
 };
 
 type Props = {
@@ -413,6 +416,7 @@ export default function ProductModal({ open, onClose, product, linkedProducts }:
               data-item-image={images[imgIndex]?.url}
               data-item-min-quantity={selected.product_min_quantity}
               data-item-max-quantity={Number.isFinite(maxQty) ? maxQty : 1000}
+              data-item-metadata={getOrderableMetadata(selected.orderable_from, selected.orderable_to)}
             >
               {lang === 'fr' ? 'Ajouter au panier' : 'Add to cart'}
             </button>

@@ -105,6 +105,20 @@
                   "label": "Linked products ids",
                   "placeholder": ""
                 }
+              },
+              "orderable_from": {
+                "type": "Date",
+                "config": {
+                  "label": "Orderable from",
+                  "placeholder": "Premier jour de retrait possible (inclus)"
+                }
+              },
+              "orderable_to": {
+                "type": "Date",
+                "config": {
+                  "label": "Orderable to",
+                  "placeholder": "Dernier jour de retrait possible (inclus)"
+                }
               }
             }
           }

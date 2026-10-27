@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-interface SnipCartItem {
+export interface SnipCartItem {
   id: string;
   uniqueId: string;
   name: string;
   price: number;
   quantity: number;
   image: string;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface SnipcartDiscount {
