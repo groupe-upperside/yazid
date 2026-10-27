@@ -1,5 +1,6 @@
 import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
 
+import { ManageCookiesButton } from '@/components/CookieConsent';
 import { createClient } from '@/prismicio';
 
 export default async function Footer({ lang }: { lang: string }) {
@@ -38,6 +39,9 @@ export default async function Footer({ lang }: { lang: string }) {
                 </PrismicNextLink>
               </li>
             ))}
+            <li key="cookies" className="me-0 w-full md:me-6">
+              <ManageCookiesButton label={lang.includes('fr') ? 'Gérer mes cookies' : 'Manage cookies'} />
+            </li>
           </ul>
         </div>
         <hr className="border-1 my-6 block border-gray-400 sm:mx-auto lg:my-8 lg:hidden" />

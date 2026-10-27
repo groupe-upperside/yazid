@@ -6,6 +6,8 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { Toaster } from 'react-hot-toast';
 
+import CookieConsent from '@/components/CookieConsent';
+import SnipcartTracking from '@/components/SnipcartTracking';
 import { createClient, repositoryName } from '@/prismicio';
 
 export async function generateMetadata({ params: { lang } }: { params: { lang: string } }): Promise<Metadata> {
@@ -58,6 +60,8 @@ export default async function RootLayout({
         <div>
           <Toaster />
         </div>
+        <CookieConsent lang={lang} />
+        <SnipcartTracking />
         {children}
       </body>
       <PrismicPreview repositoryName={repositoryName} />
